@@ -9,47 +9,47 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ExerciseResource extends Resource
 {
     protected static ?string $model = Exercise::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-fire';
-
-    public static function schema(): array
-    {
-        return [
-            Forms\Components\TextInput::make('name')
-                ->required(),
-            Forms\Components\RichEditor::make('description')
-                ->nullable(),
-            Forms\Components\Select::make('categories')
-                ->relationship(titleAttribute: 'name')
-                ->required()
-                ->searchable()
-                ->multiple()
-                ->preload()
-                ->createOptionForm(CategoryResource::schema()),
-        ];
-    }
+    protected static ?string $navigationIcon = null;
+    protected static ?string $navigationGroup = 'Gym';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema(static::schema());
+            ->schema(self::schema());
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('muscleGroup.name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -58,6 +58,8 @@ class ExerciseResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }
@@ -75,6 +77,29 @@ class ExerciseResource extends Resource
             'index' => Pages\ListExercises::route('/'),
             'create' => Pages\CreateExercise::route('/create'),
             'edit' => Pages\EditExercise::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+
+    public static function schema(): array
+    {
+        return [
+            Forms\Components\TextInput::make('name')
+                ->required()
+                ->maxLength(255),
+            Forms\Components\Textarea::make('description')
+                ->columnSpanFull(),
+            Forms\Components\Select::make('muscle_group_id')
+                ->relationship('muscleGroup', 'name')
+                ->required()
+                ->createOptionForm(MuscleGroupResource::schema()),
         ];
     }
 }

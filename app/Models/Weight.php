@@ -2,48 +2,57 @@
 
 namespace App\Models;
 
+use App\Concerns\WeightConcern;
+use App\Settings\GeneralSettings;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * 
  *
  * @property int $id
- * @property string $weight
+ * @property int $weight
+ * @property \Illuminate\Support\Carbon $date
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User|null $user
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Weight newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Weight newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Weight onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Weight query()
  * @method static \Illuminate\Database\Eloquent\Builder|Weight whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Weight whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Weight whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Weight whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Weight whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Weight whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Weight whereWeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Weight withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Weight withoutTrashed()
  * @mixin \Eloquent
  */
 class Weight extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
-    protected function casts(): array
+    public function casts()
     {
         return [
-            'weight' => 'float',
+            'date' => 'datetime',
         ];
     }
 
-    public static function boot()
+    public function save(array $options = [])
     {
-        parent::boot();
+        $this->user_id = auth()->id();
 
-        static::saving(function ($post) {
-            $post->user_id = auth()->user()->id;
-        });
+        return parent::save($options);
     }
 
     public function user(): BelongsTo
@@ -51,11 +60,19 @@ class Weight extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected function weight(): Attribute
+    public function weight(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => round($value / 453.6, 2),
-            set: fn (string $value) => round($value * 453.6, 2),
+            get: fn (int $value) => match (app(GeneralSettings::class)->weight_unit) {
+                'kg' => round(app(WeightConcern::class)->gToKg($value), 2),
+                'lbs' => round(app(WeightConcern::class)->gToLbs($value), 2),
+                default => 0,
+            },
+            set: fn (string $value) => match (app(GeneralSettings::class)->weight_unit) {
+                'kg' => app(WeightConcern::class)->kgToG($value),
+                'lbs' => app(WeightConcern::class)->lbsToG($value),
+                default => 0,
+            },
         );
     }
 }
