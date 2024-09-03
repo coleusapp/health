@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Concerns\WeightConcern;
 use App\Settings\GeneralSettings;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -73,6 +74,16 @@ class Weight extends Model
                 'lbs' => app(WeightConcern::class)->lbsToG($value),
                 default => 0,
             } : null,
+        );
+    }
+
+    public function date(): Attribute
+    {
+        $timezone = app(GeneralSettings::class)->timezone;
+
+        return Attribute::make(
+            get: fn (string $date) => Carbon::parse($date)->setTimezone($timezone),
+            set: fn (string $date) => Carbon::parse($date)->shiftTimezone($timezone)->setTimezone('UTC'),
         );
     }
 }

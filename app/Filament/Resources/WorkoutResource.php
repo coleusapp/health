@@ -104,6 +104,7 @@ class WorkoutResource extends Resource
             ])
             ->groups([
                 Group::make('date')->date()
+                    ->orderQueryUsing(fn (Builder $query, string $direction) => $query->orderBy('created_at', $direction))
                     ->collapsible(),
             ])
             ->defaultGroup('date')
