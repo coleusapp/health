@@ -12,22 +12,29 @@ use Illuminate\Support\Arr;
 
 class ManageGeneral extends SettingsPage
 {
-    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
-    protected static ?string $activeNavigationIcon = 'heroicon-s-cog-6-tooth';
+    protected static ?string $navigationIcon = null;
+
+    protected static ?string $navigationGroup = 'Settings';
 
     protected static string $settings = GeneralSettings::class;
+
+    protected static ?string $title = 'General';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Select::make('timezone')
-                    ->options(fn () => Arr::map(DateTimeZone::listIdentifiers(), fn ($item) => $item))
+                    ->options(fn () => array_combine(DateTimeZone::listIdentifiers(), DateTimeZone::listIdentifiers()))
                     ->label('Timezone')
                     ->required()
-                    ->searchable(),
+                    ->searchable()
+                    ->preload(),
                 Select::make('weight_unit')
                     ->options(['lbs' => 'Pound (lbs)', 'kg' => 'Kilogram (kg)'])
+                    ->required(),
+                Select::make('distance_unit')
+                    ->options(['kilometer' => 'Kilometer', 'mile' => 'Mile'])
                     ->required(),
             ]);
     }

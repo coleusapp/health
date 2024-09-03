@@ -28,7 +28,11 @@ class AdminPanelProvider extends PanelProvider
             Filament::registerNavigationGroups([
                 NavigationGroup::make()
                     ->label('Gym')
-                    ->icon('healthicons-n-gym')
+                    ->icon('healthicons-o-gym')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Settings')
+                    ->icon('healthicons-o-ui-settings')
                     ->collapsed(),
             ]);
         });

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\WorkoutResource\Pages;
 use App\Filament\Resources\WorkoutResource\RelationManagers;
 use App\Models\Workout;
+use App\Settings\GeneralSettings;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -30,6 +31,7 @@ class WorkoutResource extends Resource
                 Forms\Components\DatePicker::make('date')
                     ->default(today()->toDateString())
                     ->label('Workout Date')
+                    ->native(false)
                     ->required(),
                 Forms\Components\Select::make('exercise_id')
                     ->relationship('exercise', 'name')
@@ -46,13 +48,16 @@ class WorkoutResource extends Resource
                     ->default(null),
                 Forms\Components\TextInput::make('weight')
                     ->numeric()
-                    ->default(null),
+                    ->default(null)
+                    ->postfix(app(GeneralSettings::class)->weight_unit),
                 Forms\Components\TextInput::make('distance')
                     ->numeric()
-                    ->default(null),
+                    ->default(null)
+                    ->postfix(app(GeneralSettings::class)->distance_unit),
                 Forms\Components\TextInput::make('duration')
                     ->numeric()
-                    ->default(0),
+                    ->default(null)
+                    ->postfix('minute'),
                 Forms\Components\Textarea::make('notes')
                     ->columnSpanFull(),
             ]);

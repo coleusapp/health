@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Concerns\WeightConcern;
 use App\Settings\GeneralSettings;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -53,6 +54,13 @@ class Workout extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected function casts(): array
+    {
+        return [
+            'date' => 'datetime',
+        ];
+    }
+
     public function save(array $options = [])
     {
         $this->user_id = auth()->id();
@@ -68,16 +76,26 @@ class Workout extends Model
     public function weight(): Attribute
     {
         return Attribute::make(
-            get: fn (int $value) => match (app(GeneralSettings::class)->weight_unit) {
+            get: fn (?float $value) => match (app(GeneralSettings::class)->weight_unit) {
                 'kg' => round(app(WeightConcern::class)->gToKg($value), 2),
                 'lbs' => round(app(WeightConcern::class)->gToLbs($value), 2),
                 default => 0,
             },
-            set: fn (string $value) => match (app(GeneralSettings::class)->weight_unit) {
+            set: fn (?float $value) => match (app(GeneralSettings::class)->weight_unit) {
                 'kg' => app(WeightConcern::class)->kgToG($value),
                 'lbs' => app(WeightConcern::class)->lbsToG($value),
                 default => 0,
             },
+        );
+    }
+
+    public function date(): Attribute
+    {
+        $timezone = app(GeneralSettings::class)->timezone;
+
+        return Attribute::make(
+            get: fn (string $date) => Carbon::parse($date)->setTimezone($timezone),
+            set: fn (string $date) => Carbon::parse($date)->shiftTimezone($timezone)->setTimezone('UTC'),
         );
     }
 }

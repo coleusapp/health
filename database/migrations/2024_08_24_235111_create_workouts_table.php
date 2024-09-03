@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('workouts', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->timestamp('date');
             $table->unsignedSmallInteger('sets')->default(1);
             $table->unsignedSmallInteger('reps')->nullable();
             $table->unsignedInteger('weight')->nullable();

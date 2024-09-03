@@ -10,6 +10,8 @@ class GeneralSettings extends Settings
 
     public string $weight_unit;
 
+    public string $distance_unit;
+
     public static function group(): string
     {
         return 'general';

@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Concerns\WeightConcern;
 use App\Services\WeightService;
+use App\Settings\GeneralSettings;
+use Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -22,5 +24,7 @@ class AppServiceProvider extends ServiceProvider
         if(config('app.env') === 'production') {
             URL::forceScheme('https');
         }
+
+        Config::set('app.timezone', app(GeneralSettings::class)->timezone);
     }
 }
