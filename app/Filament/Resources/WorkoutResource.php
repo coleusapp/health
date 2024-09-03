@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,8 +30,8 @@ class WorkoutResource extends Resource
         return $form
             ->schema([
                 Forms\Components\DatePicker::make('date')
-                    ->default(today()->toDateString())
-                    ->label('Workout Date')
+                    ->default(now(app(GeneralSettings::class)->timezone)->toDateString())
+                    ->label('Date')
                     ->native(false)
                     ->required(),
                 Forms\Components\Select::make('exercise_id')
@@ -67,19 +68,25 @@ class WorkoutResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('exercise.name')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('sets')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('reps')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->default('—'),
                 Tables\Columns\TextColumn::make('weight')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->default('—'),
                 Tables\Columns\TextColumn::make('distance')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('duration'),
+                    ->sortable()
+                    ->default('—'),
+                Tables\Columns\TextColumn::make('duration')
+                    ->default('—'),
                 Tables\Columns\TextColumn::make('exercise.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -101,8 +108,12 @@ class WorkoutResource extends Resource
             ])
             ->defaultGroup('date')
             ->filters([
+                SelectFilter::make('exercise')
+                    ->relationship('exercise', 'name')
+                    ->searchable()
+                    ->preload(),
                 Tables\Filters\TrashedFilter::make(),
-            ])
+            ], layout: Tables\Enums\FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

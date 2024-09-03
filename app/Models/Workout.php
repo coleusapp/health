@@ -76,16 +76,16 @@ class Workout extends Model
     public function weight(): Attribute
     {
         return Attribute::make(
-            get: fn (?float $value) => match (app(GeneralSettings::class)->weight_unit) {
+            get: fn (?float $value) => $value ? match (app(GeneralSettings::class)->weight_unit) {
                 'kg' => round(app(WeightConcern::class)->gToKg($value), 2),
                 'lbs' => round(app(WeightConcern::class)->gToLbs($value), 2),
                 default => 0,
-            },
-            set: fn (?float $value) => match (app(GeneralSettings::class)->weight_unit) {
+            } : null,
+            set: fn (?float $value) => $value ? match (app(GeneralSettings::class)->weight_unit) {
                 'kg' => app(WeightConcern::class)->kgToG($value),
                 'lbs' => app(WeightConcern::class)->lbsToG($value),
                 default => 0,
-            },
+            } : null,
         );
     }
 
