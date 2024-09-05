@@ -42,9 +42,9 @@ class WeightResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date')
+                    ->label('Time')
                     ->sortable()
-                    ->date()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->dateTime('h:i A'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -58,12 +58,11 @@ class WeightResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->groups([
+            ->defaultGroup(
                 Group::make('date')->date()
                     ->collapsible()
-                    ->orderQueryUsing(fn (Builder $query, string $direction = 'asc') => $query->orderBy('date', 'desc')),
-            ])
-            ->defaultGroup('date')
+                    ->orderQueryUsing(fn (Builder $query, string $direction = 'asc') => $query->orderBy('date', 'desc'))
+            )
             ->groupingDirectionSettingHidden()
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
