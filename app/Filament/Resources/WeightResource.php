@@ -6,6 +6,8 @@ use App\Filament\Resources\WeightResource\Pages;
 use App\Filament\Resources\WeightResource\RelationManagers;
 use App\Filament\Resources\WeightResource\Widgets\WeightChart;
 use App\Models\Weight;
+use App\Settings\GeneralSettings;
+use Filament\Actions\RestoreAction;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Form;
@@ -44,19 +46,7 @@ class WeightResource extends Resource
                 Tables\Columns\TextColumn::make('date')
                     ->label('Time')
                     ->sortable()
-                    ->dateTime('h:i A'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->dateTime('h:i A', app(GeneralSettings::class)->timezone),
             ])
             ->defaultGroup(
                 Group::make('date')->date()
@@ -86,6 +76,7 @@ class WeightResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
