@@ -24,7 +24,5 @@ class AppServiceProvider extends ServiceProvider
         if(config('app.env') === 'production') {
             URL::forceScheme('https');
         }
-
-        Config::set('app.timezone', app(GeneralSettings::class)->timezone);
     }
 }
