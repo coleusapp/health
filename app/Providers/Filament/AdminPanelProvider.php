@@ -24,19 +24,6 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        Filament::serving(function () {
-            Filament::registerNavigationGroups([
-                NavigationGroup::make()
-                    ->label('Gym')
-                    ->icon('healthicons-o-gym')
-                    ->collapsed(),
-                NavigationGroup::make()
-                    ->label('Settings')
-                    ->icon('healthicons-o-ui-settings')
-                    ->collapsed(),
-            ]);
-        });
-
         return $panel
             ->default()
             ->id('health-admin')

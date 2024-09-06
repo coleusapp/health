@@ -18,9 +18,7 @@ class ExerciseResource extends Resource
 {
     protected static ?string $model = Exercise::class;
 
-    protected static ?string $navigationIcon = null;
-    protected static ?string $navigationGroup = 'Gym';
-    protected static ?int $navigationSort = 2;
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
