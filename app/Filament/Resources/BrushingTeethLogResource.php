@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SwimmingLogResource\Pages;
-use App\Models\SwimmingLog;
+use App\Filament\Resources\BrushingTeethLogResource\Pages;
+use App\Models\BrushingTeethLog;
 use App\Settings\GeneralSettings;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,17 +13,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SwimmingLogResource extends Resource
+class BrushingTeethLogResource extends Resource
 {
-    protected static ?string $model = SwimmingLog::class;
+    protected static ?string $model = BrushingTeethLog::class;
 
-    protected static ?string $navigationIcon = 'healthicons-o-swim';
+    protected static ?string $navigationIcon = 'healthicons-o-dental-hygiene';
 
-    protected static ?string $activeNavigationIcon = 'healthicons-f-swim';
+    protected static ?string $activeNavigationIcon = 'healthicons-f-dental-hygiene';
 
-    protected static ?string $label = 'Swimming';
+    protected static ?string $label = 'Brushing';
 
-    protected static ?int $navigationSort = 98;
+    protected static ?int $navigationSort = 97;
 
     public static function form(Form $form): Form
     {
@@ -34,19 +34,11 @@ class SwimmingLogResource extends Resource
                     ->label('Date')
                     ->native(false)
                     ->required(),
-                Forms\Components\Select::make('swimming_type_id')
-                    ->relationship('swimmingType', 'name')
-                    ->required()
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm(SwimmingTypeResource::schema())
-                    ->editOptionForm(SwimmingTypeResource::schema()),
                 Forms\Components\TextInput::make('duration')
                     ->numeric()
                     ->default(null),
-                Forms\Components\TextInput::make('distance')
-                    ->numeric()
-                    ->default(null),
+                Forms\Components\Toggle::make('flossed'),
+                Forms\Components\Toggle::make('fluoride_taken'),
                 Forms\Components\Textarea::make('notes')
                     ->columnSpanFull(),
             ]);
@@ -57,23 +49,15 @@ class SwimmingLogResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('date')
-                    ->label('Date')
-                    ->sortable()
-                    ->since(app(GeneralSettings::class)->timezone),
-                Tables\Columns\TextColumn::make('swimmingType.name')
+                    ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('duration')
                     ->numeric()
-                    ->sortable()
-                    ->default('—'),
-                Tables\Columns\TextColumn::make('distance')
-                    ->numeric()
-                    ->sortable()
-                    ->default('—'),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('flossed')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('fluoride_taken')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -88,7 +72,6 @@ class SwimmingLogResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -109,9 +92,9 @@ class SwimmingLogResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSwimmingLogs::route('/'),
-            'create' => Pages\CreateSwimmingLog::route('/create'),
-            'edit' => Pages\EditSwimmingLog::route('/{record}/edit'),
+            'index' => Pages\ListBrushingTeethLogs::route('/'),
+            'create' => Pages\CreateBrushingTeethLog::route('/create'),
+            'edit' => Pages\EditBrushingTeethLog::route('/{record}/edit'),
         ];
     }
 

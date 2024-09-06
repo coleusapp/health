@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\WorkoutResource\Pages;
-use App\Filament\Resources\WorkoutResource\RelationManagers;
 use App\Models\Workout;
 use App\Settings\GeneralSettings;
 use Filament\Forms;
@@ -21,6 +20,8 @@ class WorkoutResource extends Resource
     protected static ?string $model = Workout::class;
 
     protected static ?string $navigationIcon = 'healthicons-o-gym';
+
+    protected static ?string $activeNavigationIcon = 'healthicons-f-gym';
 
     protected static ?string $label = 'Workouts';
 
