@@ -3,19 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\WeightResource\Pages;
-use App\Filament\Resources\WeightResource\RelationManagers;
-use App\Filament\Resources\WeightResource\Widgets\WeightChart;
 use App\Models\Weight;
 use App\Settings\GeneralSettings;
-use Filament\Actions\RestoreAction;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\Summarizers\Average;
-use Filament\Tables\Columns\Summarizers\Range;
-use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
@@ -27,6 +21,7 @@ class WeightResource extends Resource
     protected static ?string $model = Weight::class;
 
     protected static ?string $navigationIcon = 'healthicons-o-weight';
+
     protected static ?string $activeNavigationIcon = 'healthicons-f-weight';
 
     public static function form(Form $form): Form
