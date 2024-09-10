@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Concerns\WeightConcern;
 use App\Settings\GeneralSettings;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -54,10 +53,11 @@ class Workout extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected function casts(): array
+    public function casts()
     {
         return [
             'date' => 'datetime',
+            'weight' => \App\Casts\Weight::class,
         ];
     }
 
@@ -71,22 +71,6 @@ class Workout extends Model
     public function exercise(): BelongsTo
     {
         return $this->belongsTo(Exercise::class);
-    }
-
-    public function weight(): Attribute
-    {
-        return Attribute::make(
-            get: fn (?float $value) => $value ? match (app(GeneralSettings::class)->weight_unit) {
-                'kg' => round(app(WeightConcern::class)->gToKg($value), 2),
-                'lbs' => round(app(WeightConcern::class)->gToLbs($value), 2),
-                default => 0,
-            } : null,
-            set: fn (?float $value) => $value ? match (app(GeneralSettings::class)->weight_unit) {
-                'kg' => app(WeightConcern::class)->kgToG($value),
-                'lbs' => app(WeightConcern::class)->lbsToG($value),
-                default => 0,
-            } : null,
-        );
     }
 
     public function date(): Attribute
