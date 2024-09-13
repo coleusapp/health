@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SwimmingLogResource\Pages;
-use App\Models\SwimmingLog;
+use App\Filament\Resources\SwimResource\Pages;
+use App\Models\Swim;
 use App\Settings\GeneralSettings;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -15,15 +15,15 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SwimmingLogResource extends Resource
+class SwimResource extends Resource
 {
-    protected static ?string $model = SwimmingLog::class;
+    protected static ?string $model = Swim::class;
 
     protected static ?string $navigationIcon = 'healthicons-o-swim';
 
     protected static ?string $activeNavigationIcon = 'healthicons-f-swim';
 
-    protected static ?string $label = 'Swimming';
+    protected static ?string $label = 'Swim';
 
     protected static ?int $navigationSort = 98;
 
@@ -122,9 +122,9 @@ class SwimmingLogResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSwimmingLogs::route('/'),
-            'create' => Pages\CreateSwimmingLog::route('/create'),
-            'edit' => Pages\EditSwimmingLog::route('/{record}/edit'),
+            'index' => Pages\ListSwims::route('/'),
+            'create' => Pages\CreateSwim::route('/create'),
+            'edit' => Pages\EditSwim::route('/{record}/edit'),
         ];
     }
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\SwimmingLogResource\Pages;
+namespace App\Filament\Resources\SwimResource\Pages;
 
-use App\Filament\Resources\SwimmingLogResource;
+use App\Filament\Resources\SwimResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditSwimmingLog extends EditRecord
+class EditSwim extends EditRecord
 {
-    protected static string $resource = SwimmingLogResource::class;
+    protected static string $resource = SwimResource::class;
 
     protected function getHeaderActions(): array
     {
