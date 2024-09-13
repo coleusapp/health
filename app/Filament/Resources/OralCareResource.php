@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BrushingTeethLogResource\Pages;
-use App\Models\BrushingTeethLog;
+use App\Filament\Resources\OralCareResource\Pages;
+use App\Models\OralCare;
 use App\Settings\GeneralSettings;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,15 +13,15 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BrushingTeethLogResource extends Resource
+class OralCareResource extends Resource
 {
-    protected static ?string $model = BrushingTeethLog::class;
+    protected static ?string $model = OralCare::class;
 
     protected static ?string $navigationIcon = 'healthicons-o-dental-hygiene';
 
     protected static ?string $activeNavigationIcon = 'healthicons-f-dental-hygiene';
 
-    protected static ?string $label = 'Brushing';
+    protected static ?string $label = 'Oral care';
 
     protected static ?int $navigationSort = 97;
 
@@ -37,6 +37,7 @@ class BrushingTeethLogResource extends Resource
                 Forms\Components\TextInput::make('duration')
                     ->numeric()
                     ->default(null),
+                Forms\Components\Toggle::make('brushed'),
                 Forms\Components\Toggle::make('flossed'),
                 Forms\Components\Toggle::make('fluoride_taken'),
             ]);
@@ -51,7 +52,10 @@ class BrushingTeethLogResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('duration')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->default('—'),
+                Tables\Columns\IconColumn::make('brushed')
+                    ->boolean(),
                 Tables\Columns\IconColumn::make('flossed')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('fluoride_taken')
@@ -90,9 +94,9 @@ class BrushingTeethLogResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBrushingTeethLogs::route('/'),
-            'create' => Pages\CreateBrushingTeethLog::route('/create'),
-            'edit' => Pages\EditBrushingTeethLog::route('/{record}/edit'),
+            'index' => Pages\ListOralCares::route('/'),
+            'create' => Pages\CreateOralCare::route('/create'),
+            'edit' => Pages\EditOralCare::route('/{record}/edit'),
         ];
     }
 

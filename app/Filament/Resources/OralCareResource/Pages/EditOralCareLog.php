@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\BrushingTeethLogResource\Pages;
+namespace App\Filament\Resources\OralCareResource\Pages;
 
-use App\Filament\Resources\BrushingTeethLogResource;
+use App\Filament\Resources\OralCareResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditBrushingTeethLog extends EditRecord
+class EditOralCare extends EditRecord
 {
-    protected static string $resource = BrushingTeethLogResource::class;
+    protected static string $resource = OralCareResource::class;
 
     protected function getHeaderActions(): array
     {

@@ -7,15 +7,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('brushing_teeth_logs', function (Blueprint $table) {
+        Schema::create('oral_cares', function (Blueprint $table) {
             $table->id();
             $table->timestamp('date');
             $table->unsignedInteger('duration')->nullable();
+            $table->boolean('brushed')->default(false);
             $table->boolean('flossed')->default(false);
             $table->boolean('fluoride_taken')->default(false);
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
@@ -24,11 +22,8 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('brushing_teeth_logs');
+        Schema::dropIfExists('oral_cares');
     }
 };
