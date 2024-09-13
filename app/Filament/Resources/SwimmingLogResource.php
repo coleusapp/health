@@ -9,6 +9,8 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -30,7 +32,8 @@ class SwimmingLogResource extends Resource
         return $form
             ->schema([
                 Forms\Components\DateTimePicker::make('date')
-                    ->default(now(app(GeneralSettings::class)->timezone))
+                    ->default(now())
+                    ->timezone(app(GeneralSettings::class)->timezone)
                     ->label('Date')
                     ->native(false)
                     ->required(),
@@ -43,12 +46,12 @@ class SwimmingLogResource extends Resource
                     ->editOptionForm(SwimmingTypeResource::schema()),
                 Forms\Components\TextInput::make('duration')
                     ->numeric()
-                    ->default(null),
+                    ->default(null)
+                    ->suffix('minutes'),
                 Forms\Components\TextInput::make('distance')
                     ->numeric()
-                    ->default(null),
-                Forms\Components\Textarea::make('notes')
-                    ->columnSpanFull(),
+                    ->default(null)
+                    ->suffix('meters'),
             ]);
     }
 
@@ -58,10 +61,9 @@ class SwimmingLogResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('date')
                     ->label('Date')
-                    ->sortable()
-                    ->since(app(GeneralSettings::class)->timezone),
-                Tables\Columns\TextColumn::make('swimmingType.name')
+                    ->since()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('swimmingType.name'),
                 Tables\Columns\TextColumn::make('duration')
                     ->numeric()
                     ->sortable()
@@ -83,9 +85,20 @@ class SwimmingLogResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->filtersLayout(Tables\Enums\FiltersLayout::AboveContent)
             ->filters([
+                SelectFilter::make('Swimming Type')
+                    ->multiple()
+                    ->preload()
+                    ->relationship('swimmingType', 'name'),
                 Tables\Filters\TrashedFilter::make(),
             ])
+            ->groups([
+                Group::make('date')
+                    ->date()
+                    ->collapsible(),
+            ])
+            ->defaultGroup('date')
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

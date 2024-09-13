@@ -34,8 +34,6 @@ class SwimmingTypeResource extends Resource
             Forms\Components\TextInput::make('name')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\Textarea::make('notes')
-                ->columnSpanFull(),
         ];
     }
 }

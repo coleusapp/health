@@ -39,8 +39,6 @@ class BrushingTeethLogResource extends Resource
                     ->default(null),
                 Forms\Components\Toggle::make('flossed'),
                 Forms\Components\Toggle::make('fluoride_taken'),
-                Forms\Components\Textarea::make('notes')
-                    ->columnSpanFull(),
             ]);
     }
 

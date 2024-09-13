@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -41,13 +42,7 @@ class Exercise extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
-    public function save(array $options = [])
-    {
-        $this->user_id = auth()->id();
-
-        return parent::save($options);
-    }
+    use AutoAssignUser;
 
     public function muscleGroup(): BelongsTo
     {

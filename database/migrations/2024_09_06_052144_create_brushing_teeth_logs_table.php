@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedInteger('duration')->nullable();
             $table->boolean('flossed')->default(false);
             $table->boolean('fluoride_taken')->default(false);
-            $table->text('notes')->nullable();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
             $table->softDeletes();
             $table->timestamps();

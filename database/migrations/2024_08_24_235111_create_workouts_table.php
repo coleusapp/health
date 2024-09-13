@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedInteger('weight')->nullable();
             $table->unsignedInteger('distance')->nullable();
             $table->unsignedSmallInteger('duration')->nullable();
-            $table->text('notes')->nullable();
             $table->foreignIdFor(Exercise::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

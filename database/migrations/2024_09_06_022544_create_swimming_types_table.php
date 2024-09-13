@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('swimming_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('notes')->nullable();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
             $table->softDeletes();
             $table->timestamps();

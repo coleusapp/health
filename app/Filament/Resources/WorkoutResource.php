@@ -59,8 +59,6 @@ class WorkoutResource extends Resource
                     ->numeric()
                     ->default(null)
                     ->postfix('minute'),
-                Forms\Components\Textarea::make('notes')
-                    ->columnSpanFull(),
             ]);
     }
 

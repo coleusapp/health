@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Casts\TimezoneDatetime;
+use App\Concerns\AutoAssignUser;
 use App\Settings\GeneralSettings;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -14,26 +16,17 @@ class SwimmingLog extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use AutoAssignUser;
 
-    public function save(array $options = [])
+    public function casts()
     {
-        $this->user_id = auth()->id();
-
-        return parent::save($options);
+        return [
+            'date' => TimezoneDatetime::class,
+        ];
     }
 
     public function swimmingType(): BelongsTo
     {
         return $this->belongsTo(SwimmingType::class);
-    }
-
-    public function date(): Attribute
-    {
-        $timezone = app(GeneralSettings::class)->timezone;
-
-        return Attribute::make(
-            get: fn (string $date) => Carbon::parse($date)->setTimezone($timezone),
-            set: fn (string $date) => Carbon::parse($date)->shiftTimezone($timezone)->setTimezone('UTC'),
-        );
     }
 }

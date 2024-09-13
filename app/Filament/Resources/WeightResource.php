@@ -24,12 +24,6 @@ class WeightResource extends Resource
 
     protected static ?string $activeNavigationIcon = 'healthicons-f-weight';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema(self::schema());
-    }
-
     public static function table(Table $table): Table
     {
         return $table
@@ -46,7 +40,7 @@ class WeightResource extends Resource
             ->defaultGroup(
                 Group::make('date')->date()
                     ->collapsible()
-                    ->orderQueryUsing(fn (Builder $query, string $direction = 'asc') => $query->orderBy('date', 'desc'))
+                    ->orderQueryUsing(fn(Builder $query, string $direction = 'asc') => $query->orderBy('date', 'desc'))
             )
             ->groupingDirectionSettingHidden()
             ->filters([
@@ -60,11 +54,11 @@ class WeightResource extends Resource
                         return $query
                             ->when(
                                 $data['date_after'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
+                                fn(Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
                             )
                             ->when(
                                 $data['date_before'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
+                                fn(Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
                             );
                     }),
             ])
@@ -80,6 +74,25 @@ class WeightResource extends Resource
                     Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function form(Form $form): Form
+    {
+        return $form->schema(self::schema());
+    }
+
+    public static function schema(): array
+    {
+        return [
+            Forms\Components\TextInput::make('weight')
+                ->required()
+                ->numeric()
+                ->autofocus(),
+            Forms\Components\DateTimePicker::make('date')
+                ->default(now())
+                ->required()
+                ->native(false),
+        ];
     }
 
     public static function getRelations(): array
@@ -104,19 +117,5 @@ class WeightResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
-    }
-
-    public static function schema(): array
-    {
-        return [
-            Forms\Components\TextInput::make('weight')
-                ->required()
-                ->numeric()
-                ->default(0),
-            Forms\Components\DateTimePicker::make('date')
-                ->default(now())
-                ->required()
-                ->native(false),
-        ];
     }
 }

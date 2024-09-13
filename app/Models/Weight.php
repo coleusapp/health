@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Settings\GeneralSettings;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Casts\TimezoneDatetime;
+use App\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -40,34 +39,13 @@ class Weight extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use AutoAssignUser;
 
     public function casts()
     {
         return [
-            'date' => 'datetime',
+            'date' => TimezoneDatetime::class,
             'weight' => \App\Casts\Weight::class,
         ];
-    }
-
-    public function save(array $options = [])
-    {
-        $this->user_id = auth()->id();
-
-        return parent::save($options);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function date(): Attribute
-    {
-        $timezone = app(GeneralSettings::class)->timezone;
-
-        return Attribute::make(
-            get: fn (string $date) => Carbon::parse($date)->setTimezone($timezone),
-            set: fn (string $date) => Carbon::parse($date)->shiftTimezone($timezone)->setTimezone('UTC'),
-        );
     }
 }

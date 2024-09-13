@@ -18,7 +18,6 @@ return new class extends Migration
             $table->timestamp('date');
             $table->unsignedInteger('duration')->nullable();
             $table->unsignedInteger('distance')->nullable();
-            $table->text('notes')->nullable();
             $table->foreignIdFor(SwimmingType::class)->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
             $table->softDeletes();
