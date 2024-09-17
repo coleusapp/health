@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\WorkoutResource\Pages;
 use App\Models\Workout;
 use App\Settings\GeneralSettings;
+use App\Settings\NavigationSettings;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -150,5 +151,10 @@ class WorkoutResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return app(NavigationSettings::class)->workout;
     }
 }

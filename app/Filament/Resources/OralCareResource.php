@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OralCareResource\Pages;
 use App\Models\OralCare;
 use App\Settings\GeneralSettings;
+use App\Settings\NavigationSettings;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -106,5 +107,10 @@ class OralCareResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return app(NavigationSettings::class)->oral_care;
     }
 }

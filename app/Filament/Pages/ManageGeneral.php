@@ -4,15 +4,15 @@ namespace App\Filament\Pages;
 
 use App\Settings\GeneralSettings;
 use DateTimeZone;
-use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
-use Illuminate\Support\Arr;
 
 class ManageGeneral extends SettingsPage
 {
     protected static string $settings = GeneralSettings::class;
+
+    protected static ?string $navigationGroup = 'Settings';
 
     protected static ?string $title = 'General';
 

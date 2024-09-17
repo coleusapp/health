@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\WeightResource\Pages;
 use App\Models\Weight;
 use App\Settings\GeneralSettings;
+use App\Settings\NavigationSettings;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Form;
@@ -117,5 +118,10 @@ class WeightResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return app(NavigationSettings::class)->weight;
     }
 }
