@@ -2,63 +2,51 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OralCareResource\Pages;
-use App\Models\OralCare;
+use App\Filament\Resources\WalkResource\Pages;
+use App\Filament\Resources\WalkResource\RelationManagers;
+use App\Models\Walk;
 use App\Settings\GeneralSettings;
-use App\Settings\NavigationSettings;
 use Filament\Forms;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class OralCareResource extends Resource
+class WalkResource extends Resource
 {
-    protected static ?string $model = OralCare::class;
+    protected static ?string $model = Walk::class;
 
-    protected static ?string $navigationIcon = 'healthicons-o-dental-hygiene';
+    protected static ?string $navigationIcon = 'healthicons-o-walking';
 
-    protected static ?string $activeNavigationIcon = 'healthicons-f-dental-hygiene';
+    protected static ?string $activeNavigationIcon = 'healthicons-f-walking';
 
-    protected static ?string $label = 'Oral care';
+    protected static ?string $label = 'Walk';
 
-    protected static ?int $navigationSort = 97;
+    protected static ?int $navigationSort = 96;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\DateTimePicker::make('date')
-                    ->default(now(app(GeneralSettings::class)->timezone))
+                    ->default(now())
+                    ->timezone(app(GeneralSettings::class)->timezone)
                     ->label('Date')
                     ->native(false)
                     ->required(),
                 Forms\Components\TextInput::make('duration')
                     ->numeric()
+                    ->default(null)
+                    ->suffix('minutes'),
+                Forms\Components\TextInput::make('distance')
+                    ->numeric()
+                    ->default(null)
+                    ->suffix('miles'),
+                Forms\Components\TextInput::make('calories')
+                    ->numeric()
                     ->default(null),
-                Forms\Components\Toggle::make('flossed'),
-                Forms\Components\Toggle::make('fluoride_taken'),
-                Forms\Components\Toggle::make('brushed')
-                    ->default(true)
-                    ->live()
-                    ->columnSpanFull(),
-                Repeater::make('oralCareToothpasteTypes')
-                    ->relationship()
-                    ->label('Toothpaste Types')
-                    ->schema([
-                        Forms\Components\Select::make('toothpaste_type_id')
-                            ->relationship('toothpasteType', 'name')
-                            ->createOptionForm(ToothpasteTypeResource::schema())
-                            ->preload()
-                            ->searchable(),
-                    ])
-                    ->visible(fn (Get $get): bool => $get('brushed'))
-                    ->columnSpanFull(),
             ]);
     }
 
@@ -71,15 +59,20 @@ class OralCareResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('duration')
                     ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('distance')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('calories')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->dateTime()
                     ->sortable()
-                    ->default('—'),
-                Tables\Columns\IconColumn::make('brushed')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('oralCareToothpasteTypes.toothpasteType.name'),
-                Tables\Columns\IconColumn::make('flossed')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('fluoride_taken')
-                    ->boolean(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -89,7 +82,6 @@ class OralCareResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->defaultSort('created_at', 'desc')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
@@ -115,9 +107,9 @@ class OralCareResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOralCares::route('/'),
-            'create' => Pages\CreateOralCare::route('/create'),
-            'edit' => Pages\EditOralCare::route('/{record}/edit'),
+            'index' => Pages\ListWalks::route('/'),
+            'create' => Pages\CreateWalk::route('/create'),
+            'edit' => Pages\EditWalk::route('/{record}/edit'),
         ];
     }
 
@@ -127,10 +119,5 @@ class OralCareResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
-    }
-
-    public static function shouldRegisterNavigation(): bool
-    {
-        return app(NavigationSettings::class)->oral_care;
     }
 }

@@ -2,20 +2,22 @@
 
 namespace App\Models;
 
+use App\Casts\TimezoneDatetime;
 use App\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OralCare extends Model
+class Walk extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use AutoAssignUser;
 
-    public function oralCareToothpasteTypes(): HasMany
+    public function casts()
     {
-        return $this->hasMany(OralCareToothpasteType::class);
+        return [
+            'date' => TimezoneDatetime::class,
+        ];
     }
 }
