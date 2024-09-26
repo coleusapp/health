@@ -91,8 +91,13 @@ class OralCareResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
+                Tables\Filters\SelectFilter::make('oralCareToothpasteTypes.toothpasteType.name')
+                    ->relationship('oralCareToothpasteTypes.toothpasteType', 'name'),
+                Tables\Filters\TernaryFilter::make('brushed'),
+                Tables\Filters\TernaryFilter::make('flossed'),
+                Tables\Filters\TernaryFilter::make('fluoride_taken'),
                 Tables\Filters\TrashedFilter::make(),
-            ])
+            ], layout: Tables\Enums\FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
