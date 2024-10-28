@@ -3,10 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ExerciseResource\Pages;
-use App\Filament\Resources\ExerciseResource\RelationManagers;
 use App\Models\Exercise;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
@@ -22,8 +23,7 @@ class ExerciseResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema(self::schema());
+        return $form->schema(self::schema());
     }
 
     public static function table(Table $table): Table
@@ -100,10 +100,17 @@ class ExerciseResource extends Resource
                 ->maxLength(255),
             Forms\Components\Textarea::make('description')
                 ->columnSpanFull(),
-            Forms\Components\Select::make('muscle_group_id')
-                ->relationship('muscleGroup', 'name')
-                ->required()
-                ->createOptionForm(MuscleGroupResource::schema()),
+            Repeater::make('exerciseMuscleGroup')
+                ->relationship()
+                ->label('Muscle Groups')
+                ->schema([
+                    Forms\Components\Select::make('muscle_group_id')
+                        ->relationship('muscleGroup', 'name')
+                        ->createOptionForm(MuscleGroupResource::schema())
+                        ->preload()
+                        ->searchable(),
+                ])
+                ->columnSpanFull(),
         ];
     }
 }

@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string|null $description
@@ -60,5 +58,10 @@ class MuscleGroup extends Model
     public function children(): HasMany
     {
         return $this->hasMany(MuscleGroup::class, 'muscle_group_id');
+    }
+
+    public function exerciseMuscleGroup(): HasMany
+    {
+        return $this->hasMany(ExerciseMuscleGroup::class);
     }
 }

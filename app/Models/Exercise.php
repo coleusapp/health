@@ -5,12 +5,10 @@ namespace App\Models;
 use App\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string|null $description
@@ -44,8 +42,8 @@ class Exercise extends Model
     use SoftDeletes;
     use AutoAssignUser;
 
-    public function muscleGroup(): BelongsTo
+    public function exerciseMuscleGroup(): HasMany
     {
-        return $this->belongsTo(MuscleGroup::class);
+        return $this->hasMany(ExerciseMuscleGroup::class);
     }
 }
