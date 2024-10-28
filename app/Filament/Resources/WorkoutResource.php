@@ -20,11 +20,11 @@ class WorkoutResource extends Resource
 {
     protected static ?string $model = Workout::class;
 
-    protected static ?string $navigationIcon = 'healthicons-o-gym';
-
-    protected static ?string $activeNavigationIcon = 'healthicons-f-gym';
-
     protected static ?string $label = 'Workouts';
+
+    protected static ?string $navigationGroup = 'Workouts';
+
+    protected static ?int $navigationSort = 0;
 
     public static function form(Form $form): Form
     {

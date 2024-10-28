@@ -17,7 +17,9 @@ class MuscleGroupResource extends Resource
 {
     protected static ?string $model = MuscleGroup::class;
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationGroup = 'Workouts';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

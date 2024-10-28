@@ -7,7 +7,6 @@ use App\Models\Exercise;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
@@ -19,7 +18,9 @@ class ExerciseResource extends Resource
 {
     protected static ?string $model = Exercise::class;
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationGroup = 'Workouts';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -32,7 +33,7 @@ class ExerciseResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('muscleGroup.name')
+                Tables\Columns\TextColumn::make('exerciseMuscleGroup.muscleGroup.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -49,7 +50,7 @@ class ExerciseResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('muscle_group_id')
-                    ->relationship('muscleGroup', 'name')
+                    ->relationship('exerciseMuscleGroup.muscleGroup', 'name')
                     ->label('Muscle group')
                     ->searchable()
                     ->preload(),
