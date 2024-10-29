@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Duration;
 use App\Casts\TimezoneDatetime;
 use App\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

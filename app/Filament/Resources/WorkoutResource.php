@@ -59,7 +59,7 @@ class WorkoutResource extends Resource
                 Forms\Components\TextInput::make('duration')
                     ->numeric()
                     ->default(null)
-                    ->postfix('minute'),
+                    ->postfix('seconds'),
             ]);
     }
 
@@ -68,6 +68,8 @@ class WorkoutResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('exercise.name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('exercise.exerciseMuscleGroup.muscleGroup.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sets')
                     ->numeric()
