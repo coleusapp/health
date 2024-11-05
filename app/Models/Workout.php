@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use App\Casts\Duration;
 use App\Casts\TimezoneDatetime;
 use App\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -57,7 +55,6 @@ class Workout extends Model
     {
         return [
             'date' => TimezoneDatetime::class,
-            'weight' => \App\Casts\Weight::class,
         ];
     }
 

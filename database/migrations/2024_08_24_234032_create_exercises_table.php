@@ -17,8 +17,11 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->boolean('has_reps')->default(true);
             $table->boolean('has_weight')->default(true);
+            $table->string('weight_unit')->nullable();
             $table->boolean('has_distance')->default(true);
+            $table->string('distance_unit')->nullable();
             $table->boolean('has_duration')->default(true);
+            $table->string('duration_unit')->nullable();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();

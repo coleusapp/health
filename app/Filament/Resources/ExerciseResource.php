@@ -2,11 +2,17 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\DistanceEnum;
+use App\Enums\DurationEnum;
+use App\Enums\WeightEnum;
 use App\Filament\Resources\ExerciseResource\Pages;
 use App\Models\Exercise;
+use App\Settings\GeneralSettings;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
@@ -104,10 +110,37 @@ class ExerciseResource extends Resource
             Forms\Components\Section::make('Type of exercise')
                 ->description('These attributes will be displayed when creating a new exercise of this type')
                 ->schema([
-                    Forms\Components\Toggle::make('has_reps')->default(true),
-                    Forms\Components\Toggle::make('has_weight')->default(true),
-                    Forms\Components\Toggle::make('has_distance')->default(true),
-                    Forms\Components\Toggle::make('has_duration')->default(true),
+                    Forms\Components\Toggle::make('has_reps')->default(false),
+                    Forms\Components\Toggle::make('has_weight')
+                        ->default(false)
+                        ->live(),
+                    Select::make('weight_unit')
+                        ->label('Weight unit')
+                        ->options(WeightEnum::class)
+                        ->native(false)
+                        ->preload()
+                        ->default(app(GeneralSettings::class)->weight_unit)
+                        ->visible(fn (Get $get): bool => $get('has_weight')),
+                    Forms\Components\Toggle::make('has_distance')
+                        ->default(false)
+                        ->live(),
+                    Select::make('distance_unit')
+                        ->label('Distance unit')
+                        ->options(DistanceEnum::class)
+                        ->native(false)
+                        ->preload()
+                        ->default(app(GeneralSettings::class)->distance_unit)
+                        ->visible(fn (Get $get): bool => $get('has_distance')),
+                    Forms\Components\Toggle::make('has_duration')
+                        ->default(false)
+                        ->live(),
+                    Select::make('duration_unit')
+                        ->label('Duration unit')
+                        ->options(DurationEnum::class)
+                        ->native(false)
+                        ->preload()
+                        ->default(app(GeneralSettings::class)->duration_unit)
+                        ->visible(fn (Get $get): bool => $get('has_duration')),
                 ])
             ->columnSpan(1),
             Repeater::make('exerciseMuscleGroup')

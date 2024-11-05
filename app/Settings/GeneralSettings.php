@@ -12,6 +12,8 @@ class GeneralSettings extends Settings
 
     public string $distance_unit;
 
+    public string $duration_unit;
+
     public static function group(): string
     {
         return 'general';

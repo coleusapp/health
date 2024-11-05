@@ -2,6 +2,9 @@
 
 namespace App\Filament\Pages;
 
+use App\Enums\DistanceEnum;
+use App\Enums\DurationEnum;
+use App\Enums\WeightEnum;
 use App\Settings\GeneralSettings;
 use DateTimeZone;
 use Filament\Forms\Components\Select;
@@ -31,10 +34,13 @@ class ManageGeneral extends SettingsPage
                     ->searchable()
                     ->preload(),
                 Select::make('weight_unit')
-                    ->options(['lbs' => 'Pound (lbs)', 'kg' => 'Kilogram (kg)'])
+                    ->options(WeightEnum::class)
                     ->required(),
                 Select::make('distance_unit')
-                    ->options(['kilometer' => 'Kilometer', 'mile' => 'Mile'])
+                    ->options(DistanceEnum::class)
+                    ->required(),
+                Select::make('duration_unit')
+                    ->options(DurationEnum::class)
                     ->required(),
             ]);
     }

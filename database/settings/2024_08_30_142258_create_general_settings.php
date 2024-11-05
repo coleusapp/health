@@ -9,5 +9,6 @@ return new class extends SettingsMigration
         $this->migrator->add('general.timezone', 'UTC');
         $this->migrator->add('general.weight_unit', 'lbs');
         $this->migrator->add('general.distance_unit', 'mile');
+        $this->migrator->add('general.duration_unit', 'second');
     }
 };

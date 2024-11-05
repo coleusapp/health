@@ -12,6 +12,10 @@ class ExerciseWorkout extends Pivot
 
     public $incrementing = true;
 
+    public $casts = [
+        'weight' => \App\Casts\Weight::class,
+    ];
+
     public function exercise(): BelongsTo
     {
         return $this->belongsTo(Exercise::class);

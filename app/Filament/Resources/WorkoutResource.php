@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\WorkoutResource\Pages;
 use App\Models\Exercise;
 use App\Models\Workout;
+use App\Services\ExercisePostfixService;
 use App\Settings\GeneralSettings;
 use App\Settings\NavigationSettings;
 use Filament\Forms;
@@ -14,12 +15,10 @@ use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ViewColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use NunoMaduro\Collision\Adapters\Phpunit\State;
 
 class WorkoutResource extends Resource
 {
@@ -62,17 +61,17 @@ class WorkoutResource extends Resource
                         Forms\Components\TextInput::make('weight')
                             ->numeric()
                             ->default(null)
-                            ->postfix(app(GeneralSettings::class)->weight_unit)
+                            ->postfix(fn (Get $get) => ExercisePostfixService::postfix($get('exercise_id'))['weight_unit'])
                             ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_weight),
                         Forms\Components\TextInput::make('distance')
                             ->numeric()
                             ->default(null)
-                            ->postfix(app(GeneralSettings::class)->distance_unit)
+                            ->postfix(fn (Get $get) => ExercisePostfixService::postfix($get('exercise_id'))['distance_unit'])
                             ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_distance),
                         Forms\Components\TextInput::make('duration')
                             ->numeric()
                             ->default(null)
-                            ->postfix('seconds')
+                            ->postfix(fn (Get $get) => ExercisePostfixService::postfix($get('exercise_id'))['duration_unit'])
                             ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_duration),
                     ])
                     ->columnSpanFull()
