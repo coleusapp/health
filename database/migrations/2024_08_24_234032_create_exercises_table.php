@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->boolean('has_reps')->default(true);
+            $table->boolean('has_weight')->default(true);
+            $table->boolean('has_distance')->default(true);
+            $table->boolean('has_duration')->default(true);
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();

@@ -42,8 +42,20 @@ class Exercise extends Model
     use SoftDeletes;
     use AutoAssignUser;
 
+    protected $casts = [
+        'has_reps' => 'bool',
+        'has_weight' => 'bool',
+        'has_distance' => 'bool',
+        'has_duration' => 'bool',
+    ];
+
     public function exerciseMuscleGroup(): HasMany
     {
         return $this->hasMany(ExerciseMuscleGroup::class);
+    }
+
+    public function exerciseWorkouts(): HasMany
+    {
+        return $this->hasMany(ExerciseWorkout::class);
     }
 }

@@ -3,18 +3,23 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\WorkoutResource\Pages;
+use App\Models\Exercise;
 use App\Models\Workout;
 use App\Settings\GeneralSettings;
 use App\Settings\NavigationSettings;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use NunoMaduro\Collision\Adapters\Phpunit\State;
 
 class WorkoutResource extends Resource
 {
@@ -35,31 +40,42 @@ class WorkoutResource extends Resource
                     ->label('Date')
                     ->native(false)
                     ->required(),
-                Forms\Components\Select::make('exercise_id')
-                    ->relationship('exercise', 'name')
-                    ->required()
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm(ExerciseResource::schema()),
-                Forms\Components\TextInput::make('sets')
-                    ->required()
-                    ->numeric()
-                    ->default(1),
-                Forms\Components\TextInput::make('reps')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('weight')
-                    ->numeric()
-                    ->default(null)
-                    ->postfix(app(GeneralSettings::class)->weight_unit),
-                Forms\Components\TextInput::make('distance')
-                    ->numeric()
-                    ->default(null)
-                    ->postfix(app(GeneralSettings::class)->distance_unit),
-                Forms\Components\TextInput::make('duration')
-                    ->numeric()
-                    ->default(null)
-                    ->postfix('seconds'),
+                Repeater::make('exerciseWorkouts')
+                    ->relationship()
+                    ->label('Exercises')
+                    ->cloneable()
+                    ->deletable()
+                    ->reorderable()
+                    ->reorderableWithButtons()
+                    ->schema([
+                        Forms\Components\Select::make('exercise_id')
+                            ->relationship('exercise', 'name')
+                            ->required()
+                            ->searchable()
+                            ->preload()
+                            ->createOptionForm(ExerciseResource::schema())
+                            ->live(onBlur: true, debounce: 500),
+                        Forms\Components\TextInput::make('reps')
+                            ->numeric()
+                            ->default(null)
+                            ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_reps),
+                        Forms\Components\TextInput::make('weight')
+                            ->numeric()
+                            ->default(null)
+                            ->postfix(app(GeneralSettings::class)->weight_unit)
+                            ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_weight),
+                        Forms\Components\TextInput::make('distance')
+                            ->numeric()
+                            ->default(null)
+                            ->postfix(app(GeneralSettings::class)->distance_unit)
+                            ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_distance),
+                        Forms\Components\TextInput::make('duration')
+                            ->numeric()
+                            ->default(null)
+                            ->postfix('seconds')
+                            ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_duration),
+                    ])
+                    ->columnSpanFull()
             ]);
     }
 
@@ -67,29 +83,23 @@ class WorkoutResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('exercise.name')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('exercise.exerciseMuscleGroup.muscleGroup.name')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sets')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('reps')
-                    ->numeric()
-                    ->sortable()
-                    ->default('—'),
-                Tables\Columns\TextColumn::make('weight')
-                    ->numeric()
-                    ->sortable()
-                    ->default('—'),
-                Tables\Columns\TextColumn::make('distance')
-                    ->numeric()
-                    ->sortable()
-                    ->default('—'),
-                Tables\Columns\TextColumn::make('duration')
-                    ->default('—'),
-                Tables\Columns\TextColumn::make('exercise.name')
-                    ->sortable(),
+                ViewColumn::make('exerciseWorkouts')->view('tables.columns.exercise-list'),
+                // Tables\Columns\TextColumn::make('reps')
+                //     ->numeric()
+                //     ->sortable()
+                //     ->default('—'),
+                // Tables\Columns\TextColumn::make('weight')
+                //     ->numeric()
+                //     ->sortable()
+                //     ->default('—'),
+                // Tables\Columns\TextColumn::make('distance')
+                //     ->numeric()
+                //     ->sortable()
+                //     ->default('—'),
+                // Tables\Columns\TextColumn::make('duration')
+                //     ->default('—'),
+                // Tables\Columns\TextColumn::make('exercise.name')
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -111,13 +121,13 @@ class WorkoutResource extends Resource
             ->groupingDirectionSettingHidden()
             ->defaultGroup('date')
             ->defaultSort('created_at', 'desc')
-            ->filters([
-                SelectFilter::make('exercise')
-                    ->relationship('exercise', 'name')
-                    ->searchable()
-                    ->preload(),
-                Tables\Filters\TrashedFilter::make(),
-            ], layout: Tables\Enums\FiltersLayout::AboveContent)
+            // ->filters([
+            //     SelectFilter::make('exercise')
+            //         ->relationship('exercise', 'name')
+            //         ->searchable()
+            //         ->preload(),
+            //     Tables\Filters\TrashedFilter::make(),
+            // ], layout: Tables\Enums\FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

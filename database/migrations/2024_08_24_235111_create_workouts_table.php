@@ -14,12 +14,6 @@ return new class extends Migration
         Schema::create('workouts', function (Blueprint $table) {
             $table->id();
             $table->timestamp('date');
-            $table->unsignedSmallInteger('sets')->default(1);
-            $table->unsignedSmallInteger('reps')->nullable();
-            $table->unsignedInteger('weight')->nullable();
-            $table->unsignedInteger('distance')->nullable();
-            $table->unsignedSmallInteger('duration')->nullable();
-            $table->foreignIdFor(Exercise::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();

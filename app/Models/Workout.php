@@ -8,6 +8,7 @@ use App\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -60,8 +61,13 @@ class Workout extends Model
         ];
     }
 
-    public function exercise(): BelongsTo
+    // public function exercise(): BelongsTo
+    // {
+    //     return $this->belongsTo(Exercise::class);
+    // }
+
+    public function exerciseWorkouts(): HasMany
     {
-        return $this->belongsTo(Exercise::class);
+        return $this->hasMany(ExerciseWorkout::class);
     }
 }

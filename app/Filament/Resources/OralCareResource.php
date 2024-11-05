@@ -120,7 +120,7 @@ class OralCareResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOralCares::route('/'),
+            'index' => Pages\ListOralCareLogs::route('/'),
             'create' => Pages\CreateOralCare::route('/create'),
             'edit' => Pages\EditOralCare::route('/{record}/edit'),
         ];

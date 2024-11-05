@@ -99,19 +99,30 @@ class ExerciseResource extends Resource
             Forms\Components\TextInput::make('name')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\Textarea::make('description')
+            Forms\Components\RichEditor::make('description')
                 ->columnSpanFull(),
+            Forms\Components\Section::make('Type of exercise')
+                ->description('These attributes will be displayed when creating a new exercise of this type')
+                ->schema([
+                    Forms\Components\Toggle::make('has_reps')->default(true),
+                    Forms\Components\Toggle::make('has_weight')->default(true),
+                    Forms\Components\Toggle::make('has_distance')->default(true),
+                    Forms\Components\Toggle::make('has_duration')->default(true),
+                ])
+            ->columnSpan(1),
             Repeater::make('exerciseMuscleGroup')
                 ->relationship()
                 ->label('Muscle Groups')
+                ->reorderable()
+                ->reorderableWithButtons()
                 ->schema([
                     Forms\Components\Select::make('muscle_group_id')
                         ->relationship('muscleGroup', 'name')
                         ->createOptionForm(MuscleGroupResource::schema())
                         ->preload()
-                        ->searchable(),
-                ])
-                ->columnSpanFull(),
+                        ->searchable()
+                        ->required(),
+                ]),
         ];
     }
 }

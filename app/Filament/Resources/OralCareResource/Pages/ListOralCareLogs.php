@@ -6,7 +6,7 @@ use App\Filament\Resources\OralCareResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListOralCares extends ListRecords
+class ListOralCareLogs extends ListRecords
 {
     protected static string $resource = OralCareResource::class;
 
