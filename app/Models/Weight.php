@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Casts\TimezoneDatetime;
+use App\Casts\TimezoneDatetimeCast;
 use App\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -44,8 +44,8 @@ class Weight extends Model
     public function casts()
     {
         return [
-            'date' => TimezoneDatetime::class,
-            'weight' => \App\Casts\Weight::class,
+            'date' => TimezoneDatetimeCast::class,
+            'weight' => \App\Casts\WeightCast::class,
         ];
     }
 }

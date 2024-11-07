@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Casts\TimezoneDatetime;
+use App\Casts\TimezoneDatetimeCast;
 use App\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -54,7 +54,7 @@ class Workout extends Model
     public function casts()
     {
         return [
-            'date' => TimezoneDatetime::class,
+            'date' => TimezoneDatetimeCast::class,
         ];
     }
 

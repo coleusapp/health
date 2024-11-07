@@ -27,7 +27,6 @@ class ManageNavigation extends SettingsPage
                 Forms\Components\Toggle::make('weight'),
                 Forms\Components\Toggle::make('workout'),
                 Forms\Components\Toggle::make('oral_care'),
-                Forms\Components\Toggle::make('swim'),
             ]);
     }
 

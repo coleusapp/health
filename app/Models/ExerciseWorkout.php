@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Casts\DistanceCast;
+use App\Casts\WeightCast;
 use App\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -13,7 +15,8 @@ class ExerciseWorkout extends Pivot
     public $incrementing = true;
 
     public $casts = [
-        'weight' => \App\Casts\Weight::class,
+        'weight' => WeightCast::class,
+        'distance' => DistanceCast::class,
     ];
 
     public function exercise(): BelongsTo
