@@ -120,6 +120,9 @@ class WorkoutResource extends Resource
             ->groupingDirectionSettingHidden()
             ->defaultGroup('date')
             ->defaultSort('created_at', 'desc')
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->with('exerciseWorkouts', 'exerciseWorkouts.exercise'); // ?
+            })
             // ->filters([
             //     SelectFilter::make('exercise')
             //         ->relationship('exercise', 'name')

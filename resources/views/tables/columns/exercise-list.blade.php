@@ -25,7 +25,7 @@
                         @if ($exerciseWorkouts->exercise->has_distance)
                             <span>{{ $exerciseWorkouts->distance }}</span>
                             <span>
-                                {{ \App\Enums\DistanceEnum::from($exerciseWorkouts->exercise?->distance_unit ?? app(GeneralSettings::class)->distance_unit)->name }}
+                                {{ \Illuminate\Support\Str::plural(\App\Enums\DistanceEnum::from($exerciseWorkouts->exercise?->distance_unit ?? app(GeneralSettings::class)->distance_unit)->name, $exerciseWorkouts->distance) }}
                             </span>
                             @if ($exerciseWorkouts->exercise->has_duration)
                             <span>&times;</span>
@@ -34,7 +34,7 @@
                         @if ($exerciseWorkouts->exercise->has_duration)
                             <span>{{ $exerciseWorkouts->duration }}</span>
                             <span>
-                                {{ \App\Enums\DurationEnum::from($exerciseWorkouts->exercise?->duration_unit ?? app(GeneralSettings::class)->duration_unit)->name }}
+                                {{ \Illuminate\Support\Str::plural(\App\Enums\DurationEnum::from($exerciseWorkouts->exercise?->duration_unit ?? app(GeneralSettings::class)->duration_unit)->name, $exerciseWorkouts->duration) }}
                             </span>
                         @endif
                     </div>
