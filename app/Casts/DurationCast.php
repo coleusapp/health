@@ -14,8 +14,8 @@ class DurationCast implements CastsAttributes
     {
         return $value ? match ($model->exercise?->duration_unit ?? app(GeneralSettings::class)->duration_unit) {
             'second' => $value,
-            'minute' => app(DurationConcern::class)->secondToMinute($value),
-            'hour' => app(DurationConcern::class)->secondToHour($value),
+            'minute' => round(app(DurationConcern::class)->secondToMinute($value), 2),
+            'hour' => round(app(DurationConcern::class)->secondToHour($value), 2),
             default => 0,
         } : null;
     }
