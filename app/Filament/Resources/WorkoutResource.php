@@ -6,6 +6,7 @@ use App\Filament\Resources\WorkoutResource\Pages;
 use App\Models\Exercise;
 use App\Models\Workout;
 use App\Services\ExercisePostfixService;
+use App\Services\TinyCacheService;
 use App\Settings\GeneralSettings;
 use App\Settings\NavigationSettings;
 use Filament\Forms;
@@ -57,22 +58,26 @@ class WorkoutResource extends Resource
                         Forms\Components\TextInput::make('reps')
                             ->numeric()
                             ->default(null)
-                            ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_reps),
+                            ->visible(fn (Get $get): bool => $get('exercise_id') && TinyCacheService::getOrPut('exercise-'.$get('exercise_id'), fn () => Exercise::find($get('exercise_id')))?->has_rep),
                         Forms\Components\TextInput::make('weight')
                             ->numeric()
                             ->default(null)
                             ->postfix(fn (Get $get) => ExercisePostfixService::postfix($get('exercise_id'))['weight_unit'])
-                            ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_weight),
+                            ->visible(fn (Get $get): bool => $get('exercise_id') && TinyCacheService::getOrPut('exercise-'.$get('exercise_id'), fn () => Exercise::find($get('exercise_id')))?->has_weight),
                         Forms\Components\TextInput::make('distance')
                             ->numeric()
                             ->default(null)
                             ->postfix(fn (Get $get) => ExercisePostfixService::postfix($get('exercise_id'))['distance_unit'])
-                            ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_distance),
+                            ->visible(fn (Get $get): bool => $get('exercise_id') && TinyCacheService::getOrPut('exercise-'.$get('exercise_id'), fn () => Exercise::find($get('exercise_id')))?->has_distance),
                         Forms\Components\TextInput::make('duration')
                             ->numeric()
                             ->default(null)
                             ->postfix(fn (Get $get) => ExercisePostfixService::postfix($get('exercise_id'))['duration_unit'])
-                            ->visible(fn (Get $get): bool => $get('exercise_id') && Exercise::find($get('exercise_id'))?->has_duration),
+                            ->visible(fn (Get $get): bool => $get('exercise_id') && TinyCacheService::getOrPut('exercise-'.$get('exercise_id'), fn () => Exercise::find($get('exercise_id')))?->has_duration),
+                        Forms\Components\TextInput::make('calorie')
+                            ->numeric()
+                            ->default(null)
+                            ->visible(fn (Get $get): bool => $get('exercise_id') && TinyCacheService::getOrPut('exercise-'.$get('exercise_id'), fn () => Exercise::find($get('exercise_id')))?->has_calorie),
                     ])
                     ->columnSpanFull()
             ]);
@@ -83,22 +88,6 @@ class WorkoutResource extends Resource
         return $table
             ->columns([
                 ViewColumn::make('exerciseWorkouts')->view('tables.columns.exercise-list'),
-                // Tables\Columns\TextColumn::make('reps')
-                //     ->numeric()
-                //     ->sortable()
-                //     ->default('—'),
-                // Tables\Columns\TextColumn::make('weight')
-                //     ->numeric()
-                //     ->sortable()
-                //     ->default('—'),
-                // Tables\Columns\TextColumn::make('distance')
-                //     ->numeric()
-                //     ->sortable()
-                //     ->default('—'),
-                // Tables\Columns\TextColumn::make('duration')
-                //     ->default('—'),
-                // Tables\Columns\TextColumn::make('exercise.name')
-                //     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

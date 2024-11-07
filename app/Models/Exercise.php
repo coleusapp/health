@@ -44,7 +44,7 @@ class Exercise extends Model
     use AutoAssignUser;
 
     protected $casts = [
-        'has_reps' => 'bool',
+        'has_rep' => 'bool',
         'has_weight' => 'bool',
         'has_distance' => 'bool',
         'has_duration' => 'bool',

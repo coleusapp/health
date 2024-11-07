@@ -41,6 +41,19 @@ class ExerciseResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('exerciseMuscleGroup.muscleGroup.name')
                     ->sortable(),
+                Tables\Columns\IconColumn::make('has_rep')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('has_weight')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('has_distance')
+                    ->boolean()
+                    ->label('Has Repetition'),
+                Tables\Columns\IconColumn::make('has_duration')
+                    ->boolean()
+                    ->label('Has Repetition'),
+                Tables\Columns\IconColumn::make('has_calorie')
+                    ->boolean()
+                    ->label('Has Repetition'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -110,7 +123,7 @@ class ExerciseResource extends Resource
             Forms\Components\Section::make('Type of exercise')
                 ->description('These attributes will be displayed when creating a new exercise of this type')
                 ->schema([
-                    Forms\Components\Toggle::make('has_reps')->default(false),
+                    Forms\Components\Toggle::make('has_rep')->default(false),
                     Forms\Components\Toggle::make('has_weight')
                         ->default(false)
                         ->live(),
@@ -141,6 +154,8 @@ class ExerciseResource extends Resource
                         ->preload()
                         ->default(app(GeneralSettings::class)->duration_unit)
                         ->visible(fn (Get $get): bool => $get('has_duration')),
+                    Forms\Components\Toggle::make('has_calorie')
+                        ->default(false),
                 ])
             ->columnSpan(1),
             Repeater::make('exerciseMuscleGroup')

@@ -6,7 +6,6 @@ use App\Concerns\WeightConcern;
 
 class WeightService implements WeightConcern
 {
-
     public function lbsToKg($weight): float
     {
         return $weight * 0.45359237;

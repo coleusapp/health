@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\MuscleGroupResource\Pages;
-use App\Filament\Resources\MuscleGroupResource\RelationManagers;
 use App\Models\MuscleGroup;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -23,8 +22,7 @@ class MuscleGroupResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema(self::schema());
+        return $form->schema(self::schema());
     }
 
     public static function table(Table $table): Table
@@ -86,9 +84,6 @@ class MuscleGroupResource extends Resource
             ]);
     }
 
-    /**
-     * @return array
-     */
     public static function schema(): array
     {
         return [

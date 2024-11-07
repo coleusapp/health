@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->boolean('has_reps')->default(true);
+            $table->boolean('has_rep')->default(true);
             $table->boolean('has_weight')->default(true);
-            $table->string('weight_unit')->nullable();
             $table->boolean('has_distance')->default(true);
+            $table->boolean('has_calorie')->default(true);
+            $table->string('weight_unit')->nullable();
             $table->string('distance_unit')->nullable();
             $table->boolean('has_duration')->default(true);
             $table->string('duration_unit')->nullable();
