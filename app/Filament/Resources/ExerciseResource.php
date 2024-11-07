@@ -39,7 +39,9 @@ class ExerciseResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('exerciseMuscleGroup.muscleGroup.name')
+                Tables\Columns\TextColumn::make('exerciseMuscleGroups.muscleGroup.name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('categoryExercises.category.name')
                     ->sortable(),
                 Tables\Columns\IconColumn::make('has_rep')
                     ->boolean(),
@@ -69,7 +71,7 @@ class ExerciseResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('muscle_group_id')
-                    ->relationship('exerciseMuscleGroup.muscleGroup', 'name')
+                    ->relationship('exerciseMuscleGroups.muscleGroup', 'name')
                     ->label('Muscle group')
                     ->searchable()
                     ->preload(),
@@ -158,19 +160,37 @@ class ExerciseResource extends Resource
                         ->default(false),
                 ])
             ->columnSpan(1),
-            Repeater::make('exerciseMuscleGroup')
-                ->relationship()
-                ->label('Muscle Groups')
-                ->reorderable()
-                ->reorderableWithButtons()
+            Forms\Components\Section::make('Meta Information')
+                ->description('Meta information about the exercise')
                 ->schema([
-                    Forms\Components\Select::make('muscle_group_id')
-                        ->relationship('muscleGroup', 'name')
-                        ->createOptionForm(MuscleGroupResource::schema())
-                        ->preload()
-                        ->searchable()
-                        ->required(),
-                ]),
+                    Repeater::make('categoryExercises')
+                        ->relationship()
+                        ->label('Category')
+                        ->reorderable()
+                        ->reorderableWithButtons()
+                        ->schema([
+                            Forms\Components\Select::make('category_id')
+                                ->relationship('category', 'name')
+                                ->createOptionForm(CategoryResource::schema())
+                                ->preload()
+                                ->searchable()
+                                ->required(),
+                        ]),
+                    Repeater::make('exerciseMuscleGroups')
+                        ->relationship()
+                        ->label('Muscle Groups')
+                        ->reorderable()
+                        ->reorderableWithButtons()
+                        ->schema([
+                            Forms\Components\Select::make('muscle_group_id')
+                                ->relationship('muscleGroup', 'name')
+                                ->createOptionForm(MuscleGroupResource::schema())
+                                ->preload()
+                                ->searchable()
+                                ->required(),
+                        ])
+                ])
+                ->columnSpan(1),
         ];
     }
 }

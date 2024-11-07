@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Concerns\AutoAssignUser;
-use App\Settings\GeneralSettings;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -50,13 +49,18 @@ class Exercise extends Model
         'has_duration' => 'bool',
     ];
 
-    public function exerciseMuscleGroup(): HasMany
+    public function exerciseMuscleGroups(): HasMany
     {
-        return $this->hasMany(ExerciseMuscleGroup::class);
+        return $this->hasMany(exerciseMuscleGroup::class);
     }
 
     public function exerciseWorkouts(): HasMany
     {
         return $this->hasMany(ExerciseWorkout::class);
+    }
+
+    public function categoryExercises(): HasMany
+    {
+        return $this->hasMany(CategoryExercise::class);
     }
 }

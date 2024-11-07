@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ExerciseMuscleGroup extends Model
+class exerciseMuscleGroup extends Model
 {
     public $incrementing = true;
 

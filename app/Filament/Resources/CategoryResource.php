@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MuscleGroupResource\Pages;
-use App\Models\MuscleGroup;
+use App\Filament\Resources\CategoryResource\Pages;
+use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,17 +12,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class MuscleGroupResource extends Resource
+class CategoryResource extends Resource
 {
-    protected static ?string $model = MuscleGroup::class;
+    protected static ?string $model = Category::class;
 
     protected static ?string $navigationGroup = 'Workouts';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
-        return $form->schema(self::schema());
+        return $form->schema(static::schema());
     }
 
     public static function table(Table $table): Table
@@ -31,10 +31,10 @@ class MuscleGroupResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('parent.name')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('children.name')
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -49,7 +49,6 @@ class MuscleGroupResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -70,9 +69,9 @@ class MuscleGroupResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMuscleGroups::route('/'),
-            'create' => Pages\CreateMuscleGroup::route('/create'),
-            'edit' => Pages\EditMuscleGroup::route('/{record}/edit'),
+            'index' => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategory::route('/create'),
+            'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }
 
@@ -90,11 +89,6 @@ class MuscleGroupResource extends Resource
             Forms\Components\TextInput::make('name')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\Textarea::make('description')
-                ->columnSpanFull(),
-            Forms\Components\Select::make('muscle_group_id')
-                ->relationship('muscleGroups', 'name')
-                ->default(null),
         ];
     }
 }

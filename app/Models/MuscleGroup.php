@@ -60,8 +60,8 @@ class MuscleGroup extends Model
         return $this->hasMany(MuscleGroup::class, 'muscle_group_id');
     }
 
-    public function exerciseMuscleGroup(): HasMany
+    public function exerciseMuscleGroups(): HasMany
     {
-        return $this->hasMany(ExerciseMuscleGroup::class);
+        return $this->hasMany(exerciseMuscleGroups::class);
     }
 }
