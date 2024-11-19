@@ -69,6 +69,7 @@ class ExerciseResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('muscle_group_id')
                     ->relationship('exerciseMuscleGroups.muscleGroup', 'name')

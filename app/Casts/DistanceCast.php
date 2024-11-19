@@ -14,6 +14,7 @@ class DistanceCast implements CastsAttributes
     {
         return $value ? match ($model->exercise?->distance_unit ?? app(GeneralSettings::class)->distance_unit) {
             'mile' => round(app(DistanceConcern::class)->mToMi($value), 2),
+            'meter' => round($value, 2),
             'kilometer' => round(app(DistanceConcern::class)->mToKm($value), 2),
             default => 0,
         } : null;
@@ -23,6 +24,7 @@ class DistanceCast implements CastsAttributes
     {
         return $value ? match ($model->exercise?->distance_unit ?? app(GeneralSettings::class)->distance_unit) {
             'mile' => app(DistanceConcern::class)->MiToM($value),
+            'meter' => $value,
             'kilometer' => app(DistanceConcern::class)->KmToM($value),
             default => 0,
         } : null;
