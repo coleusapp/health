@@ -58,11 +58,6 @@ class Workout extends Model
         ];
     }
 
-    // public function exercise(): BelongsTo
-    // {
-    //     return $this->belongsTo(Exercise::class);
-    // }
-
     public function exerciseWorkouts(): HasMany
     {
         return $this->hasMany(ExerciseWorkout::class);

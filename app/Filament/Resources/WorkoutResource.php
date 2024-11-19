@@ -88,6 +88,9 @@ class WorkoutResource extends Resource
         return $table
             ->columns([
                 ViewColumn::make('exerciseWorkouts')->view('tables.columns.exercise-list'),
+                Tables\Columns\TextColumn::make('exercise_workouts_sum_calorie')
+                    ->label('Calories')
+                    ->sum('exerciseWorkouts', 'calorie'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
