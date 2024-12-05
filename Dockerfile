@@ -8,7 +8,8 @@ WORKDIR /var/www
 COPY . /var/www
 
 RUN --mount=type=bind,from=composer:latest,source=/usr/bin/composer,target=/usr/bin/composer \
-    composer install --no-interaction --prefer-dist --optimize-autoloader  \
+    composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev  \
+    && php artisan storage:link \
     && chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www
 

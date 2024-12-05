@@ -4,25 +4,22 @@ services:
     image: amirmasoud/health:latest
     container_name: health_app
     restart: unless-stopped
+    volumes:
+      - ./.env:/var/www/.env
+      - ./storage/:/var/www/storage/
     networks:
       - health_app_network
-    environment:
-      - DB_HOST=mariadb
-      - DB_PORT=3306
-      - DB_DATABASE=laravel
-      - DB_USERNAME=root
-      - DB_PASSWORD=root
   mariadb:
     image: mariadb:10.11.10
     container_name: health_mariadb
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: health
-      MYSQL_USER: root
-      MYSQL_PASSWORD: secret
+      MARIADB_ROOT_PASSWORD: secret
+      MARIADB_DATABASE: health
+      MARIADB_USER: root
+      MARIADB_PASSWORD: secret
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - health_mariadb_data:/var/lib/mysql
     networks:
       - health_app_network
   nginx:
@@ -36,7 +33,7 @@ services:
     networks:
       - health_app_network
 volumes:
-  mariadb_data:
+  health_mariadb_data:
 networks:
   health_app_network:
     driver: bridge
