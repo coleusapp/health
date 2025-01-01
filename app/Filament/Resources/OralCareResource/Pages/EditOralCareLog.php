@@ -6,7 +6,7 @@ use App\Filament\Resources\OralCareResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditOralCare extends EditRecord
+class EditOralCareLog extends EditRecord
 {
     protected static string $resource = OralCareResource::class;
 

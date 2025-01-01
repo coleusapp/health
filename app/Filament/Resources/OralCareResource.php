@@ -8,7 +8,6 @@ use App\Settings\GeneralSettings;
 use App\Settings\NavigationSettings;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
@@ -121,8 +120,8 @@ class OralCareResource extends Resource
     {
         return [
             'index' => Pages\ListOralCareLogs::route('/'),
-            'create' => Pages\CreateOralCare::route('/create'),
-            'edit' => Pages\EditOralCare::route('/{record}/edit'),
+            'create' => Pages\CreateOralCareLog::route('/create'),
+            'edit' => Pages\EditOralCareLog::route('/{record}/edit'),
         ];
     }
 
