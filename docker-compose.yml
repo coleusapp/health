@@ -7,6 +7,7 @@ services:
     volumes:
       - ./.env:/var/www/.env
       - ./storage/:/var/www/storage/
+      - ./public/:/var/www/public/
     networks:
       - health_app_network
   mariadb:
