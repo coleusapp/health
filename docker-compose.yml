@@ -7,7 +7,6 @@ services:
     volumes:
       - ./.env:/var/www/.env
       - ./storage/:/var/www/storage/
-      - ./public/:/var/www/public/
     networks:
       - health_app_network
   mariadb:
@@ -29,6 +28,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www:delegated
     ports:
       - "8080:80"
     networks:
