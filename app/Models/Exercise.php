@@ -51,7 +51,7 @@ class Exercise extends Model
 
     public function exerciseMuscleGroups(): HasMany
     {
-        return $this->hasMany(exerciseMuscleGroup::class);
+        return $this->hasMany(ExerciseMuscleGroup::class);
     }
 
     public function exerciseWorkouts(): HasMany
