@@ -1,0 +1,14 @@
+<template>
+    <FormKit
+        type="number"
+        name="weight"
+        label="Weight"
+        validation="required|number"
+    />
+    <FormKit
+        type="datetime-local"
+        name="date"
+        label="DateTime"
+        validation="required"
+    />
+</template>

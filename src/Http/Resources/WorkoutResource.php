@@ -1,0 +1,24 @@
+<?php
+
+namespace Coleus\Health\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Coleus\Health\Http\Resources\ExerciseWorkoutResource;
+
+/**
+ * @mixin \Coleus\Health\Models\Workout
+ */
+class WorkoutResource extends JsonResource
+{
+    public function toArray(Request $request): array
+    {
+        return [
+            'id' => $this->id,
+            'date' => $this->date->format('Y-m-d\TH:i'),
+            'date_string' => $this->date->toDateString(),
+            'date_for_humans' => $this->date->diffForHumans(),
+            'exercises' => ExerciseWorkoutResource::collection($this->whenLoaded('exercises')),
+        ];
+    }
+}
