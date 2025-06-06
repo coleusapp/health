@@ -14,26 +14,28 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return Inertia::render('@health/workouts/categories/Index', [
+        return Inertia::render('@health/categories/Index', [
             'collection' => CategoryResource::collection(CategoryTable::query()->paginate()),
         ]);
     }
 
     public function create()
     {
-        return Inertia::render('@health/workouts/categories/Create');
+        return Inertia::render('@health/categories/Create');
     }
 
     public function store(StoreRequest $request)
     {
         $category = Category::create($request->validated());
 
-        return to_route('health.categories.edit', ['resource' => $category]);
+        return to_route('health.workouts.categories.edit', [
+            'category' => $category
+        ]);
     }
 
     public function edit(Category $category)
     {
-        return Inertia::render('@health/workouts/categories/Edit', [
+        return Inertia::render('@health/categories/Edit', [
             'resource' => CategoryResource::make($category),
         ]);
     }
