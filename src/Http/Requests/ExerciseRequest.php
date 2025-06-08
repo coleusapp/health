@@ -1,6 +1,6 @@
 <?php
 
-namespace Coleus\Health\Http\Requests\Exercise;
+namespace Coleus\Health\Http\Requests;
 
 use Coleus\Health\Enums\DistanceEnum;
 use Coleus\Health\Enums\DurationEnum;
@@ -11,7 +11,7 @@ use Coleus\Support\Concerns\FlattenArray;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class SaveRequest extends FormRequest
+class ExerciseRequest extends FormRequest
 {
     use FlattenArray;
 

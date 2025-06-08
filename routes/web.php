@@ -13,8 +13,8 @@ Route::middleware('web')->name('health.')->prefix('health')->group(function () {
     Route::resource('categories', CategoryController::class)->except('show');
     Route::resource('weights', WeightController::class);
     Route::resource('workouts', WorkoutController::class)->except('show');
+    Route::resource('exercises', ExerciseController::class)->except('show');
     Route::name('workouts.')->prefix('workouts')->group(function () {
         Route::resource('muscle-groups', MuscleGroupController::class)->except('show');
-        Route::resource('exercises', ExerciseController::class)->except('show');
     });
 })->middleware(['auth', 'verified']);

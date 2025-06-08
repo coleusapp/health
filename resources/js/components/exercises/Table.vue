@@ -1,16 +1,17 @@
 <script setup lang="ts">
+import BadgeColumn from '@/components/ui/table/columns/BadgeColumn.vue';
 import IconColumn from '@/components/ui/table/columns/IconColumn.vue';
 import { IconColumnProps } from '@/components/ui/table/columns/IconColumnProps';
 import TableActions from '@coleus/health/components/exercises/parts/TableActions.vue';
-import { Collection, Data } from '@coleus/health/components/exercises/type';
+import { ExerciseCollection, ExerciseData } from '@coleus/health/components/exercises/type';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
-import BadgeColumn from '@/components/ui/table/columns/BadgeColumn.vue';
 
 defineProps<{
-    collection?: Collection;
+    collection?: ExerciseCollection;
 }>();
-const columns: TableColumn<Data>[] = [
+
+const columns: TableColumn<ExerciseData>[] = [
     {
         accessorKey: 'name',
         header: 'Name',

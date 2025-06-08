@@ -8,13 +8,13 @@ defineProps<{
 <template>
     <div class="flex items-center justify-end">
         <UiTooltip text="Edit">
-            <Link :href="route('health.workouts.exercises.edit', { exercise: exerciseId })">
+            <Link :href="route('health.exercises.edit', { exercise: exerciseId })">
                 <UiButton icon="i-lucide-pencil" variant="ghost" color="neutral"></UiButton>
             </Link>
         </UiTooltip>
         <UiTooltip text="Delete">
             <Link
-                :href="route('health.workouts.exercises.destroy', { exercise: exerciseId })"
+                :href="route('health.exercises.destroy', { exercise: exerciseId })"
                 method="delete"
                 @success="() => $toast.add({ title: 'Exercise deleted successfully!' })"
             >

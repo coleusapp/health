@@ -2,10 +2,11 @@
 
 namespace Coleus\Health\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Coleus\Health\Enums\DistanceEnum;
 use Coleus\Health\Enums\DurationEnum;
 use Coleus\Health\Enums\WeightEnum;
-use Coleus\Health\Http\Requests\Exercise\SaveRequest;
+use Coleus\Health\Http\Requests\ExerciseRequest;
 use Coleus\Health\Http\Resources\CategoryAsOptionResource;
 use Coleus\Health\Http\Resources\ExerciseResource;
 use Coleus\Health\Http\Resources\MuscleGroupAsOptionResource;
@@ -13,20 +14,21 @@ use Coleus\Health\Models\Category;
 use Coleus\Health\Models\Exercise;
 use Coleus\Health\Models\MuscleGroup;
 use Coleus\Health\Services\ExerciseTable;
-use App\Http\Controllers\Controller;
-use App\Packages\Support\Resources\EnumResource;
+use Coleus\Support\Resources\EnumResource;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ExerciseController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('@health/exercises/Index', [
             'collection' => ExerciseResource::collection(ExerciseTable::query()->paginate()),
         ]);
     }
 
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('@health/exercises/Create', [
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
@@ -37,17 +39,17 @@ class ExerciseController extends Controller
         ]);
     }
 
-    public function store(SaveRequest $request)
+    public function store(ExerciseRequest $request): RedirectResponse
     {
         $exercise = Exercise::create($request->validated());
 
         $exercise->categories()->attach($request->flatten('categories'));
         $exercise->muscleGroups()->attach($request->flatten('muscle_groups'));
 
-        return to_route('health.workouts.exercises.edit', ['exercise' => $exercise]);
+        return to_route('health.exercises.edit', ['exercise' => $exercise]);
     }
 
-    public function edit(Exercise $exercise)
+    public function edit(Exercise $exercise): Response
     {
         return Inertia::render('@health/exercises/Edit', [
             'resource' => ExerciseResource::make($exercise->load('muscleGroups', 'categories')),
@@ -59,7 +61,7 @@ class ExerciseController extends Controller
         ]);
     }
 
-    public function update(SaveRequest $request, Exercise $exercise)
+    public function update(ExerciseRequest $request, Exercise $exercise): RedirectResponse
     {
         $exercise->update($request->validated());
 
@@ -69,7 +71,7 @@ class ExerciseController extends Controller
         return back();
     }
 
-    public function destroy(Exercise $exercise)
+    public function destroy(Exercise $exercise): RedirectResponse
     {
         $exercise->delete();
 
