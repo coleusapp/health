@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import HealthLayout from '@health/layouts/HealthLayout.vue';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import CreateWeight from "@health/components/weights/Create.vue";
-import { Resource } from '@health/components/weights/type';
+import CreateWeight from "@coleus/health/components/weights/Create.vue";
+import { Resource } from '@coleus/health/components/weights/type';
 
 defineProps<{
     resource: Resource;

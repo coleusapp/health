@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { CategoryCollection } from '@health/components/categories/category';
-import HealthLayout from '@health/layouts/HealthLayout.vue';
+import { CategoryCollection } from '@coleus/health/components/categories/type';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+import CategoriesTable from '@coleus/health/components/categories/Table.vue';
 
 defineProps<{
     collection: CategoryCollection;
@@ -8,7 +9,7 @@ defineProps<{
 </script>
 <template>
     <HealthLayout>
-        Categories {{collection}}
+        <CategoriesTable :collection="collection" />
     </HealthLayout>
 </template>
 

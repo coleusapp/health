@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
 import { FormKit } from '@formkit/vue';
-import { Data } from '@health/components/exercises/type';
+import { Data } from '@coleus/health/components/exercises/type';
 
 defineProps<{
     value: Omit<Data, 'id'>;

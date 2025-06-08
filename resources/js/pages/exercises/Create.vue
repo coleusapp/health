@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
-import CreateExercise from '@health/components/exercises/Create.vue';
-import HealthLayout from '@health/layouts/HealthLayout.vue';
+import CreateExercise from '@coleus/health/components/exercises/Create.vue';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
 defineProps<{

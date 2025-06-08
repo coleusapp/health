@@ -1,5 +1,5 @@
-import { CategoryCollection } from '@health/components/categories/category';
-import { MuscleGroupCollection } from '@health/components/muscleGroups/muscleGroup';
+import { CategoryCollection } from '@coleus/health/components/categories/category';
+import { MuscleGroupCollection } from '@coleus/health/components/muscleGroups/muscleGroup';
 
 export type ExerciseData = {
     id: number;

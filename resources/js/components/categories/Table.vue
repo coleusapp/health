@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import TableActions from '@coleus/health/components/categories/TableActions.vue';
+import { CategoryCollection, CategoryData } from '@coleus/health/components/categories/type';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
-import TableActions from '@health/components/categories/parts/TableActions.vue';
-import { CategoryCollection, CategoryData } from '@health/components/categories/category';
 
 defineProps<{
     collection?: CategoryCollection;

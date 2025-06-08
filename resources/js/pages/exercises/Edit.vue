@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
-import EditExercise from '@health/components/exercises/Edit.vue';
-import { Resource } from '@health/components/exercises/type';
-import HealthLayout from '@health/layouts/HealthLayout.vue';
+import EditExercise from '@coleus/health/components/exercises/Edit.vue';
+import { Resource } from '@coleus/health/components/exercises/type';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 
 defineProps<{
     weight_units: OptionCollection;

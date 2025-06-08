@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import MuscleGroupCreate from '@health/components/muscleGroups/Create.vue';
-import HealthLayout from '@health/layouts/HealthLayout.vue';
+import MuscleGroupCreate from '@coleus/health/components/muscleGroups/Create.vue';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 </script>
 
 <template>

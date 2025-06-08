@@ -2,7 +2,7 @@
 
 namespace Coleus\Health\Http\Controllers;
 
-use Coleus\Health\Http\Requests\WorkoutSaveRequest;
+use Coleus\Health\Http\Requests\WorkoutRequest;
 use Coleus\Health\Http\Resources\ExerciseAsOptionResource;
 use Coleus\Health\Http\Resources\WorkoutResource;
 use Coleus\Health\Models\Exercise;
@@ -21,7 +21,7 @@ class WorkoutController extends Controller
         ]);
     }
 
-    public function store(WorkoutSaveRequest $request)
+    public function store(WorkoutRequest $request)
     {
         $workout = Workout::create($request->all());
 
@@ -49,7 +49,7 @@ class WorkoutController extends Controller
     /**
      * @throws \Throwable
      */
-    public function update(WorkoutSaveRequest $request, Workout $workout)
+    public function update(WorkoutRequest $request, Workout $workout)
     {
         $workout->update($request->only('date'));
 

@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import HealthLayout from '@health/layouts/HealthLayout.vue';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import WeightCard from '@health/components/weights/Card.vue';
-import CategoryCard from '@health/components/categories/Card.vue';
-import MuscleGroupCard from '@health/components/muscleGroups/Card.vue';
-import ToothpasteTypeCard from '@health/components/toothpasteTypes/Card.vue';
-import ExerciseCard from '@health/components/exercises/Card.vue';
-import WorkoutCard from '@health/components/workouts/Card.vue';
-import { Collection as WeightCollection } from '@health/components/weights/type';
-import { CategoryCollection } from '@health/components/categories/category';
-import { MuscleGroupCollection } from '@health/components/muscleGroups/muscleGroup';
-import { Collection as ToothpasteTypeCollection } from '@health/components/toothpasteTypes/type';
-import { Collection as ExerciseCollection } from '@health/components/exercises/type';
-import { WorkoutCollection } from '@health/components/workouts/workout';
+import WeightCard from '@coleus/health/components/weights/Card.vue';
+import CategoryCard from '@coleus/health/components/categories/Card.vue';
+import MuscleGroupCard from '@coleus/health/components/muscleGroups/Card.vue';
+import ToothpasteTypeCard from '@coleus/health/components/toothpasteTypes/Card.vue';
+import ExerciseCard from '@coleus/health/components/exercises/Card.vue';
+import WorkoutCard from '@coleus/health/components/workouts/Card.vue';
+import { Collection as WeightCollection } from '@coleus/health/components/weights/type';
+import { CategoryCollection } from '@coleus/health/components/categories/category';
+import { MuscleGroupCollection } from '@coleus/health/components/muscleGroups/muscleGroup';
+import { Collection as ToothpasteTypeCollection } from '@coleus/health/components/toothpasteTypes/type';
+import { Collection as ExerciseCollection } from '@coleus/health/components/exercises/type';
+import { WorkoutCollection } from '@coleus/health/components/workouts/workout';
 
 defineProps<{
     weights: WeightCollection;

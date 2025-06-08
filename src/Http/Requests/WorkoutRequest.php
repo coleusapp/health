@@ -7,7 +7,7 @@ use Coleus\Support\Concerns\FlattenArray;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class WorkoutSaveRequest extends FormRequest
+class WorkoutRequest extends FormRequest
 {
     use FlattenArray;
 

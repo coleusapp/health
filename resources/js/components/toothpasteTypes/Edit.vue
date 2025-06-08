@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import CategoryForm from '@health/components/categories/Form.vue';
+import CategoryForm from '@coleus/health/components/categories/Form.vue';
 import { useForm } from '@inertiajs/vue3';
-import { CategoryResource } from '@health/types/category';
+import { CategoryResource } from '@coleus/health/types/category';
 
 const props = defineProps<{
     category: CategoryResource;

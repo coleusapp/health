@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
 import { useForm } from '@formkit/inertia';
-import ExerciseForm from '@health/components/exercises/parts/Form.vue';
-import { Data } from '@health/components/exercises/type';
+import ExerciseForm from '@coleus/health/components/exercises/parts/Form.vue';
+import { Data } from '@coleus/health/components/exercises/type';
 
 const props = defineProps<{
     weightUnits: OptionCollection;

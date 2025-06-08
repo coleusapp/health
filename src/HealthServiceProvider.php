@@ -2,6 +2,8 @@
 
 namespace Coleus\Health;
 
+use Coleus\Health\Models\Category;
+use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

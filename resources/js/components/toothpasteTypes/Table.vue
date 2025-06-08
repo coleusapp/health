@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
-import TableActions from '@health/components/toothpasteTypes/parts/TableActions.vue';
-import { Collection, Data } from '@health/components/toothpasteTypes/type';
+import TableActions from '@coleus/health/components/toothpasteTypes/parts/TableActions.vue';
+import { Collection, Data } from '@coleus/health/components/toothpasteTypes/type';
 
 defineProps<{
     collection?: Collection;

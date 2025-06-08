@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useForm } from '@formkit/inertia';
-import WeightForm from '@health/components/workouts/categories/parts/Form.vue';
+import WeightForm from '@coleus/health/components/workouts/categories/parts/Form.vue';
 
 const form = useForm({
     name: null,

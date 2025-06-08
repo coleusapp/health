@@ -3,6 +3,7 @@
     "private": true,
     "type": "module",
     "dependencies": {
+        "@coleus/support": "workspace:*",
         "@formkit/auto-animate": "catalog:dep",
         "@formkit/icons": "catalog:dep",
         "@formkit/inertia": "catalog:dep",

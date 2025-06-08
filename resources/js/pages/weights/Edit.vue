@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HealthLayout from '@health/layouts/HealthLayout.vue';
-import EditForm from '@health/components/weights/Edit.vue';
-import { Resource } from '@health/components/weights/type';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+import EditForm from '@coleus/health/components/weights/Edit.vue';
+import { Resource } from '@coleus/health/components/weights/type';
 
 defineProps<{
     resource: Resource;

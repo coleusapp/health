@@ -1,5 +1,5 @@
-import { ExerciseResource } from '@health/components/exercises/exercise';
-import { ExerciseWorkout } from '@health/components/exerciseWorkouts/exerciseWorkout';
+import { ExerciseResource } from '@coleus/health/components/exercises/exercise';
+import { ExerciseWorkout } from '@coleus/health/components/exerciseWorkouts/exerciseWorkout';
 
 export type WorkoutData = {
     id: number;

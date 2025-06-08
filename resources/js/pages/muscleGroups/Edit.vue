@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import Edit from '@health/components/categories/Edit.vue';
-import { CategoryResource } from '@health/types/category';
-import HealthLayout from '@health/layouts/HealthLayout.vue';
+import Edit from '@coleus/health/components/categories/Edit.vue';
+import { CategoryResource } from '@coleus/health/types/category';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import HeadingSmall from '@/components/HeadingSmall.vue';
 
 defineProps<{

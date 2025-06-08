@@ -2,7 +2,7 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
-import HealthLayout from '@health/layouts/HealthLayout.vue';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import type { Table as TableType } from '@/types';
 import { Tabs } from '@/components/ui/tabs';
 import { useSlots } from 'vue';

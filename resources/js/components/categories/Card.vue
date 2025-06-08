@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CategoryTable from '@health/components/categories/Table.vue';
-import { CategoryCollection } from '@health/components/categories/category';
+import CategoryTable from '@coleus/health/components/categories/Table.vue';
+import { CategoryCollection } from '@coleus/health/components/categories/category';
 import { Link } from '@inertiajs/vue3';
 
 defineProps<{
@@ -11,7 +11,7 @@ defineProps<{
     <UiCard>
         <template #header>
             Categories
-            <Link :href="route('health.workouts.categories.create')">
+            <Link :href="route('health.categories.create')">
                 <UiButton icon="lucide-plus">New</UiButton>
             </Link>
         </template>

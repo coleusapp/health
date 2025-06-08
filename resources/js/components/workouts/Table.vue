@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import TableActions from '@health/components/workouts/parts/TableActions.vue';
-import { WorkoutCollection, WorkoutData } from '@health/components/workouts/workout';
+import TableActions from '@coleus/health/components/workouts/parts/TableActions.vue';
+import { WorkoutCollection, WorkoutData } from '@coleus/health/components/workouts/workout';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
 

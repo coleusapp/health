@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useForm } from '@formkit/inertia';
-import { Resource, Request } from '@health/components/weights/type';
-import WeightForm from '@health/components/weights/parts/Form.vue';
+import { Resource, Request } from '@coleus/health/components/weights/type';
+import WeightForm from '@coleus/health/components/weights/parts/Form.vue';
 
 const props = defineProps<{
     resource: Resource;

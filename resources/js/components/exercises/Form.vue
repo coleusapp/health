@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import InputError from '@/components/InputError.vue';
-import { Form } from '@health/types/category';
+import { Form } from '@coleus/health/types/category';
 
 const form = defineModel<Form>({ required: true });
 </script>

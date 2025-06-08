@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
 import { useForm } from '@formkit/inertia';
-import MuscleGroupForm from '@health/components/muscleGroups/parts/Form.vue';
-import { Data } from '@health/components/muscleGroups/type';
+import MuscleGroupForm from '@coleus/health/components/muscleGroups/parts/Form.vue';
+import { Data } from '@coleus/health/components/muscleGroups/type';
 
 defineProps<{
     muscleGroups: OptionCollection;

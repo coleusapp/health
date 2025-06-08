@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import HealthLayout from '@health/layouts/HealthLayout.vue';
-import EditForm from '@health/components/workouts/Edit.vue';
-import { WorkoutResource } from '@health/components/workouts/workout';
-import { ExerciseCollection } from '@health/components/exercises/exercise';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+import EditForm from '@coleus/health/components/workouts/Edit.vue';
+import { WorkoutResource } from '@coleus/health/components/workouts/workout';
+import { ExerciseCollection } from '@coleus/health/components/exercises/exercise';
 
 defineProps<{
     resource: WorkoutResource;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
 import { FormKit } from '@formkit/vue';
-import { WorkoutData } from '@health/components/workouts/workout';
+import { WorkoutData } from '@coleus/health/components/workouts/workout';
 import { cloneDeep, find, memoize } from 'lodash';
 
 const props = defineProps<{

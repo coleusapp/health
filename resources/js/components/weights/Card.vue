@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {Link} from "@inertiajs/vue3";
-import WeightTable from '@health/components/weights/Table.vue';
-import { Collection } from '@health/components/weights/type';
+import WeightTable from '@coleus/health/components/weights/Table.vue';
+import { Collection } from '@coleus/health/components/weights/type';
 
 defineProps<{
     collection?: Collection;

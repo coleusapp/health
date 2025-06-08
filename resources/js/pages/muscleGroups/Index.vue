@@ -3,10 +3,10 @@ import ButtonLink from '@/components/ButtonLink.vue';
 import HeadingSmall from '@/components/HeadingSmall.vue';
 import { Table } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { CategoryTable } from '@health/types/category';
+import { CategoryTable } from '@coleus/health/types/category';
 import { Head } from '@inertiajs/vue3';
 import ContentColumn from '@/components/ContentColumn.vue';
-import HealthLayout from '@health/layouts/HealthLayout.vue';
+import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 
 defineProps<{
     table?: CategoryTable;

@@ -1,24 +1,22 @@
 <script setup lang="ts">
-import CategoryForm from '@health/components/categories/Form.vue';
-import { useForm } from '@inertiajs/vue3';
-import { CategoryResource } from '@health/types/category';
+import CategoryForm from '@coleus/health/components/categories/Form.vue';
+import { CategoryRequest, CategoryResource } from '@coleus/health/components/categories/type';
+import Form from '@coleus/support/components/form/Form.vue';
+import { useForm } from '@formkit/inertia';
 
 const props = defineProps<{
-    category: CategoryResource;
+    resource: CategoryResource;
 }>();
-
-const form = useForm<{ name: string }>({
-    name: props.category.data.name || '',
+const form = useForm<CategoryRequest>({
+    name: props.resource?.data?.name || '',
 });
-
-const submit = () => {
-    form.patch(route('health.categories.update', { category: props.category.data.id }), {
-        preserveScroll: true,
+const submit = () =>
+    form.put(route('health.categories.update', { category: props.resource.data.id }), {
+        onSuccess: () => useToast().add({ title: 'Successfully added!' }),
     });
-};
 </script>
 <template>
-    <form @submit.prevent="submit">
-        <CategoryForm v-model="form" />
-    </form>
+    <Form :form="form" :submit="submit">
+        <CategoryForm />
+    </Form>
 </template>
