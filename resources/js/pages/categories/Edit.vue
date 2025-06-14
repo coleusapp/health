@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import Edit from '@coleus/health/components/categories/Edit.vue';
-import { CategoryResource } from '@coleus/health/components/categories/type';
+import EditCategory from '@coleus/health/components/categories/Edit.vue';
+import { CategoryResource, resourceKey } from '@coleus/health/components/categories/category';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+import { provide } from 'vue';
 
-defineProps<{
+const props = defineProps<{
     resource: CategoryResource;
 }>();
+provide(resourceKey, props.resource);
 </script>
 
 <template>
     <HealthLayout>
-        <Edit :resource="resource" />
+        <EditCategory />
     </HealthLayout>
 </template>

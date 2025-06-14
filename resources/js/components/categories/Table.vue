@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TableActions from '@coleus/health/components/categories/TableActions.vue';
-import { CategoryCollection, CategoryData } from '@coleus/health/components/categories/type';
+import { CategoryCollection, CategoryData } from '@coleus/health/components/categories/category';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
 
