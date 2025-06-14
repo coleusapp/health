@@ -1,3 +1,6 @@
+import { Collection, Request, Resource } from '@coleus/support/types/resource';
+import type { InjectionKey } from 'vue';
+
 export type MuscleGroupData = {
     id: number;
     name: string | null;
@@ -5,10 +8,9 @@ export type MuscleGroupData = {
     muscle_group_id: number | null;
 };
 
-export type MuscleGroupResource = {
-    data: MuscleGroupData;
-}
+export type MuscleGroupResource = Resource<MuscleGroupData>;
+export type MuscleGroupRequest = Request<MuscleGroupData>;
+export type MuscleGroupCollection = Collection<MuscleGroupData>;
 
-export type MuscleGroupCollection = {
-    data: MuscleGroupData[];
-};
+export const muscleGroupResourceKey = Symbol() as InjectionKey<MuscleGroupResource>;
+export const muscleGroupsKey = Symbol() as InjectionKey<MuscleGroupCollection>;

@@ -1,26 +1,24 @@
 <script setup lang="ts">
-import AppLayout from '@/layouts/AppLayout.vue';
-import { Head } from '@inertiajs/vue3';
-import Edit from '@coleus/health/components/categories/Edit.vue';
-import { CategoryResource } from '@coleus/health/types/category';
+import MuscleGroupEdit from '@coleus/health/components/muscleGroups/Edit.vue';
+import {
+    MuscleGroupCollection,
+    MuscleGroupResource,
+    muscleGroupResourceKey,
+    muscleGroupsKey,
+} from '@coleus/health/components/muscleGroups/muscleGroup';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
-import HeadingSmall from '@/components/HeadingSmall.vue';
+import { provide } from 'vue';
 
-defineProps<{
-    category: CategoryResource;
+const props = defineProps<{
+    resource: MuscleGroupResource;
+    muscle_groups: MuscleGroupCollection;
 }>();
+provide(muscleGroupResourceKey, props.resource);
+provide(muscleGroupsKey, props.muscle_groups);
 </script>
 
 <template>
-    <AppLayout>
-        <Head title="Edit Category" />
-        <HealthLayout>
-            <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                <HeadingSmall title="Edit Category" />
-                <div class="flex max-w-xl flex-col">
-                    <Edit :category="category" />
-                </div>
-            </div>
-        </HealthLayout>
-    </AppLayout>
+    <HealthLayout>
+        <MuscleGroupEdit />
+    </HealthLayout>
 </template>

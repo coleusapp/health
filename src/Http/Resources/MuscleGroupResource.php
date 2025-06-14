@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin \Coleus\Health\Models\Category
+ * @mixin \Coleus\Health\Models\MuscleGroup
  */
 class MuscleGroupResource extends JsonResource
 {
@@ -15,6 +15,8 @@ class MuscleGroupResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'description' => $this->description,
+            'muscle_group_id' => $this->muscle_group_id,
         ];
     }
 }

@@ -1,30 +1,12 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import InputError from '@/components/InputError.vue';
-import { Form } from '@coleus/health/types/category';
+import { inject } from 'vue';
+import { MuscleGroupCollection, muscleGroupsKey } from './muscleGroup';
 
-const form = defineModel<Form>({ required: true });
+const muscleGroups = inject(muscleGroupsKey) as MuscleGroupCollection;
 </script>
 
 <template>
-    <div class="space-y-6">
-        <div class="grid gap-2">
-            <Label for="name">Name</Label>
-            <Input
-                id="name"
-                class="mt-1 block w-full"
-                v-model="form.name"
-                required
-                autocomplete="name"
-                placeholder="Enter name"
-            />
-            <InputError class="mt-2" :message="form.errors.name" />
-        </div>
-
-        <div class="flex items-center gap-4">
-            <Button :disabled="form.processing">Save</Button>
-        </div>
-    </div>
+    <FormKit type="text" name="name" label="Name" validation="required" />
+    <FormKit type="textarea" name="description" label="description" />
+    <FormKit type="select" name="muscle_group_id" label="Muscle Group" :options="muscleGroups?.data || []" />
 </template>

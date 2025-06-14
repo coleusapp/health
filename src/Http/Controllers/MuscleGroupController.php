@@ -3,51 +3,54 @@
 namespace Coleus\Health\Http\Controllers;
 
 use Coleus\Health\Http\Requests\MuscleGroup\SaveRequest;
+use Coleus\Health\Http\Resources\MuscleGroupAsOptionResource;
 use Coleus\Health\Http\Resources\MuscleGroupResource;
 use Coleus\Health\Models\MuscleGroup;
 use Coleus\Health\Services\Workout\MuscleGroup\MuscleGroupTable;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class MuscleGroupController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
-        return Inertia::render('@health/workouts/muscleGroups/Index', [
+        return Inertia::render('@health/muscleGroups/Index', [
             'collection' => MuscleGroupResource::collection(MuscleGroupTable::query()->paginate()),
         ]);
     }
 
-    public function create()
+    public function create(): Response
     {
-        return MuscleGroupResource::collection(MuscleGroup::all());
         return Inertia::render('@health/muscleGroups/Create', [
-            'muscle_groups' => MuscleGroupResource::collection(MuscleGroup::all()),
+            'muscle_groups' => MuscleGroupAsOptionResource::collectionWithNull(MuscleGroup::get()),
         ]);
     }
 
-    public function store(SaveRequest $request)
+    public function store(SaveRequest $request): RedirectResponse
     {
         $muscleGroup = MuscleGroup::create($request->validated());
 
-        return to_route('health.workouts.muscle-groups.edit', ['muscle_group' => $muscleGroup]);
+        return to_route('health.muscle-groups.edit', ['muscle_group' => $muscleGroup]);
     }
 
-    public function edit(MuscleGroup $muscleGroup)
+    public function edit(MuscleGroup $muscleGroup): Response
     {
-        return Inertia::render('@health/workouts/muscleGroups/Edit', [
+        return Inertia::render('@health/muscleGroups/Edit', [
             'resource' => MuscleGroupResource::make($muscleGroup),
+            'muscle_groups' => MuscleGroupAsOptionResource::collectionWithNull(MuscleGroup::get()),
         ]);
     }
 
-    public function update(SaveRequest $request, MuscleGroup $muscleGroup)
+    public function update(SaveRequest $request, MuscleGroup $muscleGroup): RedirectResponse
     {
         $muscleGroup->update($request->validated());
 
         return back();
     }
 
-    public function destroy(MuscleGroup $muscleGroup)
+    public function destroy(MuscleGroup $muscleGroup): RedirectResponse
     {
         $muscleGroup->delete();
 

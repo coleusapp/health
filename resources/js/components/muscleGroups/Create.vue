@@ -1,38 +1,24 @@
 <script setup lang="ts">
-import { OptionCollection } from '@/types';
+import MuscleGroupForm from '@coleus/health/components/muscleGroups/Form.vue';
+import { MuscleGroupRequest } from '@coleus/health/components/muscleGroups/muscleGroup';
+import Form from '@coleus/support/components/form/Form.vue';
+import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';
-import MuscleGroupForm from '@coleus/health/components/muscleGroups/parts/Form.vue';
-import { Data } from '@coleus/health/components/muscleGroups/type';
 
-defineProps<{
-    muscleGroups: OptionCollection;
-}>();
-
-const form = useForm<Omit<Data, 'id'>>({
+const form = useForm<MuscleGroupRequest>({
     name: null,
     description: null,
     muscle_group_id: null,
 });
+const submit = () =>
+    form.post(route('health.muscle-groups.store'), {
+        ...onSuccessToast(ToastType.STORE_SUCCESS),
+        ...onErrorToast(ToastType.ERROR),
+    });
 </script>
+
 <template>
-    <FormKit
-        type="form"
-        @submit="
-            (fields, node) =>
-                form.post(route('health.workouts.muscle-groups.store'), {
-                    onSuccess: () => $toast.add({ title: 'Muscle group successfully added!' }),
-                })(fields, node)
-        "
-        :plugins="[form.plugin]"
-        submit-label="Save"
-    >
-        <template #default="{ value }">
-            <MuscleGroupForm
-                :muscle-groups="muscleGroups"
-            />
-        </template>
-        <template #submit>
-            <UiButton type="submit" :disabled="form.processing.value">Save</UiButton>
-        </template>
-    </FormKit>
+    <Form :form="form" :submit="submit" #default="{ value }">
+        <MuscleGroupForm :value="value as MuscleGroupRequest" />
+    </Form>
 </template>

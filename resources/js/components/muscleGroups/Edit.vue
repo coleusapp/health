@@ -1,55 +1,26 @@
 <script setup lang="ts">
-import { OptionCollection } from '@/types';
+import MuscleGroupForm from '@coleus/health/components/muscleGroups/Form.vue';
+import { MuscleGroupRequest, MuscleGroupResource, muscleGroupResourceKey } from '@coleus/health/components/muscleGroups/muscleGroup';
+import Form from '@coleus/support/components/form/Form.vue';
+import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';
-import ExerciseForm from '@coleus/health/components/exercises/parts/Form.vue';
-import { Data, Resource } from '@coleus/health/components/exercises/exercise';
+import { inject } from 'vue';
 
-const props = defineProps<{
-    resource: Resource;
-    weightUnits: OptionCollection;
-    distanceUnits: OptionCollection;
-    durationUnits: OptionCollection;
-    muscleGroups: OptionCollection;
-    categories: OptionCollection;
-}>();
+const resource = inject(muscleGroupResourceKey) as MuscleGroupResource;
 
-const form = useForm<Omit<Data, 'id'>>({
-    name: props.resource.data.name,
-    description: props.resource.data.description,
-    has_rep: props.resource.data.has_rep,
-    has_calorie: props.resource.data.has_calorie,
-    has_weight: props.resource.data.has_weight,
-    weight_unit: props.resource.data.weight_unit,
-    has_distance: props.resource.data.has_distance,
-    distance_unit: props.resource.data.distance_unit,
-    has_duration: props.resource.data.has_duration,
-    duration_unit: props.resource.data.duration_unit,
+const form = useForm<MuscleGroupRequest>({
+    name: resource.data.name,
+    description: resource.data.description,
+    muscle_group_id: resource.data.muscle_group_id,
 });
+const submit = () =>
+    form.patch(route('health.muscle-groups.update', { muscle_group: resource.data.id }), {
+        ...onSuccessToast(ToastType.UPDATE_SUCCESS),
+        ...onErrorToast(ToastType.ERROR),
+    });
 </script>
 <template>
-    <FormKit
-        type="form"
-        @submit="
-            (fields, node) =>
-                form.patch(route('health.workouts.exercises.update', { exercise: resource.data.id }), {
-                    onSuccess: () => $toast.add({ title: 'Exercise successfully updated!' }),
-                })(fields, node)
-        "
-        :plugins="[form.plugin]"
-        submit-label="Save"
-    >
-        <template #default="{ value }">
-            <ExerciseForm
-                :value="value as Omit<Data, 'id'>"
-                :weight-units="weightUnits"
-                :distance-units="distanceUnits"
-                :duration-units="durationUnits"
-                :muscle-groups="muscleGroups"
-                :categories="categories"
-            />
-        </template>
-        <template #submit>
-            <UiButton type="submit" :disabled="form.processing.value">Save</UiButton>
-        </template>
-    </FormKit>
+    <Form :form="form" :submit="submit" #default="{ value }">
+        <MuscleGroupForm :value="value as MuscleGroupRequest" />
+    </Form>
 </template>
