@@ -1,15 +1,17 @@
 <script setup lang="ts">
+import EditWeight from '@coleus/health/components/weights/Edit.vue';
+import { WeightResource, resourceKey } from '@coleus/health/components/weights/weight';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
-import EditForm from '@coleus/health/components/weights/Edit.vue';
-import { Resource } from '@coleus/health/components/weights/type';
+import { provide } from 'vue';
 
-defineProps<{
-    resource: Resource;
+const props = defineProps<{
+    resource: WeightResource;
 }>();
+provide(resourceKey, props.resource);
 </script>
 
 <template>
     <HealthLayout>
-        <EditForm :resource="resource" />
+        <EditWeight />
     </HealthLayout>
 </template>

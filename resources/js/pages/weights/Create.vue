@@ -1,17 +1,17 @@
 <script setup lang="ts">
+import CreateWeight from '@coleus/health/components/weights/Create.vue';
+import { WeightResource, resourceKey } from '@coleus/health/components/weights/weight';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
-import { Head } from '@inertiajs/vue3';
-import CreateWeight from "@coleus/health/components/weights/Create.vue";
-import { Resource } from '@coleus/health/components/weights/type';
+import { provide } from 'vue';
 
-defineProps<{
-    resource: Resource;
+const props = defineProps<{
+    resource: WeightResource;
 }>();
+provide(resourceKey, props.resource);
 </script>
 
 <template>
-    <Head title="Create Weight" />
     <HealthLayout>
-        <CreateWeight :resource="resource" />
+        <CreateWeight />
     </HealthLayout>
 </template>

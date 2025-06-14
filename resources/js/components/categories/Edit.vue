@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ExerciseForm from '@coleus/health/components/categories/Form.vue';
+import WeightForm from '@coleus/health/components/categories/Form.vue';
 import { CategoryRequest, CategoryResource, resourceKey } from '@coleus/health/components/categories/category';
 import Form from '@coleus/support/components/form/Form.vue';
 import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
@@ -19,6 +19,6 @@ const submit = () =>
 </script>
 <template>
     <Form :form="form" :submit="submit" #default="{ value }">
-        <ExerciseForm :value="value as CategoryRequest" />
+        <WeightForm :value="value as CategoryRequest" />
     </Form>
 </template>

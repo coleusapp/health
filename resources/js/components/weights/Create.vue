@@ -1,32 +1,25 @@
 <script setup lang="ts">
+import WeightForm from '@coleus/health/components/weights/Form.vue';
+import { resourceKey, WeightRequest, WeightResource } from '@coleus/health/components/weights/weight';
+import Form from '@coleus/support/components/form/Form.vue';
+import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';
-import WeightForm from '@coleus/health/components/weights/parts/Form.vue';
-import { Resource } from '@coleus/health/components/weights/type';
+import { inject } from 'vue';
 
-const props = defineProps<{
-    resource: Resource;
-}>();
+const resource = inject(resourceKey) as WeightResource;
 
-const form = useForm({
-    weight: props.resource.data.weight,
-    date: props.resource.data.date,
+const form = useForm<WeightRequest>({
+    weight: resource.data.weight,
+    date: resource.data.date,
 });
+const submit = () =>
+    form.post(route('health.weights.store'), {
+        ...onSuccessToast(ToastType.STORE_SUCCESS),
+        ...onErrorToast(ToastType.ERROR),
+    });
 </script>
 <template>
-    <FormKit
-        type="form"
-        @submit="
-            (fields, node) =>
-                form.post(route('health.weights.store'), {
-                    onSuccess: () => $toast.add({ title: 'Weight successfully added!' }),
-                })(fields, node)
-        "
-        :plugins="[form.plugin]"
-        submit-label="Save"
-    >
-        <WeightForm />
-        <template #submit>
-            <UiButton type="submit" :disabled="form.processing.value">Save</UiButton>
-        </template>
-    </FormKit>
+    <Form :form="form" :submit="submit" #default="{ value }">
+        <WeightForm :value="value as WeightRequest" />
+    </Form>
 </template>

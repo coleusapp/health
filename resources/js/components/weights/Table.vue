@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
-import TableActions from '@coleus/health/components/weights/parts/TableActions.vue';
-import { Collection, Data } from '@coleus/health/components/weights/type';
+import TableActions from '@coleus/health/components/weights/TableActions.vue';
+import { WeightCollection, WeightData } from '@coleus/health/components/weights/weight';
 
 defineProps<{
-    collection?: Collection;
+    collection?: WeightCollection;
 }>();
 
-const columns: TableColumn<Data>[] = [
+const columns: TableColumn<WeightData>[] = [
     {
         accessorKey: 'date',
         cell: ({ row }) => `${row.original.date_for_humans}`,
