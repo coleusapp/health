@@ -11,7 +11,7 @@ import { Collection as WeightCollection } from '@coleus/health/components/weight
 import { CategoryCollection } from '@coleus/health/components/categories/category';
 import { MuscleGroupCollection } from '@coleus/health/components/muscleGroups/muscleGroup';
 import { Collection as ToothpasteTypeCollection } from '@coleus/health/components/toothpasteTypes/type';
-import { Collection as ExerciseCollection } from '@coleus/health/components/exercises/type';
+import { Collection as ExerciseCollection } from '@coleus/health/components/exercises/exercise';
 import { WorkoutCollection } from '@coleus/health/components/workouts/workout';
 
 defineProps<{

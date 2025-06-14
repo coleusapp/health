@@ -1,18 +1,11 @@
 <script setup lang="ts">
-import { OptionCollection } from '@/types';
+import ExerciseForm from '@coleus/health/components/exercises/Form.vue';
+import { ExerciseRequest } from '@coleus/health/components/exercises/exercise';
+import Form from '@coleus/support/components/form/Form.vue';
+import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';
-import ExerciseForm from '@coleus/health/components/exercises/parts/Form.vue';
-import { Data } from '@coleus/health/components/exercises/type';
 
-const props = defineProps<{
-    weightUnits: OptionCollection;
-    distanceUnits: OptionCollection;
-    durationUnits: OptionCollection;
-    muscleGroups: OptionCollection;
-    categories: OptionCollection;
-}>();
-
-const form = useForm<Omit<Data, 'id'>>({
+const form = useForm<ExerciseRequest>({
     name: null,
     description: null,
     has_rep: true,
@@ -23,32 +16,17 @@ const form = useForm<Omit<Data, 'id'>>({
     distance_unit: null,
     has_duration: false,
     duration_unit: null,
+    categories: [],
+    muscle_groups: [],
 });
+const submit = () =>
+    form.post(route('health.exercises.store'), {
+        ...onSuccessToast(ToastType.STORE_SUCCESS),
+        ...onErrorToast(ToastType.ERROR),
+    });
 </script>
 <template>
-    <FormKit
-        type="form"
-        @submit="
-            (fields, node) =>
-                form.post(route('health.workouts.exercises.store'), {
-                    onSuccess: () => $toast.add({ title: 'Exercise successfully added!' }),
-                })(fields, node)
-        "
-        :plugins="[form.plugin]"
-        submit-label="Save"
-    >
-        <template #default="{ value }">
-            <ExerciseForm
-                :value="value as Omit<Data, 'id'>"
-                :weight-units="weightUnits"
-                :distance-units="distanceUnits"
-                :duration-units="durationUnits"
-                :muscle-groups="muscleGroups"
-                :categories="categories"
-            />
-        </template>
-        <template #submit>
-            <UiButton type="submit" :disabled="form.processing.value">Save</UiButton>
-        </template>
-    </FormKit>
+    <Form :form="form" :submit="submit" #default="{ value }">
+        <ExerciseForm :value="value as ExerciseRequest" />
+    </Form>
 </template>

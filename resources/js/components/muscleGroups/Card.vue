@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ExerciseTable from '@coleus/health/components/exercises/Table.vue';
-import { Collection } from '@coleus/health/components/exercises/type';
+import { Collection } from '@coleus/health/components/exercises/exercise';
 import { Link } from '@inertiajs/vue3';
 
 defineProps<{

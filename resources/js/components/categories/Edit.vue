@@ -2,6 +2,7 @@
 import CategoryForm from '@coleus/health/components/categories/Form.vue';
 import { CategoryRequest, CategoryResource } from '@coleus/health/components/categories/type';
 import Form from '@coleus/support/components/form/Form.vue';
+import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';
 
 const props = defineProps<{
@@ -12,7 +13,8 @@ const form = useForm<CategoryRequest>({
 });
 const submit = () =>
     form.put(route('health.categories.update', { category: props.resource.data.id }), {
-        onSuccess: () => useToast().add({ title: 'Successfully added!' }),
+        ...onSuccessToast(ToastType.STORE_SUCCESS),
+        ...onErrorToast(ToastType.ERROR),
     });
 </script>
 <template>

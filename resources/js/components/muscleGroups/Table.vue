@@ -2,7 +2,7 @@
 import IconColumn from '@/components/ui/table/columns/IconColumn.vue';
 import { IconColumnProps } from '@/components/ui/table/columns/IconColumnProps';
 import TableActions from '@coleus/health/components/exercises/parts/TableActions.vue';
-import { Collection, Data } from '@coleus/health/components/exercises/type';
+import { Collection, Data } from '@coleus/health/components/exercises/exercise';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
 import BadgeColumn from '@/components/ui/table/columns/BadgeColumn.vue';

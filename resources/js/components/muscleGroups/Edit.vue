@@ -2,7 +2,7 @@
 import { OptionCollection } from '@/types';
 import { useForm } from '@formkit/inertia';
 import ExerciseForm from '@coleus/health/components/exercises/parts/Form.vue';
-import { Data, Resource } from '@coleus/health/components/exercises/type';
+import { Data, Resource } from '@coleus/health/components/exercises/exercise';
 
 const props = defineProps<{
     resource: Resource;
