@@ -1,4 +1,5 @@
-import { ExerciseResource } from '@coleus/health/components/exercises/exercise';
+import { Collection, Request, Resource } from '@coleus/support/types/resource';
+import type { InjectionKey } from 'vue';
 import { ExerciseWorkout } from '@coleus/health/components/exerciseWorkouts/exerciseWorkout';
 
 export type WorkoutData = {
@@ -7,10 +8,9 @@ export type WorkoutData = {
     exercises?: ExerciseWorkout[]
 };
 
-export type WorkoutResource = {
-    data: WorkoutData;
-}
+export type WorkoutResource = Resource<WorkoutData>;
+export type WorkoutRequest = Request<WorkoutData>;
+export type WorkoutCollection = Collection<WorkoutData>;
 
-export type WorkoutCollection = {
-    data: WorkoutData[];
-};
+export const workoutResourceKey = Symbol() as InjectionKey<WorkoutResource>;
+

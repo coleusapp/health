@@ -1,36 +1,24 @@
 <script setup lang="ts">
-import { OptionCollection } from '@/types';
+import { ExerciseRequest } from '@coleus/health/components/exercises/exercise';
+import WorkoutForm from '@coleus/health/components/workouts/Form.vue';
+import { WorkoutRequest, workoutResourceKey } from '@coleus/health/components/workouts/workout';
+import Form from '@coleus/support/components/form/Form.vue';
+import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';
-import WorkoutForm from '@coleus/health/components/workouts/parts/Form.vue';
-import { WorkoutData } from '@coleus/health/components/workouts/workout';
+import { inject } from 'vue';
 
-defineProps<{
-    exercises: OptionCollection;
-}>();
-
-const form = useForm<Omit<WorkoutData, 'id'>>({
-    date: null,
+const resource = inject(workoutResourceKey) as workoutResourceKey;
+const form = useForm<WorkoutRequest>({
+    date: resource.data.date,
 });
+const submit = () =>
+    form.post(route('health.workouts.store'), {
+        ...onSuccessToast(ToastType.STORE_SUCCESS),
+        ...onErrorToast(ToastType.ERROR),
+    });
 </script>
 <template>
-    <FormKit
-        type="form"
-        @submit="
-            (fields, node) =>
-                form.post(route('health.workouts.store'), {
-                    onSuccess: () => $toast.add({ title: 'Workout successfully added!' }),
-                })(fields, node)
-        "
-        :plugins="[form.plugin]"
-        submit-label="Save"
-    >
-        <template #default="{ value }">
-            <WorkoutForm
-                exercises: OptionCollection;
-            />
-        </template>
-        <template #submit>
-            <UiButton type="submit" :disabled="form.processing.value">Save</UiButton>
-        </template>
-    </FormKit>
+    <Form :form="form" :submit="submit" #default="{ value }">
+        <WorkoutForm :value="value as ExerciseRequest" />
+    </Form>
 </template>

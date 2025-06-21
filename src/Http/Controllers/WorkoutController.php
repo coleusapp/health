@@ -21,21 +21,21 @@ class WorkoutController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        $default = new Workout(['date' => now('America/Denver')]);
+
+        return Inertia::render('@health/workouts/Create', [
+            'resource' => new WorkoutResource($default),
+            'exercises' => ExerciseAsOptionResource::collection(Exercise::all()),
+        ]);
+    }
+
     public function store(WorkoutRequest $request)
     {
         $workout = Workout::create($request->all());
 
         return to_route('health.workouts.edit', ['workout' => new WorkoutResource($workout)]);
-    }
-
-    public function create()
-    {
-        $default = Workout::latest('created_at')->first() ?? new Workout(['workout' => 1]);
-        $default->date = now('America/Denver');
-
-        return Inertia::render('@health/workouts/Create', [
-            'resource' => new WorkoutResource($default),
-        ]);
     }
 
     public function edit(Workout $workout)

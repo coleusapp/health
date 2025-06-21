@@ -1,17 +1,20 @@
 <script setup lang="ts">
+import { ExerciseCollection, exerciseCollectionKey } from '@coleus/health/components/exercises/exercise';
+import EditWorkout from '@coleus/health/components/workouts/Edit.vue';
+import { WorkoutResource, workoutResourceKey } from '@coleus/health/components/workouts/workout';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
-import EditForm from '@coleus/health/components/workouts/Edit.vue';
-import { WorkoutResource } from '@coleus/health/components/workouts/workout';
-import { ExerciseCollection } from '@coleus/health/components/exercises/exercise';
+import { provide } from 'vue';
 
-defineProps<{
+const props = defineProps<{
     resource: WorkoutResource;
     exercises: ExerciseCollection;
 }>();
+provide(workoutResourceKey, props.resource);
+provide(exerciseCollectionKey, props.exercises);
 </script>
 
 <template>
     <HealthLayout>
-        <EditForm :resource="resource" :exercises="exercises" />
+        <EditWorkout />
     </HealthLayout>
 </template>

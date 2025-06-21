@@ -1,17 +1,20 @@
 <script setup lang="ts">
+import CreateWorkout from '@coleus/health/components/workouts/Create.vue';
+import { WorkoutResource, workoutResourceKey } from '@coleus/health/components/workouts/workout';
+import { ExerciseCollection, exerciseCollectionKey } from '@coleus/health/components/exercises/exercise';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
-import { Head } from '@inertiajs/vue3';
-import CreateWorkout from "@coleus/health/components/workouts/Create.vue";
-import { WorkoutResource } from '@coleus/health/components/workouts/workout';
+import { provide } from 'vue';
 
-defineProps<{
+const props = defineProps<{
     resource: WorkoutResource;
+    exercises: ExerciseCollection;
 }>();
+provide(workoutResourceKey, props.resource);
+provide(exerciseCollectionKey, props.exercises);
 </script>
 
 <template>
-    <Head title="Create Workout" />
     <HealthLayout>
-        <CreateWorkout :resource="resource" />
+        <CreateWorkout />
     </HealthLayout>
 </template>

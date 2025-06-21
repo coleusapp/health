@@ -22,7 +22,8 @@ export type ExerciseResource = Resource<ExerciseData>;
 export type ExerciseRequest = Request<ExerciseData>;
 export type ExerciseCollection = Collection<ExerciseData>;
 
-export const resourceKey = Symbol() as InjectionKey<ExerciseResource>;
+export const exerciseResourceKey = Symbol() as InjectionKey<ExerciseResource>;
+export const exerciseCollectionKey = Symbol() as InjectionKey<ExerciseCollection>;
 export const weightUnitsKey = Symbol() as InjectionKey<OptionCollection>;
 export const distanceUnitsKey = Symbol() as InjectionKey<OptionCollection>;
 export const durationUnitsKey = Symbol() as InjectionKey<OptionCollection>;

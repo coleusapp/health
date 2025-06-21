@@ -7,7 +7,7 @@ import {
     durationUnitsKey,
     ExerciseResource,
     muscleGroupsKey,
-    resourceKey,
+    exerciseResourceKey,
     weightUnitsKey,
 } from '@coleus/health/components/exercises/exercise';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
@@ -21,7 +21,7 @@ const props = defineProps<{
     muscle_groups: OptionCollection;
     categories: OptionCollection;
 }>();
-provide(resourceKey, props.resource);
+provide(exerciseResourceKey, props.resource);
 provide(weightUnitsKey, props.weight_units);
 provide(distanceUnitsKey, props.distance_units);
 provide(durationUnitsKey, props.duration_units);

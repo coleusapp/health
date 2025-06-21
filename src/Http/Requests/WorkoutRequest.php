@@ -26,33 +26,33 @@ class WorkoutRequest extends FormRequest
             'exercises.*.id' => [
                 'required',
                 'numeric',
-                'gt:0',
+                'gte:0',
                 Rule::exists(Exercise::class, 'id')
             ],
             'exercises.*.calorie' => [
                 'nullable',
                 'numeric',
-                'gt:0',
+                'gte:0',
             ],
             'exercises.*.duration' => [
                 'nullable',
                 'numeric',
-                'gt:0',
+                'gte:0',
             ],
             'exercises.*.distance' => [
                 'nullable',
                 'numeric',
-                'gt:0',
+                'gte:0',
             ],
             'exercises.*.reps' => [
                 'nullable',
                 'numeric',
-                'gt:0',
+                'gte:0',
             ],
             'exercises.*.weight' => [
                 'nullable',
                 'numeric',
-                'gt:0',
+                'gte:0',
             ],
         ];
     }

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import WeightTable from '@coleus/health/components/weights/Table.vue';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
-import { Collection } from '@coleus/health/components/weights/type';
+import WorkoutsTable from '@coleus/health/components/workouts/Table.vue';
+import { WorkoutCollection } from '@coleus/health/components/workouts/workout';
 
 defineProps<{
-    collection?: Collection;
+    collection?: WorkoutCollection;
 }>();
 </script>
 
 <template>
     <HealthLayout>
-        <WeightTable :collection="collection" />
+        <WorkoutsTable :collection="collection" />
     </HealthLayout>
 </template>

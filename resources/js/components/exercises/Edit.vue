@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import ExerciseForm from '@coleus/health/components/exercises/Form.vue';
-import { ExerciseRequest, ExerciseResource, resourceKey } from '@coleus/health/components/exercises/exercise';
+import { ExerciseRequest, ExerciseResource, exerciseResourceKey } from '@coleus/health/components/exercises/exercise';
 import Form from '@coleus/support/components/form/Form.vue';
 import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';
 import { inject } from 'vue';
 
-const resource = inject(resourceKey) as ExerciseResource;
+const resource = inject(exerciseResourceKey) as ExerciseResource;
 
 const form = useForm<ExerciseRequest>({
     name: resource.data.name,

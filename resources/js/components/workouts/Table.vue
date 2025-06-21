@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TableActions from '@coleus/health/components/workouts/parts/TableActions.vue';
+import TableActions from '@coleus/health/components/workouts/TableActions.vue';
 import { WorkoutCollection, WorkoutData } from '@coleus/health/components/workouts/workout';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';

@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { OptionCollection } from '@/types';
 import { FormKit } from '@formkit/vue';
 import { WorkoutData } from '@coleus/health/components/workouts/workout';
 import { cloneDeep, find, memoize } from 'lodash';
+import { inject } from 'vue';
+import { ExerciseCollection, exerciseCollectionKey } from '@coleus/health/components/exercises/exercise';
 
-const props = defineProps<{
+const exercises = inject(exerciseCollectionKey) as ExerciseCollection;
+
+defineProps<{
     value: Omit<WorkoutData, 'id'>;
-    exercises: OptionCollection;
 }>();
 
 const getExercise = memoize((exerciseId: number) => {
-    return find(props.exercises.data, (item) => [item?.value].includes(exerciseId));
+    return find(exercises.data, (item) => [item?.value].includes(exerciseId));
 });
 </script>
 <template>
