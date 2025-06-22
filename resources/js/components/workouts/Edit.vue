@@ -1,37 +1,26 @@
 <script setup lang="ts">
-import { OptionCollection } from '@/types';
-import { useForm } from '@formkit/inertia';
 import WorkoutForm from '@coleus/health/components/workouts/Form.vue';
-import { WorkoutData, WorkoutResource } from '@coleus/health/components/workouts/workout';
-import { toRaw } from 'vue';
+import { WorkoutRequest, WorkoutResource, workoutResourceKey } from '@coleus/health/components/workouts/workout';
+import Form from '@coleus/support/components/form/Form.vue';
+import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
+import { useForm } from '@formkit/inertia';
+import { inject, toRaw } from 'vue';
 
-const props = defineProps<{
-    resource: WorkoutResource;
-    exercises: OptionCollection;
-}>();
+const resource = inject(workoutResourceKey) as WorkoutResource;
 
-const form = useForm<Omit<WorkoutData, 'id'>>({
-    date: props.resource.data.date,
-    exercises: toRaw(props.resource.data.exercises),
+const form = useForm<WorkoutRequest>({
+    date: resource.data.date,
+    exercises: toRaw(resource.data.exercises),
 });
+
+const submit = () =>
+    form.put(route('health.workouts.update', { workout: resource.data.id }), {
+        ...onSuccessToast(ToastType.UPDATE_SUCCESS),
+        ...onErrorToast(ToastType.ERROR),
+    });
 </script>
 <template>
-    <FormKit
-        type="form"
-        @submit="
-            (fields, node) =>
-                form.patch(route('health.workouts.update', { workout: resource.data.id }), {
-                    onSuccess: () => $toast.add({ title: 'Workout successfully updated!' }),
-                })(fields, node)
-        "
-        :plugins="[form.plugin]"
-        submit-label="Save"
-    >
-        <template #default="{ value }">
-            <WorkoutForm :value="value as Omit<WorkoutData, 'id'>" :exercises="exercises" />
-        </template>
-        <template #submit>
-            <UiButton type="submit" :disabled="form.processing.value">Save</UiButton>
-        </template>
-    </FormKit>
+    <Form :form="form" :submit="submit" #default="{ value }">
+        <WorkoutForm :value="value as WorkoutRequest" />
+    </Form>
 </template>

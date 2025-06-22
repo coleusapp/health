@@ -7,6 +7,7 @@ use Coleus\Health\Http\Resources\ExerciseAsOptionResource;
 use Coleus\Health\Http\Resources\WorkoutResource;
 use Coleus\Health\Models\Exercise;
 use Coleus\Health\Models\Workout;
+use Coleus\Health\Services\WorkoutService;
 use Coleus\Health\Services\WorkoutTable;
 use App\Http\Controllers\Controller;
 use DB;
@@ -33,7 +34,7 @@ class WorkoutController extends Controller
 
     public function store(WorkoutRequest $request)
     {
-        $workout = Workout::create($request->all());
+        $workout = WorkoutService::save($request);
 
         return to_route('health.workouts.edit', ['workout' => new WorkoutResource($workout)]);
     }
@@ -51,22 +52,7 @@ class WorkoutController extends Controller
      */
     public function update(WorkoutRequest $request, Workout $workout)
     {
-        $workout->update($request->only('date'));
-
-        DB::transaction(function () use ($workout, $request) {
-            $workout->exercises()->detach();
-            collect($request->validated('exercises'))
-                ->each(function ($exercise) use ($workout) {
-                    $workout->exercises()->attach($exercise['id'], [
-                        'reps' => $exercise['reps'] ?? null,
-                        'weight' => $exercise['weight'] ?? null,
-                        'distance' => $exercise['distance'] ?? null,
-                        'duration' => $exercise['duration'] ?? null,
-                        'calorie' => $exercise['calorie'] ?? null,
-                        'user_id' => auth()->id(),
-                    ]);
-                });
-        });
+        WorkoutService::save($request, $workout);
 
         return to_route('health.workouts.edit', ['workout' => new WorkoutResource($workout)]);
     }
