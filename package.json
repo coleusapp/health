@@ -16,6 +16,7 @@
         "@vitejs/plugin-vue": "catalog:dep",
         "@vueuse/core": "catalog:dep",
         "autoprefixer": "catalog:dep",
+        "chart.js": "catalog:dep",
         "class-variance-authority": "catalog:dep",
         "clsx": "catalog:dep",
         "concurrently": "catalog:dep",

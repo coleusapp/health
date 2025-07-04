@@ -1,6 +1,6 @@
 <?php
 
-namespace Coleus\Health\Services\Workout\MuscleGroup;
+namespace Coleus\Health\Services;
 
 use Coleus\Health\Models\MuscleGroup;
 use Coleus\Table\Table;

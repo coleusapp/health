@@ -2,20 +2,20 @@
 
 namespace Coleus\Health\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use Coleus\Health\Http\Resources\CategoryResource;
 use Coleus\Health\Http\Resources\ExerciseResource;
 use Coleus\Health\Http\Resources\MuscleGroupResource;
 use Coleus\Health\Http\Resources\ToothpasteTypeResource;
 use Coleus\Health\Http\Resources\WeightResource;
-use Coleus\Health\Http\Resources\CategoryResource;
 use Coleus\Health\Http\Resources\WorkoutResource;
-use Coleus\Health\Services\ExerciseTable;
-use Coleus\Health\Services\ToothpasteTypeTable;
-use Coleus\Health\Services\Weight\WeightTable;
-use Coleus\Health\Services\Workout\MuscleGroup\MuscleGroupTable;
 use Coleus\Health\Services\CategoryTable;
+use Coleus\Health\Services\ExerciseTable;
+use Coleus\Health\Services\MuscleGroupTable;
+use Coleus\Health\Services\ToothpasteTypeTable;
+use Coleus\Health\Services\WeightChart;
+use Coleus\Health\Services\WeightTable;
 use Coleus\Health\Services\WorkoutTable;
-use App\Http\Controllers\Controller;
-use Coleus\Support\Shit;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -30,6 +30,7 @@ class DashboardController extends Controller
             'toothpaste_types' => ToothpasteTypeResource::collection(ToothpasteTypeTable::query()->paginate()),
             'exercises' => ExerciseResource::collection(ExerciseTable::query()->paginate()),
             'workouts' => WorkoutResource::collection(WorkoutTable::query()->paginate()),
+            'weights_chart' => WeightChart::getData(),
         ]);
     }
 }

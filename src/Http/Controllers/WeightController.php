@@ -2,11 +2,11 @@
 
 namespace Coleus\Health\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Coleus\Health\Http\Requests\Weight\SaveRequest;
 use Coleus\Health\Http\Resources\WeightResource;
 use Coleus\Health\Models\Weight;
-use Coleus\Health\Services\Weight\WeightTable;
-use App\Http\Controllers\Controller;
+use Coleus\Health\Services\WeightTable;
 use Inertia\Inertia;
 
 class WeightController extends Controller

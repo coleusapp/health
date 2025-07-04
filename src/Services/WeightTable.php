@@ -1,6 +1,6 @@
 <?php
 
-namespace Coleus\Health\Services\Weight;
+namespace Coleus\Health\Services;
 
 use Coleus\Health\Http\Resources\WeightResource;
 use Coleus\Health\Models\Weight;

@@ -2,12 +2,12 @@
 
 namespace Coleus\Health\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Coleus\Health\Http\Requests\MuscleGroup\SaveRequest;
 use Coleus\Health\Http\Resources\MuscleGroupAsOptionResource;
 use Coleus\Health\Http\Resources\MuscleGroupResource;
 use Coleus\Health\Models\MuscleGroup;
-use Coleus\Health\Services\Workout\MuscleGroup\MuscleGroupTable;
-use App\Http\Controllers\Controller;
+use Coleus\Health\Services\MuscleGroupTable;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
