@@ -6,7 +6,7 @@ import type { CategoryCollection } from '@coleus/health/components/categories/ca
 import type { MuscleGroupCollection } from '@coleus/health/components/muscleGroups/muscleGroup';
 import type { ExerciseCollection } from '@coleus/health/components/exercises/exercise';
 import type { WorkoutCollection } from '@coleus/health/components/workouts/workout';
-import LineChart from '@coleus/health/components/weights/LineChart.vue';
+import TrendMetric from '../components/weights/TrendMetric.vue';
 
 defineProps<{
     weights: WeightCollection;
@@ -24,7 +24,7 @@ defineProps<{
 
     <HealthLayout>
         <div class="flex flex-wrap gap-4 w-full">
-            <LineChart class="w-full" :data="weights_chart" />
+            <TrendMetric class="w-full max-w-128" :data="weights_chart" />
         </div>
     </HealthLayout>
 </template>
