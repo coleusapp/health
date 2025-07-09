@@ -19,7 +19,9 @@ const submit = () =>
     });
 </script>
 <template>
-    <Form :form="form" :submit="submit" #default="{ value }">
-        <WeightForm :value="value as WeightRequest" />
+    <Form :form="form" :submit="submit">
+        <template #default="{ value }">
+            <WeightForm :value="value as WeightRequest" />
+        </template>
     </Form>
 </template>

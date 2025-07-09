@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CreateWeight from '@coleus/health/components/weights/Create.vue';
+import CreateCard from '@coleus/health/components/weights/CreateCard.vue';
 import { WeightResource, resourceKey } from '@coleus/health/components/weights/weight';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { provide } from 'vue';
@@ -12,6 +12,6 @@ provide(resourceKey, props.resource);
 
 <template>
     <HealthLayout>
-        <CreateWeight />
+        <CreateCard />
     </HealthLayout>
 </template>
