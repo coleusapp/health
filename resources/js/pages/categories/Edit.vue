@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EditCategory from '@coleus/health/components/categories/Edit.vue';
+import EditCard from '@coleus/health/components/categories/EditCard.vue';
 import { CategoryResource, resourceKey } from '@coleus/health/components/categories/category';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { provide } from 'vue';
@@ -12,6 +12,6 @@ provide(resourceKey, props.resource);
 
 <template>
     <HealthLayout>
-        <EditCategory />
+        <EditCard />
     </HealthLayout>
 </template>
