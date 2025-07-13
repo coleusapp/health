@@ -6,11 +6,11 @@ use Coleus\Health\Models\MuscleGroup;
 use Coleus\Table\Table;
 use Illuminate\Database\Eloquent\Builder;
 
-class MuscleGroupTable extends Table
+class MuscleGroupService
 {
-    public static function query(): Builder
+    public static function indexQuery(): Builder
     {
-        return MuscleGroup::query()
+        return MuscleGroup::with('parent')
             ->orderBy('created_at', 'desc');
     }
 }

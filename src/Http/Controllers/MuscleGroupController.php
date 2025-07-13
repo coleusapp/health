@@ -7,7 +7,7 @@ use Coleus\Health\Http\Requests\MuscleGroup\SaveRequest;
 use Coleus\Health\Http\Resources\MuscleGroupAsOptionResource;
 use Coleus\Health\Http\Resources\MuscleGroupResource;
 use Coleus\Health\Models\MuscleGroup;
-use Coleus\Health\Services\MuscleGroupTable;
+use Coleus\Health\Services\MuscleGroupService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,8 +16,11 @@ class MuscleGroupController extends Controller
 {
     public function index(): Response
     {
+        $collection = MuscleGroupService::indexQuery()
+            ->paginate();
+
         return Inertia::render('@health/muscleGroups/Index', [
-            'collection' => MuscleGroupResource::collection(MuscleGroupTable::query()->paginate()),
+            'collection' => MuscleGroupResource::collection($collection),
         ]);
     }
 

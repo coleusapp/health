@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
-import ExerciseTable from '@coleus/health/components/exercises/Table.vue';
+import TableCard from '@coleus/health/components/exercises/TableCard.vue';
 import { ExerciseCollection } from '@coleus/health/components/exercises/exercise';
 
 defineProps<{
-    collection?: ExerciseCollection;
+    collection: ExerciseCollection;
 }>();
 </script>
 
 <template>
     <HealthLayout>
-        <ExerciseTable :collection="collection" />
+        <TableCard :collection="collection" />
     </HealthLayout>
 </template>

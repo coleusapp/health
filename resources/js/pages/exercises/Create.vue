@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
-import CreateExercise from '@coleus/health/components/exercises/Create.vue';
+import CreateCard from '@coleus/health/components/exercises/CreateCard.vue';
 import { categoriesKey, distanceUnitsKey, durationUnitsKey, muscleGroupsKey, weightUnitsKey } from '@coleus/health/components/exercises/exercise';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { provide } from 'vue';
@@ -21,6 +21,6 @@ provide(categoriesKey, props.categories);
 
 <template>
     <HealthLayout>
-        <CreateExercise />
+        <CreateCard />
     </HealthLayout>
 </template>

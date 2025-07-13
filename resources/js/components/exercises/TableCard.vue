@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import WeightTable from '@coleus/health/components/weights/Table.vue';
-import { WeightCollection } from '@coleus/health/components/weights/weight';
+import ExerciseTable from '@coleus/health/components/exercises/Table.vue';
+import type { ExerciseCollection } from '@coleus/health/components/exercises/exercise';
 import Header from '@coleus/support/components/card/Header.vue';
 import { Link } from '@inertiajs/vue3';
 import MetaInformation from '@coleus/support/components/table/MetaInformation.vue';
 import Pagination from '@coleus/support/components/table/Pagination.vue';
 
 defineProps<{
-    collection: WeightCollection;
+    collection: ExerciseCollection;
 }>();
 </script>
 
 <template>
     <UiCard>
         <template #header>
-            <Header title="weights">
-                <Link :href="route('health.weights.create')">
+            <Header title="exercises">
+                <Link :href="route('health.exercises.create')">
                     <UiButton icon="lucide-plus">New</UiButton>
                 </Link>
             </Header>
         </template>
-        <WeightTable :collection="collection" />
+        <ExerciseTable :collection="collection" />
         <template #footer>
             <div class="flex items-center justify-between">
                 <MetaInformation :meta="collection.meta" />

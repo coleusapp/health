@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
-import EditExercise from '@coleus/health/components/exercises/Edit.vue';
+import EditCard from '@coleus/health/components/exercises/EditCard.vue';
 import {
     categoriesKey,
     distanceUnitsKey,
@@ -31,6 +31,6 @@ provide(categoriesKey, props.categories);
 
 <template>
     <HealthLayout>
-        <EditExercise />
+        <EditCard />
     </HealthLayout>
 </template>

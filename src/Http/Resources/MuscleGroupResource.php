@@ -17,6 +17,7 @@ class MuscleGroupResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'muscle_group_id' => $this->muscle_group_id,
+            'parent' => MuscleGroupResource::make($this->whenLoaded('parent')),
         ];
     }
 }

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import TableActions from '@coleus/health/components/muscleGroups/TableActions.vue';
-import { MuscleGroupCollection, MuscleGroupData } from '@coleus/health/components/muscleGroups/muscleGroup';
+import type { MuscleGroupCollection, MuscleGroupData } from '@coleus/health/components/muscleGroups/muscleGroup';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
 
 defineProps<{
-    collection?: MuscleGroupCollection;
+    collection: MuscleGroupCollection;
 }>();
 
 const columns: TableColumn<MuscleGroupData>[] = [
@@ -18,7 +18,7 @@ const columns: TableColumn<MuscleGroupData>[] = [
         header: 'Description',
     },
     {
-        accessorKey: 'muscle_group_id',
+        accessorKey: 'parent.name',
         header: 'Muscle Group',
     },
     {
@@ -29,5 +29,12 @@ const columns: TableColumn<MuscleGroupData>[] = [
 </script>
 
 <template>
-    <UiTable :data="collection?.data" :columns="columns" />
+    <UiTable
+        :data="collection?.data"
+        :columns="columns"
+        :pagination="{
+            pageIndex: 0,
+            pageSize: 15,
+        }"
+    />
 </template>

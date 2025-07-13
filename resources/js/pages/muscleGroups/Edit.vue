@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MuscleGroupEdit from '@coleus/health/components/muscleGroups/Edit.vue';
+import MuscleGroupCard from '@coleus/health/components/muscleGroups/EditCard.vue';
 import {
     MuscleGroupCollection,
     MuscleGroupResource,
@@ -19,6 +19,6 @@ provide(muscleGroupsKey, props.muscle_groups);
 
 <template>
     <HealthLayout>
-        <MuscleGroupEdit />
+        <MuscleGroupCard />
     </HealthLayout>
 </template>

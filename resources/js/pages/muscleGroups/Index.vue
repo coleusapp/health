@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import MuscleGroupTable from '@coleus/health/components/muscleGroups/Table.vue';
+import MuscleGroupCard from '@coleus/health/components/muscleGroups/TableCard.vue';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { MuscleGroupCollection } from '@coleus/health/components/muscleGroups/muscleGroup';
 
 defineProps<{
-    collection?: MuscleGroupCollection;
+    collection: MuscleGroupCollection;
 }>();
 </script>
 
 <template>
     <HealthLayout>
-        <MuscleGroupTable :collection="collection" />
+        <MuscleGroupCard :collection="collection" />
     </HealthLayout>
 </template>
