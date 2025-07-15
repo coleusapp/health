@@ -12,21 +12,23 @@ import Aside from '@coleus/health/components/Aside.vue';
             <div class="w-full flex items-center gap-3">
                 <!--<UiButton icon="i-lucide-x" size="xs" variant="ghost" color="neutral" class="rounded-full"></UiButton>-->
                 <!--<UiButton icon="i-lucide-minus" size="xs" variant="ghost" color="neutral" class="rounded-full"></UiButton>-->
-                <UiDrawer direction="left" :overlay="false" :handle="false">
-                    <UiButton color="neutral" size="lg" variant="ghost" icon="i-lucide-menu" class="rounded-full" />
-                    <template #content>
-                        <Aside />
-                    </template>
-                </UiDrawer>
+                <!--<UiDrawer direction="left" :overlay="false" :handle="false">-->
+                <!--    <UiButton color="neutral" size="lg" variant="ghost" icon="i-lucide-menu" class="rounded-full" />-->
+                <!--    <template #content>-->
+                <!--        <Aside />-->
+                <!--    </template>-->
+                <!--</UiDrawer>-->
                 <Link :href="route('health.dashboard')">
                     <UiButton color="neutral" size="lg" variant="ghost" icon="i-lucide-apple" class="rounded-full" label="Health" />
                 </Link>
             </div>
         </div>
         <div class="flex h-full p-4">
-            <div class="w-full">
-                <!--<Aside />-->
-                <slot />
+            <div class="w-full flex flex-row max-h-full gap-4">
+                <Aside />
+                <div class="flex flex-col w-full h-full">
+                    <slot />
+                </div>
             </div>
         </div>
     </AppLayout>

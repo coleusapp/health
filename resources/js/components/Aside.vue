@@ -3,28 +3,64 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <aside class="flex h-full min-w-64 p-2">
+    <aside class="flex h-full min-w-64">
         <div class="flex w-full flex-col">
-            <Link class="flex items-center justify-start gap-5 rounded-md p-3 hover:bg-gray-100" :href="route('health.dashboard')">
+            <Link
+                class="flex items-center justify-start gap-5 rounded-md p-3 hover:bg-gray-100"
+                :class="{
+                    'bg-gray-100 font-semibold hover:bg-gray-200': route().current('health.dashboard'),
+                }"
+                :href="route('health.dashboard')"
+            >
                 <UiIcon name="i-lucide-house" class="size-5" />
                 Dashboard
             </Link>
-            <Link class="flex items-center justify-start gap-5 rounded-md p-3 hover:bg-gray-100" :href="route('health.workouts.index')">
+            <Link
+                class="flex items-center justify-start gap-5 rounded-md p-3 hover:bg-gray-100"
+                :href="route('health.workouts.index')"
+                :class="{
+                    'bg-gray-100 font-semibold hover:bg-gray-200': route().current('health.workouts.*'),
+                }"
+            >
                 <UiIcon name="i-lucide-dumbbell" class="size-5" />
                 Workouts
             </Link>
-            <div class="ml-5 flex flex-col border-l border-gray-300 pl-6">
-                <Link class="flex items-center justify-start gap-5 rounded-md p-2 hover:bg-gray-100" :href="route('health.categories.index')">
+            <div class="ml-5 flex flex-col border-l-2 border-gray-100 pl-6">
+                <Link
+                    class="flex items-center justify-start gap-5 rounded-md p-2 hover:bg-gray-100"
+                    :href="route('health.categories.index')"
+                    :class="{
+                        'bg-gray-100 font-semibold hover:bg-gray-200': route().current('health.categories.*'),
+                    }"
+                >
                     Categories
                 </Link>
-                <Link class="flex items-center justify-start gap-5 rounded-md p-2 hover:bg-gray-100" :href="route('health.muscle-groups.index')">
+                <Link
+                    class="flex items-center justify-start gap-5 rounded-md p-2 hover:bg-gray-100"
+                    :href="route('health.muscle-groups.index')"
+                    :class="{
+                        'bg-gray-100 font-semibold hover:bg-gray-200': route().current('health.muscle-groups.*'),
+                    }"
+                >
                     Muscle Groups
                 </Link>
-                <Link class="flex items-center justify-start gap-5 rounded-md p-2 hover:bg-gray-100" :href="route('health.exercises.index')">
+                <Link
+                    class="flex items-center justify-start gap-5 rounded-md p-2 hover:bg-gray-100"
+                    :href="route('health.exercises.index')"
+                    :class="{
+                        'bg-gray-100 font-semibold hover:bg-gray-200': route().current('health.exercises.*'),
+                    }"
+                >
                     Exercises
                 </Link>
             </div>
-            <Link class="flex items-center justify-start gap-5 rounded-md p-3 hover:bg-gray-100" :href="route('health.weights.index')">
+            <Link
+                class="flex items-center justify-start gap-5 rounded-md p-3 hover:bg-gray-100"
+                :href="route('health.weights.index')"
+                :class="{
+                    'bg-gray-100 font-semibold hover:bg-gray-200': route().current('health.weights.*'),
+                }"
+            >
                 <UiIcon name="i-lucide-weight" class="size-5" />
                 Weights
             </Link>
