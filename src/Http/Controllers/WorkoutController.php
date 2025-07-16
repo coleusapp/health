@@ -18,7 +18,9 @@ class WorkoutController extends Controller
     public function index()
     {
         return Inertia::render('@health/workouts/Index', [
-            'collection' => WorkoutResource::collection(WorkoutTable::query()->paginate()),
+            'collection' => WorkoutResource::collection(
+                WorkoutTable::query()->withCount('exercises')->paginate()
+            ),
         ]);
     }
 

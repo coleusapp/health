@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CreateWorkout from '@coleus/health/components/workouts/Create.vue';
+import CreateCard from '@coleus/health/components/workouts/CreateCard.vue';
 import { WorkoutResource, workoutResourceKey } from '@coleus/health/components/workouts/workout';
 import { ExerciseCollection, exerciseCollectionKey } from '@coleus/health/components/exercises/exercise';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
@@ -15,6 +15,6 @@ provide(exerciseCollectionKey, props.exercises);
 
 <template>
     <HealthLayout>
-        <CreateWorkout />
+        <CreateCard />
     </HealthLayout>
 </template>

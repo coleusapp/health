@@ -12,8 +12,8 @@ import { Link } from '@inertiajs/vue3';
                 }"
                 :href="route('health.dashboard')"
             >
-                <UiIcon name="i-lucide-house" class="size-5" />
-                Dashboard
+                <UiIcon name="i-lucide-heart-pulse" class="size-5" />
+                Health
             </Link>
             <Link
                 class="flex items-center justify-start gap-5 rounded-md p-3 hover:bg-gray-100"

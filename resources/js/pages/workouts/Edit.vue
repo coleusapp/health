@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ExerciseCollection, exerciseCollectionKey } from '@coleus/health/components/exercises/exercise';
-import EditWorkout from '@coleus/health/components/workouts/Edit.vue';
+import EditCard from '@coleus/health/components/workouts/EditCard.vue';
 import { WorkoutResource, workoutResourceKey } from '@coleus/health/components/workouts/workout';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { provide } from 'vue';
@@ -15,6 +15,6 @@ provide(exerciseCollectionKey, props.exercises);
 
 <template>
     <HealthLayout>
-        <EditWorkout />
+        <EditCard />
     </HealthLayout>
 </template>

@@ -9,8 +9,12 @@ defineProps<{
 }>();
 const columns: TableColumn<WorkoutData>[] = [
     {
-        accessorKey: 'date',
+        accessorKey: 'date_string',
         header: 'Date',
+    },
+    {
+        accessorKey: 'exercises_count',
+        header: 'Exercises Count',
     },
     {
         id: 'actions',
