@@ -7,8 +7,6 @@ use App\Casts\WeightCast;
 use Coleus\Support\Concerns\AutoAssignUser;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
-use Coleus\Health\Models\Exercise;
-use Coleus\Health\Models\Workout;
 
 /**
  * 
@@ -26,7 +24,7 @@ use Coleus\Health\Models\Workout;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property-read \Coleus\Health\Models\Exercise $exercise
- * @property-read \App\Models\User $user
+ * @property-read \Coleus\Users\Models\User $user
  * @property-read \Coleus\Health\Models\Workout $workout
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ExerciseWorkout newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ExerciseWorkout newQuery()
@@ -55,6 +53,16 @@ class ExerciseWorkout extends Pivot
         'weight' => WeightCast::class,
         'distance' => DistanceCast::class,
     ];
+
+    protected $guarded = [];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->guarded[] = $this->primaryKey;
+        $this->table = config('health.table_prefix').$this->getTable() ?: parent::getTable();
+    }
 
     public function exercise(): BelongsTo
     {

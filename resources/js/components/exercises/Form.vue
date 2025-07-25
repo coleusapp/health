@@ -38,7 +38,7 @@ const categories = inject(categoriesKey) as OptionCollection;
 
         <div class="flex flex-col">
             <FormKit type="checkbox" name="has_weight" label="Has Weight" />
-            <FormKit v-if="value?.has_weight" type="select" name="weight_unit" label="Weight Unit" :options="weightUnits?.data" key="weight_unit" />
+            <FormKit v-if="value?.has_weight" type="select" name="weight_unit" label="Default Weight Unit" :options="weightUnits?.data" key="weight_unit" />
         </div>
         <div class="flex flex-col">
             <FormKit type="checkbox" name="has_distance" label="Has Distance" />
@@ -46,7 +46,7 @@ const categories = inject(categoriesKey) as OptionCollection;
                 v-if="value?.has_distance"
                 type="select"
                 name="distance_unit"
-                label="Distance Unit"
+                label="Default Distance Unit"
                 :options="distanceUnits?.data"
                 key="distance_unit"
             />
@@ -57,7 +57,7 @@ const categories = inject(categoriesKey) as OptionCollection;
                 v-if="value?.has_duration"
                 type="select"
                 name="duration_unit"
-                label="Duration Unit"
+                label="Default Duration Unit"
                 :options="durationUnits?.data"
                 key="duration_unit"
             />

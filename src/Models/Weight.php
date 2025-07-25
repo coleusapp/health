@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\User $user
+ * @property-read \Coleus\Users\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Weight newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Weight newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Weight onlyTrashed()
@@ -36,11 +36,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Weight extends Model
 {
-    use HasFactory;
     use SoftDeletes;
     use AutoAssignUser;
 
     public $fillable = ['weight', 'date'];
+
+    protected $guarded = [];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->guarded[] = $this->primaryKey;
+        $this->table = config('health.table_prefix').$this->getTable() ?: parent::getTable();
+    }
 
     public function casts(): array
     {

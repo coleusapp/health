@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Coleus\Health\Models\Category;
-use Coleus\Health\Models\MuscleGroup;
-use Coleus\Health\Models\Workout;
 
 /**
  * 
@@ -53,7 +50,7 @@ use Coleus\Health\Models\Workout;
  * @property-read int|null $exercise_muscle_groups_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Health\Models\ExerciseWorkout> $exerciseWorkouts
  * @property-read int|null $exercise_workouts_count
- * @property-read \App\Models\User $user
+ * @property-read \Coleus\Users\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereDistanceUnit($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereDurationUnit($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereHasCalorie($value)
@@ -66,7 +63,6 @@ use Coleus\Health\Models\Workout;
  */
 class Exercise extends Model
 {
-    use HasFactory;
     use SoftDeletes;
     use AutoAssignUser;
 
@@ -90,6 +86,16 @@ class Exercise extends Model
         'has_duration',
         'duration_unit',
     ];
+
+    protected $guarded = [];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->guarded[] = $this->primaryKey;
+        $this->table = config('health.table_prefix').$this->getTable() ?: parent::getTable();
+    }
 
     public function muscleGroups(): BelongsToMany
     {

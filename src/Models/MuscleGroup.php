@@ -40,20 +40,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $muscle_groups_count
  * @property-read MuscleGroup|null $parent
  * @method static \Illuminate\Database\Eloquent\Builder|MuscleGroup whereMuscleGroupId($value)
- * @property-read \App\Models\User $user
+ * @property-read \Coleus\Users\Models\User $user
  * @mixin \Eloquent
  */
 class MuscleGroup extends Model
 {
-    use HasFactory;
     use SoftDeletes;
     use AutoAssignUser;
 
-    protected $fillable = [
-        'name',
-        'description',
-        'muscle_group_id',
-    ];
+    protected $guarded = [];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->guarded[] = $this->primaryKey;
+        $this->table = config('health.table_prefix').$this->getTable() ?: parent::getTable();
+    }
 
     public function muscleGroups(): HasMany
     {

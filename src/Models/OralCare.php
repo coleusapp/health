@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Coleus\Health\Models\OralCareToothpasteType;
 
 /**
  * 
@@ -24,7 +23,7 @@ use Coleus\Health\Models\OralCareToothpasteType;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Health\Models\OralCareToothpasteType> $oralCareToothpasteTypes
  * @property-read int|null $oral_care_toothpaste_types_count
- * @property-read \App\Models\User $user
+ * @property-read \Coleus\Users\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare onlyTrashed()
@@ -45,9 +44,18 @@ use Coleus\Health\Models\OralCareToothpasteType;
  */
 class OralCare extends Model
 {
-    use HasFactory;
     use SoftDeletes;
     use AutoAssignUser;
+
+    protected $guarded = [];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->guarded[] = $this->primaryKey;
+        $this->table = config('health.table_prefix').$this->getTable() ?: parent::getTable();
+    }
 
     public function oralCareToothpasteTypes(): HasMany
     {

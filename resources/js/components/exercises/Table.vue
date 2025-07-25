@@ -25,14 +25,19 @@ const columns: TableColumn<ExerciseData>[] = [
         cell: ({ row }) => h(IconColumn, new IconColumnProps().make(row?.original?.has_weight).build()),
     },
     {
+        accessorKey: 'weight_unit',
+        header: 'Default Weight Unit',
+        cell: ({ row }) => h(BadgeColumn, row?.original?.weight_unit || ''),
+    },
+    {
         accessorKey: 'has_distance',
         header: 'Has Distance',
         cell: ({ row }) => h(IconColumn, new IconColumnProps().make(row?.original?.has_distance).build()),
     },
     {
         accessorKey: 'distance_unit',
-        header: 'Distance Unit',
-        cell: ({ row }) => h(BadgeColumn, row?.original?.distance_unit),
+        header: 'Default Distance Unit',
+        cell: ({ row }) => h(BadgeColumn, row?.original?.distance_unit || ''),
     },
     {
         accessorKey: 'has_calorie',
@@ -46,8 +51,8 @@ const columns: TableColumn<ExerciseData>[] = [
     },
     {
         accessorKey: 'duration_unit',
-        header: 'Duration Unit',
-        cell: ({ row }) => h(BadgeColumn, row?.original?.distance_unit),
+        header: 'Default Duration Unit',
+        cell: ({ row }) => h(BadgeColumn, row?.original?.distance_unit || ''),
     },
     {
         id: 'actions',
