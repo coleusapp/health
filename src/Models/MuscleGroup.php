@@ -2,8 +2,10 @@
 
 namespace Coleus\Health\Models;
 
-use Coleus\Support\Concerns\AutoAssignUser;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Coleus\Health\HealthModelDefaults;
+use Coleus\Users\Concerns\HasUser;
+use Coleus\Users\Models\Scopes\UserScope;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -43,20 +45,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Coleus\Users\Models\User $user
  * @mixin \Eloquent
  */
-class MuscleGroup extends Model
+#[ScopedBy([UserScope::class])]
+class MuscleGroup extends HealthModelDefaults
 {
     use SoftDeletes;
-    use AutoAssignUser;
-
-    protected $guarded = [];
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-
-        $this->guarded[] = $this->primaryKey;
-        $this->table = config('health.table_prefix').$this->getTable() ?: parent::getTable();
-    }
+    use HasUser;
 
     public function muscleGroups(): HasMany
     {

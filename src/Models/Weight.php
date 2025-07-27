@@ -3,9 +3,10 @@
 namespace Coleus\Health\Models;
 
 use Coleus\Health\Casts\TimezoneDatetimeCast;
-use Coleus\Support\Concerns\AutoAssignUser;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Coleus\Health\HealthModelDefaults;
+use Coleus\Users\Concerns\HasUser;
+use Coleus\Users\Models\Scopes\UserScope;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -34,22 +35,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Weight withoutTrashed()
  * @mixin \Eloquent
  */
-class Weight extends Model
+#[ScopedBy([UserScope::class])]
+class Weight extends HealthModelDefaults
 {
     use SoftDeletes;
-    use AutoAssignUser;
-
-    public $fillable = ['weight', 'date'];
-
-    protected $guarded = [];
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-
-        $this->guarded[] = $this->primaryKey;
-        $this->table = config('health.table_prefix').$this->getTable() ?: parent::getTable();
-    }
+    use HasUser;
 
     public function casts(): array
     {

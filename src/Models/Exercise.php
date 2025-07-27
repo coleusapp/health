@@ -2,7 +2,11 @@
 
 namespace Coleus\Health\Models;
 
+use Coleus\Health\HealthModelDefaults;
 use Coleus\Support\Concerns\AutoAssignUser;
+use Coleus\Users\Concerns\HasUser;
+use Coleus\Users\Models\Scopes\UserScope;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -61,10 +65,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereWeightUnit($value)
  * @mixin \Eloquent
  */
-class Exercise extends Model
+#[ScopedBy([UserScope::class])]
+class Exercise extends HealthModelDefaults
 {
     use SoftDeletes;
-    use AutoAssignUser;
+    use HasUser;
 
     protected $casts = [
         'has_rep' => 'bool',
@@ -73,29 +78,6 @@ class Exercise extends Model
         'has_calorie' => 'bool',
         'has_duration' => 'bool',
     ];
-
-    protected $fillable = [
-        'name',
-        'description',
-        'has_rep',
-        'has_weight',
-        'has_distance',
-        'has_calorie',
-        'weight_unit',
-        'distance_unit',
-        'has_duration',
-        'duration_unit',
-    ];
-
-    protected $guarded = [];
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-
-        $this->guarded[] = $this->primaryKey;
-        $this->table = config('health.table_prefix').$this->getTable() ?: parent::getTable();
-    }
 
     public function muscleGroups(): BelongsToMany
     {

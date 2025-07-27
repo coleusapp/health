@@ -5,8 +5,10 @@ namespace Coleus\Health\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Coleus\Health\Http\Requests\Weight\SaveRequest;
 use Coleus\Health\Http\Resources\WeightResource;
+use Coleus\Health\Models\HealthUser;
 use Coleus\Health\Models\Weight;
 use Coleus\Health\Services\WeightTable;
+use Coleus\Users\Models\User;
 use Inertia\Inertia;
 
 class WeightController extends Controller

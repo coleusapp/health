@@ -3,7 +3,7 @@
 namespace Coleus\Health\Services;
 
 use Coleus\Health\Http\Resources\WeightResource;
-use Coleus\Health\Models\Weight;
+use Coleus\Health\Models\HealthUser;
 use Coleus\Table\Searchable;
 use Coleus\Table\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,10 +28,11 @@ class WeightTable extends Table
 
     public static function query(): Builder
     {
-        return Weight::query()
+        return HealthUser::user()->weights()
             ->when(static::hasSearchQuery(), fn ($query) => static::searchQuery($query))
             ->when(static::hasSortQuery(), fn ($query) => static::sortQuery($query))
-            ->orderBy('created_at', 'desc');
+            ->orderBy('created_at', 'desc')
+            ->getQuery();
     }
 
     protected static function searchQuery(Builder $query): Builder

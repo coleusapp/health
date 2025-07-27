@@ -2,10 +2,7 @@
 
 namespace Coleus\Health\Http\Requests;
 
-use Coleus\Health\Models\Exercise;
-use Coleus\Support\Concerns\FlattenArray;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class CategoryRequest extends FormRequest
 {
