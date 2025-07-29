@@ -13,6 +13,7 @@ const form = useForm<ExerciseRequest>({
     description: resource.data.description,
     has_rep: resource.data.has_rep,
     has_calorie: resource.data.has_calorie,
+    calorie_unit: resource.data.calorie_unit,
     has_weight: resource.data.has_weight,
     weight_unit: resource.data.weight_unit,
     has_distance: resource.data.has_distance,

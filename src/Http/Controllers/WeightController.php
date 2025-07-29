@@ -3,12 +3,12 @@
 namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Coleus\Health\Http\Requests\Weight\SaveRequest;
+use Coleus\Health\Enums\WeightEnum;
+use Coleus\Health\Http\Requests\WeightRequest;
 use Coleus\Health\Http\Resources\WeightResource;
-use Coleus\Health\Models\HealthUser;
 use Coleus\Health\Models\Weight;
 use Coleus\Health\Services\WeightTable;
-use Coleus\Users\Models\User;
+use Coleus\Support\Resources\EnumResource;
 use Inertia\Inertia;
 
 class WeightController extends Controller
@@ -26,11 +26,12 @@ class WeightController extends Controller
         $default->date = now('America/Denver');
 
         return Inertia::render('@health/weights/Create', [
+            'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'resource' => new WeightResource($default),
         ]);
     }
 
-    public function store(SaveRequest $request)
+    public function store(WeightRequest $request)
     {
         $weight = Weight::create($request->all());
 
@@ -40,11 +41,12 @@ class WeightController extends Controller
     public function edit(Weight $weight)
     {
         return Inertia::render('@health/weights/Edit', [
+            'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'resource' => new WeightResource($weight),
         ]);
     }
 
-    public function update(SaveRequest $request, Weight $weight)
+    public function update(WeightRequest $request, Weight $weight)
     {
         $weight->update($request->all());
 

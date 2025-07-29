@@ -3,6 +3,7 @@
 namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Coleus\Health\Enums\CalorieEnum;
 use Coleus\Health\Enums\DistanceEnum;
 use Coleus\Health\Enums\DurationEnum;
 use Coleus\Health\Enums\WeightEnum;
@@ -34,6 +35,7 @@ class ExerciseController extends Controller
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),
             'duration_units' => EnumResource::collectionWithNull(DurationEnum::cases()),
+            'calorie_units' => EnumResource::collectionWithNull(CalorieEnum::cases()),
             'muscle_groups' => MuscleGroupAsOptionResource::collection(MuscleGroup::get()),
             'categories' => CategoryAsOptionResource::collection(Category::get()),
         ]);
@@ -56,6 +58,7 @@ class ExerciseController extends Controller
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),
             'duration_units' => EnumResource::collectionWithNull(DurationEnum::cases()),
+            'calorie_units' => EnumResource::collectionWithNull(CalorieEnum::cases()),
             'muscle_groups' => MuscleGroupAsOptionResource::collection(MuscleGroup::get()),
             'categories' => CategoryAsOptionResource::collection(Category::get()),
         ]);

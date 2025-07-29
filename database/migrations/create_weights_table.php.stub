@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create(config('health.table_prefix').'weights', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('weight')->default(0);
+            $table->double('weight')->default(0);
+            $table->string('unit')->nullable();
             $table->timestamp('date')->default(now());
             $table->timestamps();
             $table->softDeletes();

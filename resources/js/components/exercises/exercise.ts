@@ -12,6 +12,7 @@ export type ExerciseData = {
     has_distance: boolean;
     distance_unit: string | null;
     has_calorie: boolean;
+    calorie_unit: string | null;
     has_duration: boolean;
     duration_unit: string | null;
     categories?: { id: number }[];
@@ -27,5 +28,6 @@ export const exerciseCollectionKey = Symbol() as InjectionKey<ExerciseCollection
 export const weightUnitsKey = Symbol() as InjectionKey<OptionCollection>;
 export const distanceUnitsKey = Symbol() as InjectionKey<OptionCollection>;
 export const durationUnitsKey = Symbol() as InjectionKey<OptionCollection>;
+export const calorieUnitsKey = Symbol() as InjectionKey<OptionCollection>;
 export const muscleGroupsKey = Symbol() as InjectionKey<OptionCollection>;
 export const categoriesKey = Symbol() as InjectionKey<OptionCollection>;

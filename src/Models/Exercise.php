@@ -81,18 +81,18 @@ class Exercise extends HealthModelDefaults
 
     public function muscleGroups(): BelongsToMany
     {
-        return $this->belongsToMany(MuscleGroup::class);
+        return $this->belongsToMany(MuscleGroup::class, config('health.table_prefix') . 'exercise_muscle_group');
     }
 
     public function workouts(): BelongsToMany
     {
-        return $this->belongsToMany(Workout::class)
+        return $this->belongsToMany(Workout::class, config('health.table_prefix') . 'category_workout')
             ->withPivot('id', 'reps', 'weight', 'distance', 'duration', 'calorie')
             ->withTimestamps();
     }
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, config('health.table_prefix') . 'category_exercise');
     }
 }

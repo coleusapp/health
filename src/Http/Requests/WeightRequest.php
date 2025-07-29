@@ -1,11 +1,12 @@
 <?php
 
-namespace Coleus\Health\Http\Requests\Weight;
+namespace Coleus\Health\Http\Requests;
 
+use Coleus\Health\Enums\WeightEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class SaveRequest extends FormRequest
+class WeightRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -22,6 +23,10 @@ class SaveRequest extends FormRequest
             'date' => [
                 'required',
                 Rule::date()->before(now()->addCentury()),
+            ],
+            'unit' => [
+                'required',
+                Rule::enum(WeightEnum::class)
             ],
         ];
     }

@@ -16,6 +16,7 @@ const columns: TableColumn<WeightData>[] = [
     },
     {
         accessorKey: 'weight',
+        cell: ({ row }) => `${row.original.weight} ${row.original.unit}`,
         header: 'Weight',
     },
     {

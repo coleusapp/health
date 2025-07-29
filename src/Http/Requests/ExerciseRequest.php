@@ -2,6 +2,7 @@
 
 namespace Coleus\Health\Http\Requests;
 
+use Coleus\Health\Enums\CalorieEnum;
 use Coleus\Health\Enums\DistanceEnum;
 use Coleus\Health\Enums\DurationEnum;
 use Coleus\Health\Enums\WeightEnum;
@@ -32,31 +33,36 @@ class ExerciseRequest extends FormRequest
             'has_weight' => 'boolean',
             'has_distance' => 'nullable|boolean',
             'has_calorie' => 'nullable|boolean',
+            'calorie_unit' => [
+                'nullable',
+                Rule::requiredIf($this->request->get('has_calorie')),
+                Rule::enum(CalorieEnum::class),
+            ],
             'weight_unit' => [
                 'nullable',
                 Rule::requiredIf($this->request->get('has_weight')),
-                Rule::enum(WeightEnum::class)
+                Rule::enum(WeightEnum::class),
             ],
             'distance_unit' => [
                 'nullable',
                 Rule::requiredIf($this->request->get('has_distance')),
-                Rule::enum(DistanceEnum::class)
+                Rule::enum(DistanceEnum::class),
             ],
             'has_duration' => 'nullable|boolean',
             'duration_unit' => [
                 'nullable',
                 Rule::requiredIf($this->request->get('has_duration')),
-                Rule::enum(DurationEnum::class)
+                Rule::enum(DurationEnum::class),
             ],
             'categories.*.id' => [
                 'numeric',
                 'gt:0',
-                Rule::exists(Category::class, 'id')
+                Rule::exists(Category::class, 'id'),
             ],
             'muscle_groups.*.id' => [
                 'numeric',
                 'gt:0',
-                Rule::exists(MuscleGroup::class, 'id')
+                Rule::exists(MuscleGroup::class, 'id'),
             ],
         ];
     }

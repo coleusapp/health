@@ -10,6 +10,7 @@ const resource = inject(resourceKey) as WeightResource;
 
 const form = useForm<WeightRequest>({
     weight: resource.data.weight,
+    unit: resource.data.unit,
     date: resource.data.date,
 });
 const submit = () =>

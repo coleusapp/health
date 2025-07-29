@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
 import CreateCard from '@coleus/health/components/exercises/CreateCard.vue';
-import { categoriesKey, distanceUnitsKey, durationUnitsKey, muscleGroupsKey, weightUnitsKey } from '@coleus/health/components/exercises/exercise';
+import {
+    calorieUnitsKey,
+    categoriesKey,
+    distanceUnitsKey,
+    durationUnitsKey,
+    muscleGroupsKey,
+    weightUnitsKey,
+} from '@coleus/health/components/exercises/exercise';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { provide } from 'vue';
 
@@ -9,12 +16,14 @@ const props = defineProps<{
     weight_units: OptionCollection;
     distance_units: OptionCollection;
     duration_units: OptionCollection;
+    calorie_units: OptionCollection;
     muscle_groups: OptionCollection;
     categories: OptionCollection;
 }>();
 provide(weightUnitsKey, props.weight_units);
 provide(distanceUnitsKey, props.distance_units);
 provide(durationUnitsKey, props.duration_units);
+provide(calorieUnitsKey, props.calorie_units);
 provide(muscleGroupsKey, props.muscle_groups);
 provide(categoriesKey, props.categories);
 </script>

@@ -2,6 +2,7 @@
 import { OptionCollection } from '@/types';
 import {
     ExerciseRequest,
+    calorieUnitsKey,
     categoriesKey,
     distanceUnitsKey,
     durationUnitsKey,
@@ -17,6 +18,7 @@ defineProps<{
 const weightUnits = inject(weightUnitsKey) as OptionCollection;
 const distanceUnits = inject(distanceUnitsKey) as OptionCollection;
 const durationUnits = inject(durationUnitsKey) as OptionCollection;
+const calorieUnits = inject(calorieUnitsKey) as OptionCollection;
 const muscleGroups = inject(muscleGroupsKey) as OptionCollection;
 const categories = inject(categoriesKey) as OptionCollection;
 </script>
@@ -34,11 +36,29 @@ const categories = inject(categoriesKey) as OptionCollection;
     <FormKit type="textarea" name="description" label="Description" />
     <div class="grid grid-cols-2 gap-x-4">
         <FormKit type="checkbox" name="has_rep" label="Has Rep" />
-        <FormKit type="checkbox" name="has_calorie" label="Has Calorie" />
-
+        <div class="flex flex-col">
+            <FormKit type="checkbox" name="has_calorie" label="Has Calorie" />
+            <FormKit
+                v-if="value?.has_calorie"
+                type="select"
+                name="calorie_unit"
+                label="Default Calorie Unit"
+                :options="calorieUnits?.data"
+                key="calorie_unit"
+                validation="required"
+            />
+        </div>
         <div class="flex flex-col">
             <FormKit type="checkbox" name="has_weight" label="Has Weight" />
-            <FormKit v-if="value?.has_weight" type="select" name="weight_unit" label="Default Weight Unit" :options="weightUnits?.data" key="weight_unit" />
+            <FormKit
+                v-if="value?.has_weight"
+                type="select"
+                name="weight_unit"
+                label="Default Weight Unit"
+                :options="weightUnits?.data"
+                key="weight_unit"
+                validation="required"
+            />
         </div>
         <div class="flex flex-col">
             <FormKit type="checkbox" name="has_distance" label="Has Distance" />
@@ -49,6 +69,7 @@ const categories = inject(categoriesKey) as OptionCollection;
                 label="Default Distance Unit"
                 :options="distanceUnits?.data"
                 key="distance_unit"
+                validation="required"
             />
         </div>
         <div class="flex flex-col">
@@ -60,6 +81,7 @@ const categories = inject(categoriesKey) as OptionCollection;
                 label="Default Duration Unit"
                 :options="durationUnits?.data"
                 key="duration_unit"
+                validation="required"
             />
         </div>
     </div>

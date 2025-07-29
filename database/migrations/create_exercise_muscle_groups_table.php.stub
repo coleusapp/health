@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('health.table_prefix').'exercise_muscle_groups', function (Blueprint $table) {
+        Schema::create(config('health.table_prefix').'exercise_muscle_group', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Exercise::class)->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
             $table->foreignIdFor(MuscleGroup::class)->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('health.table_prefix').'exercise_muscle_groups');
+        Schema::dropIfExists(config('health.table_prefix').'exercise_muscle_group');
     }
 };
