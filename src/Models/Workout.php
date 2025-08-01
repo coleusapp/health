@@ -64,7 +64,7 @@ class Workout extends HealthModelDefaults
 
     public function exercises(): BelongsToMany
     {
-        return $this->belongsToMany(Exercise::class)
+        return $this->belongsToMany(Exercise::class, config('health.table_prefix') . 'exercise_workout')
             ->withPivot('id', 'reps', 'weight', 'distance', 'duration', 'calorie')
             ->withTimestamps();
     }

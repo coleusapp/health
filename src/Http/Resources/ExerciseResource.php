@@ -4,8 +4,6 @@ namespace Coleus\Health\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Coleus\Health\Http\Resources\CategoryResource;
-use Coleus\Health\Http\Resources\MuscleGroupResource;
 
 /**
  * @mixin \Coleus\Health\Models\Exercise

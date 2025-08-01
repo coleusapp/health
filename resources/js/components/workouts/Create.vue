@@ -18,6 +18,7 @@ const submit = () =>
     });
 </script>
 <template>
+    {{resource.data?.exercises}}
     <Form :form="form" :submit="submit" #default="{ value }">
         <WorkoutForm :value="value as WorkoutRequest" />
     </Form>

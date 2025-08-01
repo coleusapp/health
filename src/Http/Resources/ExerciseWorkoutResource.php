@@ -21,9 +21,13 @@ class ExerciseWorkoutResource extends JsonResource
             'id' => $this->pivot->exercise_id,
             'reps' => $this->pivot->reps,
             'weight' => $this->pivot->weight,
+            'weight_unit' => $this->weight_unit,
             'distance' => $this->pivot->distance,
+            'distance_unit' => $this->distance_unit,
             'duration' => $this->pivot->duration,
+            'duration_unit' => $this->duration_unit,
             'calorie' => $this->pivot->calorie,
+            'calorie_unit' => $this->calorie_unit,
         ];
     }
 }

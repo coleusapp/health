@@ -23,6 +23,7 @@ class ExerciseAsOptionResource extends JsonResource
             'has_duration' => $this->has_duration,
             'duration_unit' => $this->when($this->has_duration, fn() => $this->duration_unit),
             'has_calorie' => $this->has_calorie,
+            'calorie_unit' => $this->when($this->has_calorie, fn() => $this->calorie_unit),
         ];
     }
 }

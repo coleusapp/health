@@ -23,10 +23,13 @@ class WorkoutService
                     $workout->exercises()->attach($exercise['id'], [
                         'reps' => $exercise['reps'] ?? null,
                         'weight' => $exercise['weight'] ?? null,
+                        'weight_unit' => $exercise['weight_unit'] ?? null,
                         'distance' => $exercise['distance'] ?? null,
+                        'distance_unit' => $exercise['distance_unit'] ?? null,
                         'duration' => $exercise['duration'] ?? null,
+                        'duration_unit' => $exercise['duration_unit'] ?? null,
                         'calorie' => $exercise['calorie'] ?? null,
-                        'user_id' => auth()->id(),
+                        'calorie_unit' => $exercise['calorie_unit'] ?? null,
                     ]);
                 });
         });

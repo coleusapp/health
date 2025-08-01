@@ -2,6 +2,10 @@
 
 namespace Coleus\Health\Http\Requests;
 
+use Coleus\Health\Enums\CalorieEnum;
+use Coleus\Health\Enums\DistanceEnum;
+use Coleus\Health\Enums\DurationEnum;
+use Coleus\Health\Enums\WeightEnum;
 use Coleus\Health\Models\Exercise;
 use Coleus\Support\Concerns\FlattenArray;
 use Illuminate\Foundation\Http\FormRequest;
@@ -34,15 +38,27 @@ class WorkoutRequest extends FormRequest
                 'numeric',
                 'gte:0',
             ],
+            'exercises.*.calorie_unit' => [
+                'nullable',
+                Rule::enum(CalorieEnum::class),
+            ],
             'exercises.*.duration' => [
                 'nullable',
                 'numeric',
                 'gte:0',
             ],
+            'exercises.*.duration_unit' => [
+                'nullable',
+                Rule::enum(DurationEnum::class),
+            ],
             'exercises.*.distance' => [
                 'nullable',
                 'numeric',
                 'gte:0',
+            ],
+            'exercises.*.distance_unit' => [
+                'nullable',
+                Rule::enum(DistanceEnum::class),
             ],
             'exercises.*.reps' => [
                 'nullable',
@@ -53,6 +69,10 @@ class WorkoutRequest extends FormRequest
                 'nullable',
                 'numeric',
                 'gte:0',
+            ],
+            'exercises.*.weight_unit' => [
+                'nullable',
+                Rule::enum(WeightEnum::class),
             ],
         ];
     }

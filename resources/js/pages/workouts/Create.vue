@@ -1,16 +1,32 @@
 <script setup lang="ts">
-import CreateCard from '@coleus/health/components/workouts/CreateCard.vue';
-import { WorkoutResource, workoutResourceKey } from '@coleus/health/components/workouts/workout';
+import { OptionCollection } from '@/types';
 import { ExerciseCollection, exerciseCollectionKey } from '@coleus/health/components/exercises/exercise';
+import CreateCard from '@coleus/health/components/workouts/CreateCard.vue';
+import {
+    calorieUnitsKey,
+    distanceUnitsKey,
+    durationUnitsKey,
+    weightUnitsKey,
+    WorkoutResource,
+    workoutResourceKey,
+} from '@coleus/health/components/workouts/workout';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { provide } from 'vue';
 
 const props = defineProps<{
     resource: WorkoutResource;
     exercises: ExerciseCollection;
+    weight_units: OptionCollection;
+    distance_units: OptionCollection;
+    duration_units: OptionCollection;
+    calorie_units: OptionCollection;
 }>();
 provide(workoutResourceKey, props.resource);
 provide(exerciseCollectionKey, props.exercises);
+provide(weightUnitsKey, props.weight_units);
+provide(distanceUnitsKey, props.distance_units);
+provide(durationUnitsKey, props.duration_units);
+provide(calorieUnitsKey, props.calorie_units);
 </script>
 
 <template>

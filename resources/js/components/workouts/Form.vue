@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { OptionCollection } from '@/types';
+import { ExerciseCollection, exerciseCollectionKey } from '@coleus/health/components/exercises/exercise';
+import { calorieUnitsKey, distanceUnitsKey, durationUnitsKey, weightUnitsKey, WorkoutData } from '@coleus/health/components/workouts/workout';
 import { FormKit } from '@formkit/vue';
-import { WorkoutData } from '@coleus/health/components/workouts/workout';
 import { cloneDeep, find, memoize } from 'lodash';
 import { inject } from 'vue';
-import { ExerciseCollection, exerciseCollectionKey } from '@coleus/health/components/exercises/exercise';
 
 const exercises = inject(exerciseCollectionKey) as ExerciseCollection;
+const weightUnits = inject(weightUnitsKey) as OptionCollection;
+const distanceUnits = inject(distanceUnitsKey) as OptionCollection;
+const durationUnits = inject(durationUnitsKey) as OptionCollection;
+const calorieUnits = inject(calorieUnitsKey) as OptionCollection;
 
 defineProps<{
     value: Omit<WorkoutData, 'id'>;
@@ -24,16 +29,52 @@ const getExercise = memoize((exerciseId: number) => {
                 <FormKit type="number" label="Reps" name="reps" />
             </template>
             <template v-if="getExercise(value.id)?.has_weight">
-                <FormKit type="number" label="Weight" name="weight" :help="getExercise(value.id).weight_unit" />
+                <FormKit type="number" label="Weight" name="weight" />
+                <FormKit
+                    type="select"
+                    name="weight_unit"
+                    label="Weight Unit"
+                    :options="weightUnits?.data"
+                    key="weight_unit"
+                    validation="required"
+                    :value="value?.weight_unit || getExercise(value.id)?.weight_unit || null"
+                />
             </template>
             <template v-if="getExercise(value.id)?.has_distance">
-                <FormKit type="number" label="Distance" name="distance" :help="getExercise(value.id).distance_unit" />
+                <FormKit type="number" label="Distance" name="distance" />
+                <FormKit
+                    type="select"
+                    name="distance_unit"
+                    label="Distance Unit"
+                    :options="distanceUnits?.data"
+                    key="distance_unit"
+                    validation="required"
+                    :value="value?.distance_unit || getExercise(value.id)?.distance_unit || null"
+                />
             </template>
             <template v-if="getExercise(value.id)?.has_duration">
-                <FormKit type="number" label="Duration" name="duration" :help="getExercise(value.id).duration_unit" />
+                <FormKit type="number" label="Duration" name="duration" />
+                <FormKit
+                    type="select"
+                    name="duration_unit"
+                    label="Duration Unit"
+                    :options="durationUnits?.data"
+                    key="duration_unit"
+                    validation="required"
+                    :value="value?.duration_unit || getExercise(value.id)?.duration_unit || null"
+                />
             </template>
             <template v-if="getExercise(value.id)?.has_calorie">
                 <FormKit type="number" label="Calorie" name="calorie" />
+                <FormKit
+                    type="select"
+                    name="calorie_unit"
+                    label="Calorie Unit"
+                    :options="calorieUnits?.data"
+                    key="calorie_unit"
+                    validation="required"
+                    :value="value?.calorie_unit || getExercise(value.id)?.calorie_unit || null"
+                />
             </template>
         </template>
     </FormKit>
