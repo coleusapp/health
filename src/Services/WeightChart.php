@@ -5,13 +5,16 @@ namespace Coleus\Health\Services;
 use Carbon\CarbonPeriod;
 use Coleus\Health\Models\Weight;
 use Coleus\Widgets\ChartWidget;
-use Illuminate\Support\Facades\DB;
 
 class WeightChart extends ChartWidget
 {
     public static function getDefault()
     {
-        return ['max_weight' => 0, 'min_weight' => 0, 'avg_weight' => 0];
+        return [
+            'max_weight' => 0,
+            'min_weight' => 0,
+            'avg_weight' => 0,
+        ];
     }
 
     public static function getRange()
@@ -37,10 +40,20 @@ class WeightChart extends ChartWidget
             ->get()
             ->mapWithKeys(fn($item) => [$item->month => $item->except(['month'])]);
 
+        $lastMonth = static::getDefault();
         $newData = static::getRange()
-            ->mapWithKeys(fn($date) => [
-                $date->month => $query[$date->month] ?? static::getDefault()
-            ]);
+            ->mapWithKeys(function ($date) use (&$lastMonth, $query) {
+                $currentMonth = $query[$date->month] ?? static::getDefault();
+                $mappedMonth = [
+                    'max_weight' => max($currentMonth['max_weight'], $lastMonth['max_weight']),
+                    'min_weight' => max($currentMonth['min_weight'], $lastMonth['min_weight']),
+                    'avg_weight' => max($currentMonth['avg_weight'], $lastMonth['avg_weight']),
+                ];
+                $lastMonth = $currentMonth;
+                return [
+                    $date->month => $mappedMonth,
+                ];
+            });
 
         return [
             'options' => [
