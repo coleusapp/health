@@ -26,10 +26,10 @@ const getExercise = memoize((exerciseId: number) => {
         <template #default="{ value }">
             <FormKit type="select" label="Exercise" name="id" :options="cloneDeep(exercises.data)" />
             <template v-if="getExercise(value.id)?.has_rep">
-                <FormKit type="number" label="Reps" name="reps" />
+                <FormKit type="number" min="0" label="Reps" name="reps" />
             </template>
-            <template v-if="getExercise(value.id)?.has_weight">
-                <FormKit type="number" label="Weight" name="weight" />
+            <div v-if="getExercise(value.id)?.has_weight" class="grid grid-cols-2 gap-2">
+                <FormKit type="number" min="0" label="Weight" name="weight" />
                 <FormKit
                     type="select"
                     name="weight_unit"
@@ -39,9 +39,9 @@ const getExercise = memoize((exerciseId: number) => {
                     validation="required"
                     :value="value?.weight_unit || getExercise(value.id)?.weight_unit || null"
                 />
-            </template>
-            <template v-if="getExercise(value.id)?.has_distance">
-                <FormKit type="number" label="Distance" name="distance" />
+            </div>
+            <div v-if="getExercise(value.id)?.has_distance" class="grid grid-cols-2 gap-2">
+                <FormKit type="number" min="0" label="Distance" name="distance" />
                 <FormKit
                     type="select"
                     name="distance_unit"
@@ -51,9 +51,9 @@ const getExercise = memoize((exerciseId: number) => {
                     validation="required"
                     :value="value?.distance_unit || getExercise(value.id)?.distance_unit || null"
                 />
-            </template>
-            <template v-if="getExercise(value.id)?.has_duration">
-                <FormKit type="number" label="Duration" name="duration" />
+            </div>
+            <div v-if="getExercise(value.id)?.has_duration" class="grid grid-cols-2 gap-2">
+                <FormKit type="number" min="0" label="Duration" name="duration" />
                 <FormKit
                     type="select"
                     name="duration_unit"
@@ -63,9 +63,9 @@ const getExercise = memoize((exerciseId: number) => {
                     validation="required"
                     :value="value?.duration_unit || getExercise(value.id)?.duration_unit || null"
                 />
-            </template>
-            <template v-if="getExercise(value.id)?.has_calorie">
-                <FormKit type="number" label="Calorie" name="calorie" />
+            </div>
+            <div v-if="getExercise(value.id)?.has_calorie" class="grid grid-cols-2 gap-2">
+                <FormKit type="number" min="0" label="Calorie" name="calorie" />
                 <FormKit
                     type="select"
                     name="calorie_unit"
@@ -75,7 +75,7 @@ const getExercise = memoize((exerciseId: number) => {
                     validation="required"
                     :value="value?.calorie_unit || getExercise(value.id)?.calorie_unit || null"
                 />
-            </template>
+            </div>
         </template>
     </FormKit>
 </template>

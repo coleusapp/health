@@ -45,6 +45,11 @@ const columns: TableColumn<ExerciseData>[] = [
         cell: ({ row }) => h(IconColumn, new IconColumnProps().make(row?.original?.has_calorie).build()),
     },
     {
+        accessorKey: 'calorie_unit',
+        header: 'Default Calorie Unit',
+        cell: ({ row }) => h(BadgeColumn, row?.original?.calorie_unit || ''),
+    },
+    {
         accessorKey: 'has_duration',
         header: 'Has Duration',
         cell: ({ row }) => h(IconColumn, new IconColumnProps().make(row?.original?.has_duration).build()),
