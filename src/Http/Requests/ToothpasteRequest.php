@@ -1,10 +1,10 @@
 <?php
 
-namespace Coleus\Health\Http\Requests\ToothpasteType;
+namespace Coleus\Health\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class ToothpasteRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -17,7 +17,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:categories,name',
+            'name' => 'required',
         ];
     }
 }

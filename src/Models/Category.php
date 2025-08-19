@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property int $user_id
@@ -33,6 +31,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Health\Models\Exercise> $exercises
+ * @property-read int|null $exercises_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Users\Models\User> $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Category user($users)
  * @mixin \Eloquent
  */
 #[ScopedBy([UserScope::class])]

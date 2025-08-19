@@ -3,6 +3,7 @@
 use Coleus\Health\Http\Controllers\DashboardController;
 use Coleus\Health\Http\Controllers\ExerciseController;
 use Coleus\Health\Http\Controllers\MuscleGroupController;
+use Coleus\Health\Http\Controllers\ToothpasteController;
 use Coleus\Health\Http\Controllers\WeightController;
 use Coleus\Health\Http\Controllers\CategoryController;
 use Coleus\Health\Http\Controllers\WorkoutController;
@@ -18,4 +19,5 @@ Route::middleware(['web', 'auth'])
         Route::resource('workouts', WorkoutController::class)->except('show');
         Route::resource('exercises', ExerciseController::class)->except('show');
         Route::resource('muscle-groups', MuscleGroupController::class)->except('show');
+        Route::resource('toothpastes', ToothpasteController::class)->except('show');
     })->middleware(['auth', 'verified']);

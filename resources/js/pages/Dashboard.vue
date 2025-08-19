@@ -12,7 +12,7 @@ defineProps<{
     weights: WeightCollection;
     categories: CategoryCollection;
     muscle_groups: MuscleGroupCollection;
-    // toothpaste_types: ToothpasteTypeCollection;
+    // toothpastes: ToothpasteCollection;
     exercises: ExerciseCollection;
     workouts: WorkoutCollection;
     weights_chart: any,

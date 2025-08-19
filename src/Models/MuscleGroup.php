@@ -6,15 +6,12 @@ use Coleus\Health\HealthModelDefaults;
 use Coleus\Users\Concerns\HasUser;
 use Coleus\Users\Models\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string|null $description
@@ -43,6 +40,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read MuscleGroup|null $parent
  * @method static \Illuminate\Database\Eloquent\Builder|MuscleGroup whereMuscleGroupId($value)
  * @property-read \Coleus\Users\Models\User $user
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Health\Models\Exercise> $exercises
+ * @property-read int|null $exercises_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Users\Models\User> $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MuscleGroup user($users)
  * @mixin \Eloquent
  */
 #[ScopedBy([UserScope::class])]

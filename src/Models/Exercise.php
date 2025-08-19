@@ -13,8 +13,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string|null $description
@@ -63,6 +61,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereHasRep($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereHasWeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereWeightUnit($value)
+ * @property string|null $calorie_unit
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Health\Models\Category> $categories
+ * @property-read int|null $categories_count
+ * @property-read int|null $muscle_groups_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Users\Models\User> $users
+ * @property-read int|null $users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Health\Models\Workout> $workouts
+ * @property-read int|null $workouts_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise user($users)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Exercise whereCalorieUnit($value)
  * @mixin \Eloquent
  */
 #[ScopedBy([UserScope::class])]

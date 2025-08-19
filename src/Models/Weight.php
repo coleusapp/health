@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property int $weight
  * @property \Illuminate\Support\Carbon $date
@@ -33,6 +31,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Weight whereWeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Weight withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Weight withoutTrashed()
+ * @property string|null $unit
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Users\Models\User> $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Weight user($users)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Weight whereUnit($value)
  * @mixin \Eloquent
  */
 #[ScopedBy([UserScope::class])]
