@@ -70,7 +70,14 @@ import { Link } from '@inertiajs/vue3';
                 <UiIcon name="i-lucide-weight" class="size-5" />
                 Weights
             </Link>
-            <Link class="flex items-center justify-start gap-5 rounded-md p-3 hover:bg-gray-100 dark:hover:bg-gray-800">
+            <Link
+                class="flex items-center justify-start gap-5 rounded-md p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                :href="route('health.oral-cares.index')"
+                :class="{
+                    'bg-gray-100 font-semibold text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-600':
+                        route().current('health.oral-cares.*'),
+                }"
+            >
                 <UiIcon name="i-lucide-ghost" class="size-5" />
                 Oral Cares
             </Link>

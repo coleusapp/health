@@ -2,6 +2,7 @@
 
 namespace Coleus\Health\Models;
 
+use Coleus\Health\Casts\TimezoneDatetimeCast;
 use Coleus\Health\HealthModelDefaults;
 use Coleus\Users\Concerns\HasUser;
 use Coleus\Users\Models\Scopes\UserScope;
@@ -50,4 +51,20 @@ class OralCare extends HealthModelDefaults
 {
     use SoftDeletes;
     use HasUser;
+
+    public function casts(): array
+    {
+        return [
+            'date' => TimezoneDatetimeCast::class,
+            'brushed' => 'boolean',
+            'flossed' => 'boolean',
+            'fluoride_taken' => 'boolean',
+        ];
+    }
+
+    public function toothpastes(): BelongsToMany
+    {
+        return $this->belongsToMany(Toothpaste::class, config(static::$tablePrefix) . 'oral_care_toothpaste')
+            ->withTimestamps();
+    }
 }
