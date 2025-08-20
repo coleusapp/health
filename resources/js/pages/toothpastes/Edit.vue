@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import EditCard from '@coleus/health/components/Toothpaste/EditCard.vue';
-import { ToothpasteResource, ToothpasteResourceKey } from '@coleus/health/components/Toothpaste/Toothpaste';
+import EditCard from '@coleus/health/components/toothpastes/EditCard.vue';
+import { ToothpasteResource, ToothpasteResourceKey } from '@coleus/health/components/toothpastes/toothpaste';
 import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
 import { provide } from 'vue';
 

@@ -1,29 +1,21 @@
 <script setup lang="ts">
-import TableActions from '@coleus/health/components/muscleGroups/TableActions.vue';
-import type { MuscleGroupCollection, MuscleGroupData } from '@coleus/health/components/muscleGroups/muscleGroup';
+import TableActions from '@coleus/health/components/toothpastes/TableActions.vue';
+import type { ToothpasteCollection, ToothpasteData } from '@coleus/health/components/toothpastes/toothpaste';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
 
 defineProps<{
-    collection: MuscleGroupCollection;
+    collection: ToothpasteCollection;
 }>();
 
-const columns: TableColumn<MuscleGroupData>[] = [
+const columns: TableColumn<ToothpasteData>[] = [
     {
         accessorKey: 'name',
         header: 'Name',
     },
     {
-        accessorKey: 'description',
-        header: 'Description',
-    },
-    {
-        accessorKey: 'parent.name',
-        header: 'Muscle Group',
-    },
-    {
         id: 'actions',
-        cell: ({ row }) => h(TableActions, { muscleGroupId: row?.original?.id }),
+        cell: ({ row }) => h(TableActions, { toothpasteId: row?.original?.id }),
     },
 ];
 </script>
