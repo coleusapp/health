@@ -10,7 +10,7 @@ class OralCareService
 {
     public static function indexQuery()
     {
-        return OralCare::orderBy('created_at', 'desc');
+        return OralCare::orderBy('date', 'desc');
     }
 
     public static function save(OralCareRequest $request, ?OralCare $oralCare = null): OralCare

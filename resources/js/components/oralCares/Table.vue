@@ -12,7 +12,7 @@ defineProps<{
 
 const columns: TableColumn<OralCareData>[] = [
     {
-        accessorKey: 'date_string',
+        accessorKey: 'date_for_humans',
         header: 'Date',
     },
     {

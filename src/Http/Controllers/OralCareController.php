@@ -27,7 +27,11 @@ class OralCareController extends Controller
 
     public function create(): Response
     {
+        $default = OralCare::latest('date')->first() ?? new OralCare();
+        $default->date = now('America/Denver');
+
         return Inertia::render('@health/oralCares/Create', [
+            'resource' => OralCareResource::make($default->load('toothpastes')),
             'toothpastes' => ToothpasteAsOptionResource::collectionWithNull(Toothpaste::get()),
         ]);
     }

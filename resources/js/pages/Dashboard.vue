@@ -24,7 +24,7 @@ defineProps<{
 
     <HealthLayout>
         <div class="flex flex-wrap gap-4 w-full">
-            <TrendMetric class="w-full max-w-128" :data="weights_chart" />
+            <TrendMetric class="w-full max-w-1/2" :data="weights_chart" />
         </div>
     </HealthLayout>
 </template>
