@@ -11,6 +11,6 @@ const weightUnits = inject(weightUnitsKey) as OptionCollection;
 
 <template>
     <FormKit type="number" name="weight" label="Weight" validation="required|number" />
-    <FormKit type="datetime-local" name="date" label="DateTime" validation="required" />
+    <FormKit type="datetime-local" name="date" label="Date Time" validation="required" />
     <FormKit type="select" name="unit" label="Unit" :options="weightUnits?.data" key="unit" validation="required" />
 </template>

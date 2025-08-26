@@ -2,29 +2,14 @@
 
 namespace Coleus\Health\Services;
 
-use Coleus\Health\Http\Resources\WeightResource;
 use Coleus\Health\Models\HealthUser;
 use Coleus\Table\Searchable;
 use Coleus\Table\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class WeightTable extends Table
+class WeightService extends Table
 {
     use Searchable;
-
-    public static function columns(): array
-    {
-        return [
-            static::sortableColumn('Date', 'date_string', 'date'),
-            static::column('Weight', 'weight'),
-        ];
-    }
-
-    public static function records(): AnonymousResourceCollection
-    {
-        return WeightResource::collection(WeightTable::query()->paginate());
-    }
 
     public static function query(): Builder
     {

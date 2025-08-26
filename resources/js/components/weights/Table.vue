@@ -1,23 +1,39 @@
 <script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui';
-import { h } from 'vue';
 import TableActions from '@coleus/health/components/weights/TableActions.vue';
+import Header from '@coleus/support/components/table/Header.vue';
 import { WeightCollection, WeightData } from '@coleus/health/components/weights/weight';
+import type { TableColumn } from '@nuxt/ui';
+import { h, ref, resolveComponent } from 'vue';
+import { router } from '@inertiajs/core';
 
 defineProps<{
     collection?: WeightCollection;
 }>();
+const sorting = ref();
+const options = ref();
+
+const UiButton = resolveComponent('UiButton')
 
 const columns: TableColumn<WeightData>[] = [
     {
         accessorKey: 'date',
         cell: ({ row }) => `${row.original.date_for_humans}`,
-        header: 'Date',
+        header: ({ column }) => h(Header, { column: column, label: 'Date' }),
+        sortingFn: (rowA, rowB, columnId) => {
+            console.log(rowA, rowB, columnId);
+            return rowA.original.someProperty - rowB.original.someProperty
+        },
     },
     {
         accessorKey: 'weight',
         cell: ({ row }) => `${row.original.weight} ${row.original.unit}`,
-        header: 'Weight',
+        header: ({ column }) => h(Header, { column: column, label: 'Weight' }),
+        sortingFn: (rowA, rowB, columnId) => {
+            (sorting.value || []).forEach((item) => {
+
+            });
+            // router.reload({data: {sort: `${columnId}`}})
+        },
     },
     {
         id: 'actions',
@@ -27,5 +43,6 @@ const columns: TableColumn<WeightData>[] = [
 </script>
 
 <template>
-    <UiTable :data="collection?.data" :columns="columns" />
+    {{sorting}}{{options}}
+    <UiTable :data="collection?.data" :columns="columns" v-model:sorting="sorting" v-model:sorting-options="options" />
 </template>

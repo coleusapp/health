@@ -7,7 +7,7 @@ use Coleus\Health\Enums\WeightEnum;
 use Coleus\Health\Http\Requests\WeightRequest;
 use Coleus\Health\Http\Resources\WeightResource;
 use Coleus\Health\Models\Weight;
-use Coleus\Health\Services\WeightTable;
+use Coleus\Health\Services\WeightService;
 use Coleus\Support\Resources\EnumResource;
 use Inertia\Inertia;
 
@@ -16,7 +16,7 @@ class WeightController extends Controller
     public function index()
     {
         return Inertia::render('@health/weights/Index', [
-            'collection' => WeightResource::collection(WeightTable::query()->paginate()),
+            'collection' => WeightResource::collection(WeightService::query()->paginate()),
         ]);
     }
 

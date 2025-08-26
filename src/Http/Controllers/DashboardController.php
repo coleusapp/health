@@ -14,7 +14,7 @@ use Coleus\Health\Services\ExerciseTable;
 use Coleus\Health\Services\MuscleGroupService;
 use Coleus\Health\Services\ToothpasteService;
 use Coleus\Health\Services\WeightChart;
-use Coleus\Health\Services\WeightTable;
+use Coleus\Health\Services\WeightService;
 use Coleus\Health\Services\WorkoutTable;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -24,7 +24,7 @@ class DashboardController extends Controller
     public function __invoke(): Response
     {
         return Inertia::render('@health/Dashboard', [
-            'weights' => WeightResource::collection(WeightTable::query()->paginate()),
+            'weights' => WeightResource::collection(WeightService::query()->paginate()),
             'categories' => CategoryResource::collection(CategoryTable::query()->paginate()),
             'muscle_groups' => MuscleGroupResource::collection(MuscleGroupService::indexQuery()->paginate()),
             'toothpastes' => ToothpasteResource::collection(ToothpasteService::indexQuery()->paginate()),
