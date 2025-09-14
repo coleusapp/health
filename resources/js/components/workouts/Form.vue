@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
-import { ExerciseCollection, exerciseCollectionKey } from '@coleus/health/components/exercises/exercise';
-import { calorieUnitsKey, distanceUnitsKey, durationUnitsKey, weightUnitsKey, WorkoutData } from '@coleus/health/components/workouts/workout';
+import { ExerciseCollection, exerciseCollectionKey } from '@/components/exercises/exercise';
+import { calorieUnitsKey, distanceUnitsKey, durationUnitsKey, weightUnitsKey, WorkoutData } from '@/components/workouts/workout';
 import { FormKit } from '@formkit/vue';
 import { cloneDeep, find, memoize } from 'lodash';
 import { inject } from 'vue';

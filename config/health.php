@@ -7,4 +7,6 @@ return [
      * Default: health_
      */
     'table_prefix' => 'health_',
+
+    'route_prefix' => 'health',
 ];

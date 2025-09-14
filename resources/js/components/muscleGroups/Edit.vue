@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import MuscleGroupForm from '@coleus/health/components/muscleGroups/Form.vue';
-import { MuscleGroupRequest, MuscleGroupResource, muscleGroupResourceKey } from '@coleus/health/components/muscleGroups/muscleGroup';
+import MuscleGroupForm from '@/components/muscleGroups/Form.vue';
+import { MuscleGroupRequest, MuscleGroupResource, muscleGroupResourceKey } from '@/components/muscleGroups/muscleGroup';
 import Form from '@coleus/support/components/form/Form.vue';
 import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';

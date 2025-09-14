@@ -1,6 +1,6 @@
 import { Collection, Request, Resource } from '@coleus/support/types/resource';
 import type { InjectionKey } from 'vue';
-import { ExerciseWorkout } from '@coleus/health/components/exerciseWorkouts/exerciseWorkout';
+import { ExerciseWorkout } from '@/components/exerciseWorkouts/exerciseWorkout';
 import { OptionCollection } from '@/types';
 
 export type WorkoutData = {

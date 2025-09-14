@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CreateWorkout from '@coleus/health/components/workouts/Create.vue';
+import CreateWorkout from '@/components/workouts/Create.vue';
 import { Link } from '@inertiajs/vue3';
 import Header from '@coleus/support/components/card/Header.vue';
 </script>

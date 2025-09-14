@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+import HealthLayout from '@/layouts/HealthLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import type { WeightCollection } from '@coleus/health/components/weights/weight';
-import type { CategoryCollection } from '@coleus/health/components/categories/category';
-import type { MuscleGroupCollection } from '@coleus/health/components/muscleGroups/muscleGroup';
-import type { ExerciseCollection } from '@coleus/health/components/exercises/exercise';
-import type { WorkoutCollection } from '@coleus/health/components/workouts/workout';
+import type { WeightCollection } from '@/components/weights/weight';
+import type { CategoryCollection } from '@/components/categories/category';
+import type { MuscleGroupCollection } from '@/components/muscleGroups/muscleGroup';
+import type { ExerciseCollection } from '@/components/exercises/exercise';
+import type { WorkoutCollection } from '@/components/workouts/workout';
 import TrendMetric from '../components/weights/TrendMetric.vue';
 
 defineProps<{

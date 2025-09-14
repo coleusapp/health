@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import TableActions from '@coleus/health/components/muscleGroups/TableActions.vue';
-import type { MuscleGroupCollection, MuscleGroupData } from '@coleus/health/components/muscleGroups/muscleGroup';
+import TableActions from '@/components/muscleGroups/TableActions.vue';
+import type { MuscleGroupCollection, MuscleGroupData } from '@/components/muscleGroups/muscleGroup';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
 

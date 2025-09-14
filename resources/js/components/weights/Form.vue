@@ -2,7 +2,7 @@
 import { OptionCollection } from '@/types';
 import {
     weightUnitsKey,
-} from '@coleus/health/components/weights/weight';
+} from '@/components/weights/weight';
 import { FormKit } from '@formkit/vue';
 import { inject } from 'vue';
 

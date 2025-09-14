@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import OralCareForm from '@coleus/health/components/oralCares/Form.vue';
-import { OralCareRequest, OralCareResource, oralCareResourceKey } from '@coleus/health/components/oralCares/oralCare';
+import OralCareForm from '@/components/oralCares/Form.vue';
+import { OralCareRequest, OralCareResource, oralCareResourceKey } from '@/components/oralCares/oralCare';
 import Form from '@coleus/support/components/form/Form.vue';
 import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';

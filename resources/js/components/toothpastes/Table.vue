@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import TableActions from '@coleus/health/components/toothpastes/TableActions.vue';
-import type { ToothpasteCollection, ToothpasteData } from '@coleus/health/components/toothpastes/toothpaste';
+import TableActions from '@/components/toothpastes/TableActions.vue';
+import type { ToothpasteCollection, ToothpasteData } from '@/components/toothpastes/toothpaste';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
 

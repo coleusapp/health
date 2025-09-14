@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import MuscleGroupTable from '@coleus/health/components/muscleGroups/Table.vue';
-import { MuscleGroupCollection } from '@coleus/health/components/muscleGroups/muscleGroup';
+import MuscleGroupTable from '@/components/muscleGroups/Table.vue';
+import { MuscleGroupCollection } from '@/components/muscleGroups/muscleGroup';
 import Header from '@coleus/support/components/card/Header.vue';
 import { Link } from '@inertiajs/vue3';
 import Pagination from '@coleus/support/components/table/Pagination.vue';

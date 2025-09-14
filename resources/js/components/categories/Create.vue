@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CategoryForm from '@coleus/health/components/categories/Form.vue';
-import { CategoryRequest } from '@coleus/health/components/categories/category';
+import CategoryForm from '@/components/categories/Form.vue';
+import { CategoryRequest } from '@/components/categories/category';
 import Form from '@coleus/support/components/form/Form.vue';
 import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ToothpasteTable from '@coleus/health/components/toothpastes/Table.vue';
-import { ToothpasteCollection } from '@coleus/health/components/toothpastes/Toothpaste';
+import ToothpasteTable from '@/components/toothpastes/Table.vue';
+import { ToothpasteCollection } from '@/components/toothpastes/Toothpaste';
 import { Link } from '@inertiajs/vue3';
 
 defineProps<{

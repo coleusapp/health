@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ToothpasteTable from '@coleus/health/components/toothpastes/Table.vue';
-import { ToothpasteCollection } from '@coleus/health/components/toothpastes/Toothpaste';
+import ToothpasteTable from '@/components/toothpastes/Table.vue';
+import { ToothpasteCollection } from '@/components/toothpastes/Toothpaste';
 import Header from '@coleus/support/components/card/Header.vue';
 import { Link } from '@inertiajs/vue3';
 import Pagination from '@coleus/support/components/table/Pagination.vue';

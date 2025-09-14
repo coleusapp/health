@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import OralCareTable from '@coleus/health/components/oralCares/Table.vue';
-import { OralCareCollection } from '@coleus/health/components/oralCares/oralCare';
+import OralCareTable from '@/components/oralCares/Table.vue';
+import { OralCareCollection } from '@/components/oralCares/oralCare';
 import Header from '@coleus/support/components/card/Header.vue';
 import { Link } from '@inertiajs/vue3';
 import Pagination from '@coleus/support/components/table/Pagination.vue';

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ExerciseCollection, exerciseCollectionKey } from '@coleus/health/components/exercises/exercise';
-import EditCard from '@coleus/health/components/workouts/EditCard.vue';
+import { ExerciseCollection, exerciseCollectionKey } from '@/components/exercises/exercise';
+import EditCard from '@/components/workouts/EditCard.vue';
 import {
     calorieUnitsKey,
     distanceUnitsKey,
@@ -8,8 +8,8 @@ import {
     weightUnitsKey,
     WorkoutResource,
     workoutResourceKey,
-} from '@coleus/health/components/workouts/workout';
-import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+} from '@/components/workouts/workout';
+import HealthLayout from '@/layouts/HealthLayout.vue';
 import { provide } from 'vue';
 import { OptionCollection } from '@/types';
 

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import BadgeColumn from '@/components/ui/table/columns/BadgeColumn.vue';
-import IconColumn from '@/components/ui/table/columns/IconColumn.vue';
-import { IconColumnProps } from '@/components/ui/table/columns/IconColumnProps';
-import TableActions from '@coleus/health/components/exercises/TableActions.vue';
-import { ExerciseCollection, ExerciseData } from '@coleus/health/components/exercises/exercise';
+import BadgeColumn from '@coleus/support/components/ui/table/columns/BadgeColumn.vue';
+import IconColumn from '@coleus/support/components/ui/table/columns/IconColumn.vue';
+import { IconColumnProps } from '@coleus/support/components/ui/table/columns/IconColumnProps';
+import TableActions from '@/components/exercises/TableActions.vue';
+import { ExerciseCollection, ExerciseData } from '@/components/exercises/exercise';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
 

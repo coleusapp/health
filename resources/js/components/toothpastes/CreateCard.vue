@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CreateToothpaste from '@coleus/health/components/toothpastes/Create.vue';
+import CreateToothpaste from '@/components/toothpastes/Create.vue';
 import { Link } from '@inertiajs/vue3';
 import Header from '@coleus/support/components/card/Header.vue';
 </script>

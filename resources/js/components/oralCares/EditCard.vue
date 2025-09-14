@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EditOralCare from '@coleus/health/components/oralCares/Edit.vue';
+import EditOralCare from '@/components/oralCares/Edit.vue';
 import { Link } from '@inertiajs/vue3';
 import Header from '@coleus/support/components/card/Header.vue';
 </script>

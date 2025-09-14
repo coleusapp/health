@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CreateCategory from '@coleus/health/components/categories/Create.vue';
+import CreateCategory from '@/components/categories/Create.vue';
 import { Link } from '@inertiajs/vue3';
 import Header from '@coleus/support/components/card/Header.vue';
 </script>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import WeightTable from '@coleus/health/components/weights/Table.vue';
-import { WeightCollection } from '@coleus/health/components/weights/weight';
+import WeightTable from '@/components/weights/Table.vue';
+import { WeightCollection } from '@/components/weights/weight';
 import Header from '@coleus/support/components/card/Header.vue';
 import { Link } from '@inertiajs/vue3';
 import MetaInformation from '@coleus/support/components/table/MetaInformation.vue';

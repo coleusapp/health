@@ -20,7 +20,7 @@ class OralCareController extends Controller
         $collection = OralCareService::indexQuery()
             ->paginate();
 
-        return Inertia::render('@health/oralCares/Index', [
+        return Inertia::render('oralCares/Index', [
             'collection' => OralCareResource::collection($collection),
         ]);
     }
@@ -30,7 +30,7 @@ class OralCareController extends Controller
         $default = OralCare::latest('date')->first() ?? new OralCare();
         $default->date = now('America/Denver');
 
-        return Inertia::render('@health/oralCares/Create', [
+        return Inertia::render('oralCares/Create', [
             'resource' => OralCareResource::make($default->load('toothpastes')),
             'toothpastes' => ToothpasteAsOptionResource::collectionWithNull(Toothpaste::get()),
         ]);
@@ -45,7 +45,7 @@ class OralCareController extends Controller
 
     public function edit(OralCare $oralCare): Response
     {
-        return Inertia::render('@health/oralCares/Edit', [
+        return Inertia::render('oralCares/Edit', [
             'resource' => OralCareResource::make($oralCare->load('toothpastes')),
             'toothpastes' => ToothpasteAsOptionResource::collectionWithNull(Toothpaste::get()),
         ]);

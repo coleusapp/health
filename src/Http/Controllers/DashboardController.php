@@ -23,7 +23,7 @@ class DashboardController extends Controller
 {
     public function __invoke(): Response
     {
-        return Inertia::render('@health/Dashboard', [
+        return Inertia::render('Dashboard', [
             'weights' => WeightResource::collection(WeightService::query()->paginate()),
             'categories' => CategoryResource::collection(CategoryTable::query()->paginate()),
             'muscle_groups' => MuscleGroupResource::collection(MuscleGroupService::indexQuery()->paginate()),

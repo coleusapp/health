@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppLayout from '@/layouts/AppLayout.vue';
-import Aside from '@coleus/health/components/Aside.vue';
+import AppLayout from '@coleus/support/layouts/AppLayout.vue';
+import Aside from '@/components/Aside.vue';
 </script>
 
 <template>

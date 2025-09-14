@@ -2,6 +2,9 @@
 
 namespace Coleus\Health;
 
+use Coleus\Health\Http\Middleware\HandleInertiaRequests;
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -25,6 +28,16 @@ class HealthServiceProvider extends PackageServiceProvider
                 'create_category_exercises_table',
             ])
             ->runsMigrations()
-            ->hasRoute('web');
+            ->hasRoute('web')
+            ->hasAssets()
+            ->hasViews();
+    }
+
+    public function bootingPackage(): void
+    {
+        if (Str::of(request()?->path())->startsWith(config('health.route_prefix'))) {
+            app('router')
+                ->pushMiddlewareToGroup('web', HandleInertiaRequests::class);
+        }
     }
 }

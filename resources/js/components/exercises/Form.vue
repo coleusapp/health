@@ -8,7 +8,7 @@ import {
     durationUnitsKey,
     muscleGroupsKey,
     weightUnitsKey,
-} from '@coleus/health/components/exercises/exercise';
+} from '@/components/exercises/exercise';
 import { FormKit } from '@formkit/vue';
 import { inject } from 'vue';
 

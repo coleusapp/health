@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import TableActions from '@coleus/health/components/weights/TableActions.vue';
-import { WeightCollection, WeightData } from '@coleus/health/components/weights/weight';
+import TableActions from '@/components/weights/TableActions.vue';
+import { WeightCollection, WeightData } from '@/components/weights/weight';
 import Header from '@coleus/support/components/table/Header.vue';
 import type { TableColumn } from '@nuxt/ui';
 import { h, ref } from 'vue';

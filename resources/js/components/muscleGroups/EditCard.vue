@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EditMuscleGroup from '@coleus/health/components/muscleGroups/Edit.vue';
+import EditMuscleGroup from '@/components/muscleGroups/Edit.vue';
 import { Link } from '@inertiajs/vue3';
 import Header from '@coleus/support/components/card/Header.vue';
 </script>

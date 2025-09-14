@@ -1,7 +1,7 @@
 import { Collection, Request, Resource } from '@coleus/support/types/resource';
 import type { InjectionKey } from 'vue';
 import { OptionCollection } from '@/types';
-import { OralCareToothpaste } from '@coleus/health/components/oralCareToothpaste/oralCareToothpaste';
+import { OralCareToothpaste } from '@/components/oralCareToothpaste/oralCareToothpaste';
 
 export type OralCareData = {
     id: number;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CategoryTable from '@coleus/health/components/categories/Table.vue';
-import { CategoryCollection } from '@coleus/health/components/categories/category';
+import CategoryTable from '@/components/categories/Table.vue';
+import { CategoryCollection } from '@/components/categories/category';
 import Header from '@coleus/support/components/card/Header.vue';
 import { Link } from '@inertiajs/vue3';
 

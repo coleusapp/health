@@ -19,14 +19,14 @@ class MuscleGroupController extends Controller
         $collection = MuscleGroupService::indexQuery()
             ->paginate();
 
-        return Inertia::render('@health/muscleGroups/Index', [
+        return Inertia::render('muscleGroups/Index', [
             'collection' => MuscleGroupResource::collection($collection),
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('@health/muscleGroups/Create', [
+        return Inertia::render('muscleGroups/Create', [
             'muscle_groups' => MuscleGroupAsOptionResource::collectionWithNull(MuscleGroup::get()),
         ]);
     }
@@ -40,7 +40,7 @@ class MuscleGroupController extends Controller
 
     public function edit(MuscleGroup $muscleGroup): Response
     {
-        return Inertia::render('@health/muscleGroups/Edit', [
+        return Inertia::render('muscleGroups/Edit', [
             'resource' => MuscleGroupResource::make($muscleGroup),
             'muscle_groups' => MuscleGroupAsOptionResource::collectionWithNull(MuscleGroup::get()),
         ]);

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ToothpasteCollection } from '@coleus/health/components/toothpastes/toothpaste';
+import type { ToothpasteCollection } from '@/components/toothpastes/toothpaste';
 import { FormKit } from '@formkit/vue';
 import { inject } from 'vue';
-import { toothpastesKey } from '@coleus/health/components/oralCares/oralCare';
+import { toothpastesKey } from '@/components/oralCares/oralCare';
 
 const toothpastes = inject(toothpastesKey) as ToothpasteCollection;
 </script>

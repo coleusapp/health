@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LineChart from '@coleus/health/components/weights/LineChart.vue';
+import LineChart from '@/components/weights/LineChart.vue';
 import Header from '@coleus/support/components/card/Header.vue';
 import { Link } from '@inertiajs/vue3';
 

@@ -15,7 +15,7 @@ class WeightController extends Controller
 {
     public function index()
     {
-        return Inertia::render('@health/weights/Index', [
+        return Inertia::render('weights/Index', [
             'collection' => WeightResource::collection(WeightService::query()->paginate()),
         ]);
     }
@@ -25,7 +25,7 @@ class WeightController extends Controller
         $default = Weight::latest('created_at')->first() ?? new Weight(['weight' => 1]);
         $default->date = now('America/Denver');
 
-        return Inertia::render('@health/weights/Create', [
+        return Inertia::render('weights/Create', [
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'resource' => new WeightResource($default),
         ]);
@@ -40,7 +40,7 @@ class WeightController extends Controller
 
     public function edit(Weight $weight)
     {
-        return Inertia::render('@health/weights/Edit', [
+        return Inertia::render('weights/Edit', [
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'resource' => new WeightResource($weight),
         ]);

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import OralCareCard from '@coleus/health/components/oralCares/EditCard.vue';
-import { OralCareResource, oralCareResourceKey, toothpastesKey } from '@coleus/health/components/oralCares/oralCare';
-import type { ToothpasteCollection } from '@coleus/health/components/toothpastes/toothpaste';
-import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+import OralCareCard from '@/components/oralCares/EditCard.vue';
+import { OralCareResource, oralCareResourceKey, toothpastesKey } from '@/components/oralCares/oralCare';
+import type { ToothpasteCollection } from '@/components/toothpastes/toothpaste';
+import HealthLayout from '@/layouts/HealthLayout.vue';
 import { provide } from 'vue';
 
 const props = defineProps<{

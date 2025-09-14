@@ -24,14 +24,14 @@ class ExerciseController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('@health/exercises/Index', [
+        return Inertia::render('exercises/Index', [
             'collection' => ExerciseResource::collection(ExerciseTable::query()->paginate()),
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('@health/exercises/Create', [
+        return Inertia::render('exercises/Create', [
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),
             'duration_units' => EnumResource::collectionWithNull(DurationEnum::cases()),
@@ -53,7 +53,7 @@ class ExerciseController extends Controller
 
     public function edit(Exercise $exercise): Response
     {
-        return Inertia::render('@health/exercises/Edit', [
+        return Inertia::render('exercises/Edit', [
             'resource' => ExerciseResource::make($exercise->load('muscleGroups', 'categories')),
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),

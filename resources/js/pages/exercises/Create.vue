@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
-import CreateCard from '@coleus/health/components/exercises/CreateCard.vue';
+import CreateCard from '@/components/exercises/CreateCard.vue';
 import {
     calorieUnitsKey,
     categoriesKey,
@@ -8,8 +8,8 @@ import {
     durationUnitsKey,
     muscleGroupsKey,
     weightUnitsKey,
-} from '@coleus/health/components/exercises/exercise';
-import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+} from '@/components/exercises/exercise';
+import HealthLayout from '@/layouts/HealthLayout.vue';
 import { provide } from 'vue';
 
 const props = defineProps<{

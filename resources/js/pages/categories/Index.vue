@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
-import { CategoryCollection } from '@coleus/health/components/categories/category';
-import TableCard from '@coleus/health/components/categories/TableCard.vue';
+import HealthLayout from '@/layouts/HealthLayout.vue';
+import { CategoryCollection } from '@/components/categories/category';
+import TableCard from '@/components/categories/TableCard.vue';
 
 defineProps<{
     collection?: CategoryCollection;

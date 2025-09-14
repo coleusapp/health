@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import WorkoutTable from '@coleus/health/components/workouts/Table.vue';
-import { WorkoutCollection } from '@coleus/health/components/workouts/workout';
+import WorkoutTable from '@/components/workouts/Table.vue';
+import { WorkoutCollection } from '@/components/workouts/workout';
 import Header from '@coleus/support/components/card/Header.vue';
 import { Link } from '@inertiajs/vue3';
 import MetaInformation from '@coleus/support/components/table/MetaInformation.vue';

@@ -21,7 +21,7 @@ class WorkoutController extends Controller
 {
     public function index()
     {
-        return Inertia::render('@health/workouts/Index', [
+        return Inertia::render('workouts/Index', [
             'collection' => WorkoutResource::collection(
                 WorkoutTable::query()->withCount('exercises')->paginate()
             ),
@@ -32,7 +32,7 @@ class WorkoutController extends Controller
     {
         $default = new Workout(['date' => now('America/Denver')]);
 
-        return Inertia::render('@health/workouts/Create', [
+        return Inertia::render('workouts/Create', [
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),
             'duration_units' => EnumResource::collectionWithNull(DurationEnum::cases()),
@@ -51,7 +51,7 @@ class WorkoutController extends Controller
 
     public function edit(Workout $workout)
     {
-        return Inertia::render('@health/workouts/Edit', [
+        return Inertia::render('workouts/Edit', [
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),
             'duration_units' => EnumResource::collectionWithNull(DurationEnum::cases()),

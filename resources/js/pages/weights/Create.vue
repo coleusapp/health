@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { OptionCollection } from '@/types';
-import CreateCard from '@coleus/health/components/weights/CreateCard.vue';
-import { WeightResource, resourceKey, weightUnitsKey } from '@coleus/health/components/weights/weight';
-import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+import CreateCard from '@/components/weights/CreateCard.vue';
+import { WeightResource, resourceKey, weightUnitsKey } from '@/components/weights/weight';
+import HealthLayout from '@/layouts/HealthLayout.vue';
 import { provide } from 'vue';
 
 const props = defineProps<{

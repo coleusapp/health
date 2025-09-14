@@ -15,14 +15,14 @@ class CategoryController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('@health/categories/Index', [
+        return Inertia::render('categories/Index', [
             'collection' => CategoryResource::collection(CategoryTable::query()->paginate()),
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('@health/categories/Create');
+        return Inertia::render('categories/Create');
     }
 
     public function store(CategoryRequest $request): RedirectResponse
@@ -36,7 +36,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category): Response
     {
-        return Inertia::render('@health/categories/Edit', [
+        return Inertia::render('categories/Edit', [
             'resource' => CategoryResource::make($category),
         ]);
     }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import EditCard from '@coleus/health/components/toothpastes/EditCard.vue';
-import { ToothpasteResource, ToothpasteResourceKey } from '@coleus/health/components/toothpastes/toothpaste';
-import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+import EditCard from '@/components/toothpastes/EditCard.vue';
+import { ToothpasteResource, ToothpasteResourceKey } from '@/components/toothpastes/toothpaste';
+import HealthLayout from '@/layouts/HealthLayout.vue';
 import { provide } from 'vue';
 
 const props = defineProps<{

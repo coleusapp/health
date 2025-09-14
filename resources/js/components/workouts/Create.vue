@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import WorkoutForm from '@coleus/health/components/workouts/Form.vue';
-import { WorkoutRequest, WorkoutResource, workoutResourceKey } from '@coleus/health/components/workouts/workout';
+import WorkoutForm from '@/components/workouts/Form.vue';
+import { WorkoutRequest, WorkoutResource, workoutResourceKey } from '@/components/workouts/workout';
 import Form from '@coleus/support/components/form/Form.vue';
 import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';

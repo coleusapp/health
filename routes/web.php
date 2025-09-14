@@ -8,9 +8,10 @@ use Coleus\Health\Http\Controllers\ToothpasteController;
 use Coleus\Health\Http\Controllers\WeightController;
 use Coleus\Health\Http\Controllers\CategoryController;
 use Coleus\Health\Http\Controllers\WorkoutController;
+use Coleus\Health\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['web', 'auth'])
+Route::middleware('web')
     ->name('health.')
     ->prefix('health')
     ->group(function () {
@@ -22,4 +23,4 @@ Route::middleware(['web', 'auth'])
         Route::resource('muscle-groups', MuscleGroupController::class)->except('show');
         Route::resource('oral-cares', OralCareController::class)->except('show');
         Route::resource('toothpastes', ToothpasteController::class)->except('show');
-    })->middleware(['auth', 'verified']);
+    });

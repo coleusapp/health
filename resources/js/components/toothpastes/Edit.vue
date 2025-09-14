@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ToothpasteForm from '@coleus/health/components/toothpastes/Form.vue';
-import { ToothpasteRequest, ToothpasteResource, ToothpasteResourceKey } from '@coleus/health/components/toothpastes/Toothpaste';
+import ToothpasteForm from '@/components/toothpastes/Form.vue';
+import { ToothpasteRequest, ToothpasteResource, ToothpasteResourceKey } from '@/components/toothpastes/Toothpaste';
 import Form from '@coleus/support/components/form/Form.vue';
 import { onErrorToast, onSuccessToast, ToastType } from '@coleus/support/lib/inertia';
 import { useForm } from '@formkit/inertia';

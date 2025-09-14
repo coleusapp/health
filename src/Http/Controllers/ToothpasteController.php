@@ -19,14 +19,14 @@ class ToothpasteController extends Controller
             ->paginate();
 
 
-        return Inertia::render('@health/toothpastes/Index', [
+        return Inertia::render('toothpastes/Index', [
             'collection' => ToothpasteResource::collection($collection),
         ]);
     }
 
     public function create()
     {
-        return Inertia::render('@health/toothpastes/Create');
+        return Inertia::render('toothpastes/Create');
     }
 
     public function store(ToothpasteRequest $request)
@@ -38,7 +38,7 @@ class ToothpasteController extends Controller
 
     public function edit(Toothpaste $Toothpaste)
     {
-        return Inertia::render('@health/toothpastes/Edit', [
+        return Inertia::render('toothpastes/Edit', [
             'resource' => ToothpasteResource::make($Toothpaste),
         ]);
     }

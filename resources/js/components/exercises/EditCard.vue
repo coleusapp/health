@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Edit from '@coleus/health/components/exercises/Edit.vue';
+import Edit from '@/components/exercises/Edit.vue';
 import { Link } from '@inertiajs/vue3';
 import Header from '@coleus/support/components/card/Header.vue';
 </script>

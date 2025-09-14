@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import MuscleGroupCard from '@coleus/health/components/muscleGroups/EditCard.vue';
+import MuscleGroupCard from '@/components/muscleGroups/EditCard.vue';
 import {
     MuscleGroupCollection,
     MuscleGroupResource,
     muscleGroupResourceKey,
     muscleGroupsKey,
-} from '@coleus/health/components/muscleGroups/muscleGroup';
-import HealthLayout from '@coleus/health/layouts/HealthLayout.vue';
+} from '@/components/muscleGroups/muscleGroup';
+import HealthLayout from '@/layouts/HealthLayout.vue';
 import { provide } from 'vue';
 
 const props = defineProps<{

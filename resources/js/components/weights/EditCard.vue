@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EditWeight from '@coleus/health/components/weights/Edit.vue';
+import EditWeight from '@/components/weights/Edit.vue';
 import { Link } from '@inertiajs/vue3';
 import Header from '@coleus/support/components/card/Header.vue';
 </script>

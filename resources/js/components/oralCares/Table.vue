@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import TableActions from '@coleus/health/components/oralCares/TableActions.vue';
-import type { OralCareCollection, OralCareData } from '@coleus/health/components/oralCares/oralCare';
+import TableActions from '@/components/oralCares/TableActions.vue';
+import type { OralCareCollection, OralCareData } from '@/components/oralCares/oralCare';
 import type { TableColumn } from '@nuxt/ui';
 import { h } from 'vue';
-import IconColumn from '@/components/ui/table/columns/IconColumn.vue';
-import { IconColumnProps } from '@/components/ui/table/columns/IconColumnProps';
+// import IconColumn from '@coleus/support/components/ui/table/columns/IconColumn.vue';
+import IconColumn from '@coleus/support/components/ui/table/columns/IconColumn.vue';
+import { IconColumnProps } from '@coleus/support/components/ui/table/columns/IconColumnProps';
 
 defineProps<{
     collection: OralCareCollection;
