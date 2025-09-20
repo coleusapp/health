@@ -33,7 +33,7 @@
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         @routes
-        @vite('resources/js/app.ts', 'vendor/health')
+        @vite('resources/js/app.ts')
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
