@@ -27,3 +27,4 @@ frankenphp-worker.php
 auto-imports.d.ts
 components.d.ts
 composer.lock
+.DS_Store
