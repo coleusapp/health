@@ -19,7 +19,6 @@ yarn-error.log
 /auth.json
 /.fleet
 /.idea
-/.nova
 /.vscode
 /.zed
 **/caddy

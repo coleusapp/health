@@ -3,7 +3,6 @@
 namespace Coleus\Health;
 
 use Coleus\Health\Http\Middleware\HandleInertiaRequests;
-use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

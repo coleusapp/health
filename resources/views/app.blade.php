@@ -33,10 +33,10 @@
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         @routes
-        @vite('resources/js/app.ts')
+        @vite('resources/js/app.ts', Vite::isRunningHot() ? '' : 'vendor/health')
         @inertiaHead
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased min-h-screen">
         @inertia
     </body>
 </html>
