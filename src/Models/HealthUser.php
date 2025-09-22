@@ -2,7 +2,7 @@
 
 namespace Coleus\Health\Models;
 
-use Coleus\Users\Models\User;
+use Coleus\Users\Models\UserAlias;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -38,8 +38,10 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|HealthUser withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|HealthUser withoutRole($roles, $guard = null)
  * @mixin \Eloquent
+ * @mixin \App\Models\User::class
+ * @mixin \Coleus\Users\Models\User::class
  */
-class HealthUser extends User
+class HealthUser extends UserAlias
 {
     protected $table = 'users';
 
