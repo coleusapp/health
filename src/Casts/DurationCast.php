@@ -3,7 +3,7 @@
 namespace Coleus\Health\Casts;
 
 use Coleus\Health\Concerns\DurationConcern;
-use App\Settings\GeneralSettings;
+// use App\Settings\GeneralSettings;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ class DurationCast implements CastsAttributes
 {
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $value ? match ($model->exercise?->duration_unit ?? app(GeneralSettings::class)->duration_unit) {
+        return $value ? match ($model->exercise?->duration_unit) { //  ?? app(GeneralSettings::class)->duration_unit
             'second' => $value,
             'minute' => round(app(DurationConcern::class)->secondToMinute($value), 2),
             'hour' => round(app(DurationConcern::class)->secondToHour($value), 2),
