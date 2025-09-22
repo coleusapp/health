@@ -11,7 +11,7 @@ use Coleus\Health\Http\Controllers\WorkoutController;
 use Coleus\Health\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('web')
+Route::middleware(['web', 'auth'])
     ->name('health.')
     ->prefix('health')
     ->group(function () {
