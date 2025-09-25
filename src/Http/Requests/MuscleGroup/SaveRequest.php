@@ -2,8 +2,8 @@
 
 namespace Coleus\Health\Http\Requests\MuscleGroup;
 
+use Coleus\Health\Models\MuscleGroup;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class SaveRequest extends FormRequest
 {
@@ -20,7 +20,7 @@ class SaveRequest extends FormRequest
         return [
             'name' => 'required',
             'description' => 'nullable',
-            'muscle_group_id' => 'nullable|exists:muscle_groups,id',
+            'muscle_group_id' => 'nullable|exists:'.app(MuscleGroup::class)->getTable().',id',
         ];
     }
 }
