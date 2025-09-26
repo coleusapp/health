@@ -128,7 +128,7 @@ const items = ref<NavigationMenuItem[][]>([
 </script>
 
 <template>
-    <aside class="flex h-full">
+    <aside class="h-full flex">
         <div class="flex w-full flex-col gap-2">
             <Link
                 class="flex items-center justify-start gap-5 rounded-md text-sm font-bold px-2 py-2 hover:bg-white dark:hover:bg-gray-800 hover:shadow-sm"

@@ -6,7 +6,7 @@ import Aside from '@/components/Aside.vue';
 <template>
     <AppLayout>
         <div class="flex w-full">
-            <div class="min-w-60 py-2 pl-2 pr-1">
+            <div class="hidden md:block min-w-60 py-2 pl-2 pr-1">
                 <Aside />
             </div>
             <div class="w-full min-h-screen h-full p-4 overflow-scroll">
