@@ -29,7 +29,7 @@ const getExercise = memoize((exerciseId: number) => {
                 <template v-if="getExercise(value.id)?.has_rep">
                     <FormKit type="number" min="0" label="Reps" name="reps" outer-class="!mb-0 w-full md:flex-1" wrapper-class="!mb-0" />
                 </template>
-                <div v-if="getExercise(value.id)?.has_weight" class="w-full md:w-auto md:flex-1 flex items-end gap-3">
+                <div v-if="getExercise(value.id)?.has_weight" class="w-full md:w-auto md:flex-2 flex items-end gap-3">
                     <FormKit type="number" min="0" label="Weight" name="weight" outer-class="!mb-0 w-2/3 md:w-full md:flex-1" wrapper-class="!mb-0" />
                     <FormKit
                         type="select"
@@ -43,7 +43,7 @@ const getExercise = memoize((exerciseId: number) => {
                         wrapper-class="!mb-0"
                     />
                 </div>
-                <div v-if="getExercise(value.id)?.has_distance" class="w-full md:w-auto md:flex-1 flex items-end gap-3">
+                <div v-if="getExercise(value.id)?.has_distance" class="w-full md:w-auto md:flex-2 flex items-end gap-3">
                     <FormKit type="number" min="0" label="Distance" name="distance" step="0.01" outer-class="!mb-0 w-2/3 md:flex-1" wrapper-class="!mb-0" />
                     <FormKit
                         type="select"
@@ -57,7 +57,7 @@ const getExercise = memoize((exerciseId: number) => {
                         wrapper-class="!mb-0"
                     />
                 </div>
-                <div v-if="getExercise(value.id)?.has_duration" class="w-full md:w-auto md:flex-1 flex items-end gap-3">
+                <div v-if="getExercise(value.id)?.has_duration" class="w-full md:w-auto md:flex-2 flex items-end gap-3">
                     <FormKit type="number" min="0" label="Duration" name="duration" outer-class="!mb-0 w-2/3 md:flex-1" wrapper-class="!mb-0" />
                     <FormKit
                         type="select"
@@ -71,7 +71,7 @@ const getExercise = memoize((exerciseId: number) => {
                         wrapper-class="!mb-0"
                     />
                 </div>
-                <div v-if="getExercise(value.id)?.has_calorie" class="w-full md:w-auto md:flex-1 flex items-end gap-3">
+                <div v-if="getExercise(value.id)?.has_calorie" class="w-full md:w-auto md:flex-2 flex items-end gap-3">
                     <FormKit type="number" min="0" label="Calorie" name="calorie" outer-class="!mb-0 w-2/3 md:flex-1" wrapper-class="!mb-0" />
                     <FormKit
                         type="select"
