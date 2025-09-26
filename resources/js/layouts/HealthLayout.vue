@@ -5,11 +5,9 @@ import Aside from '@/components/Aside.vue';
 
 <template>
     <AppLayout>
-        <div class="flex w-full">
-            <div class="hidden md:block min-w-60 py-2 pl-2 pr-1">
-                <Aside />
-            </div>
-            <div class="w-full min-h-screen h-full p-4 overflow-scroll">
+        <div class="flex w-full flex-col-reverse md:flex-row">
+            <Aside />
+            <div class="w-full h-full p-4 overflow-scroll">
                 <div class="w-full max-w-7xl mx-auto ">
                     <slot />
                 </div>
