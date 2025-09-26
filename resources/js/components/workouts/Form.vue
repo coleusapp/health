@@ -41,7 +41,7 @@ const getExercise = memoize((exerciseId: number) => {
                 />
             </div>
             <div v-if="getExercise(value.id)?.has_distance" class="grid grid-cols-2 gap-2">
-                <FormKit type="number" min="0" label="Distance" name="distance" />
+                <FormKit type="number" min="0" label="Distance" name="distance" step="0.01" />
                 <FormKit
                     type="select"
                     name="distance_unit"
