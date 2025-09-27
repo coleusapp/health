@@ -19,7 +19,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Coleus\\Health\\": "src/"
+            "Coleus\\Health\\": "src/",
+            "Coleus\\Health\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     },
     "extra": {

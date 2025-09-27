@@ -20,7 +20,8 @@ class WeightCast implements CastsAttributes
 
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $value ? match ($model->exercise?->weight_unit ?? app(GeneralSettings::class)->weight_unit) {
+        // app(GeneralSettings::class)->weight_unit
+        return $value ? match ($model->exercise?->weight_unit) {
             'kg' => app(WeightConcern::class)->kgToG($value),
             'lbs' => app(WeightConcern::class)->lbsToG($value),
             default => 0,

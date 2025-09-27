@@ -3,10 +3,12 @@
 namespace Coleus\Health\Models;
 
 use Coleus\Health\Casts\TimezoneDatetimeCast;
+use Coleus\Health\Database\Factories\WeightFactory;
 use Coleus\Health\HealthModelDefaults;
 use Coleus\Users\Concerns\HasUser;
 use Coleus\Users\Models\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -43,6 +45,8 @@ class Weight extends HealthModelDefaults
 {
     use SoftDeletes;
     use HasUser;
+    /** @uses \Coleus\Health\Database\Factories\WeightFactory */
+    use HasFactory;
 
     public function casts(): array
     {
@@ -50,5 +54,10 @@ class Weight extends HealthModelDefaults
             'date' => TimezoneDatetimeCast::class,
             // 'weight' => \App\Casts\WeightCast::class,
         ];
+    }
+
+    protected static function newFactory(): WeightFactory|\Illuminate\Database\Eloquent\Factories\Factory
+    {
+        return WeightFactory::new();
     }
 }

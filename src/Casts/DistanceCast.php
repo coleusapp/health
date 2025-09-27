@@ -21,7 +21,8 @@ class DistanceCast implements CastsAttributes
 
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $value ? match ($model->exercise?->distance_unit ?? app(GeneralSettings::class)->distance_unit) {
+        // app(GeneralSettings::class)->distance_unit
+        return $value ? match ($model->exercise?->distance_unit) {
             'mile' => app(DistanceConcern::class)->MiToM($value),
             'meter' => $value,
             'kilometer' => app(DistanceConcern::class)->KmToM($value),

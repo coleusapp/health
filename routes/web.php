@@ -8,7 +8,6 @@ use Coleus\Health\Http\Controllers\ToothpasteController;
 use Coleus\Health\Http\Controllers\WeightController;
 use Coleus\Health\Http\Controllers\CategoryController;
 use Coleus\Health\Http\Controllers\WorkoutController;
-use Coleus\Health\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['web', 'auth'])
@@ -16,11 +15,11 @@ Route::middleware(['web', 'auth'])
     ->prefix('health')
     ->group(function () {
         Route::get('/', DashboardController::class)->name('dashboard');
-        Route::resource('categories', CategoryController::class)->except('show');
-        Route::resource('weights', WeightController::class);
+        Route::resource('weights', WeightController::class)->except('show');
         Route::resource('workouts', WorkoutController::class)->except('show');
-        Route::resource('exercises', ExerciseController::class)->except('show');
+        Route::resource('categories', CategoryController::class)->except('show');
         Route::resource('muscle-groups', MuscleGroupController::class)->except('show');
+        Route::resource('exercises', ExerciseController::class)->except('show');
         Route::resource('oral-cares', OralCareController::class)->except('show');
         Route::resource('toothpastes', ToothpasteController::class)->except('show');
     });

@@ -21,7 +21,8 @@ class DurationCast implements CastsAttributes
 
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $value ? match ($model->exercise?->duration_unit ?? app(GeneralSettings::class)->duration_unit) {
+        // app(GeneralSettings::class)->duration_unit
+        return $value ? match ($model->exercise?->duration_unit) {
             'second' => $value,
             'minute' => app(DurationConcern::class)->minuteToSecond($value),
             'hour' => app(DurationConcern::class)->hourToSecond($value),
