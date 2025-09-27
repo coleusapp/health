@@ -3,10 +3,12 @@
 namespace Coleus\Health\Models;
 
 use Coleus\Health\Casts\TimezoneDatetimeCast;
+use Coleus\Health\Database\Factories\WorkoutFactory;
 use Coleus\Health\HealthModelDefaults;
 use Coleus\Users\Concerns\HasUser;
 use Coleus\Users\Models\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -57,12 +59,18 @@ class Workout extends HealthModelDefaults
 {
     use SoftDeletes;
     use HasUser;
+    use HasFactory;
 
     public function casts(): array
     {
         return [
             'date' => TimezoneDatetimeCast::class,
         ];
+    }
+
+    protected static function newFactory(): WorkoutFactory
+    {
+        return WorkoutFactory::new();
     }
 
     public function exercises(): BelongsToMany

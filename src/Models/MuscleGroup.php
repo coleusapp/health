@@ -2,10 +2,12 @@
 
 namespace Coleus\Health\Models;
 
+use Coleus\Health\Database\Factories\MuscleGroupFactory;
 use Coleus\Health\HealthModelDefaults;
 use Coleus\Users\Concerns\HasUser;
 use Coleus\Users\Models\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -52,6 +54,12 @@ class MuscleGroup extends HealthModelDefaults
 {
     use SoftDeletes;
     use HasUser;
+    use HasFactory;
+
+    protected static function newFactory(): MuscleGroupFactory
+    {
+        return MuscleGroupFactory::new();
+    }
 
     public function muscleGroups(): HasMany
     {

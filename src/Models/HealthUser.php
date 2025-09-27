@@ -38,8 +38,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|HealthUser withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|HealthUser withoutRole($roles, $guard = null)
  * @mixin \Eloquent
- * @mixin \App\Models\User::class
- * @mixin \Coleus\Users\Models\User::class
+ * @mixin \Coleus\Users\Models\User
  */
 class HealthUser extends UserAlias
 {
@@ -49,6 +48,17 @@ class HealthUser extends UserAlias
     {
         return $this->morphedByMany(
             Weight::class,
+            'model',
+            'model_has_users',
+            'user_id',
+            'model_id',
+        );
+    }
+
+    public function workouts(): MorphToMany
+    {
+        return $this->morphedByMany(
+            Workout::class,
             'model',
             'model_has_users',
             'user_id',

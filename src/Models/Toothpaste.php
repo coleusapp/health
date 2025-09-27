@@ -2,10 +2,12 @@
 
 namespace Coleus\Health\Models;
 
+use Coleus\Health\Database\Factories\ToothpasteFactory;
 use Coleus\Health\HealthModelDefaults;
 use Coleus\Users\Concerns\HasUser;
 use Coleus\Users\Models\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -35,6 +37,12 @@ class Toothpaste extends HealthModelDefaults
 {
     use SoftDeletes;
     use HasUser;
+    use HasFactory;
 
     protected $table = 'toothpastes';
+
+    protected static function newFactory(): ToothpasteFactory
+    {
+        return ToothpasteFactory::new();
+    }
 }

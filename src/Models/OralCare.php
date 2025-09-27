@@ -3,10 +3,12 @@
 namespace Coleus\Health\Models;
 
 use Coleus\Health\Casts\TimezoneDatetimeCast;
+use Coleus\Health\Database\Factories\OralCareFactory;
 use Coleus\Health\HealthModelDefaults;
 use Coleus\Users\Concerns\HasUser;
 use Coleus\Users\Models\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -51,6 +53,7 @@ class OralCare extends HealthModelDefaults
 {
     use SoftDeletes;
     use HasUser;
+    use HasFactory;
 
     public function casts(): array
     {
@@ -60,6 +63,11 @@ class OralCare extends HealthModelDefaults
             'flossed' => 'boolean',
             'fluoride_taken' => 'boolean',
         ];
+    }
+
+    protected static function newFactory(): OralCareFactory
+    {
+        return OralCareFactory::new();
     }
 
     public function toothpastes(): BelongsToMany

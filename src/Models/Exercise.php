@@ -2,6 +2,7 @@
 
 namespace Coleus\Health\Models;
 
+use Coleus\Health\Database\Factories\ExerciseFactory;
 use Coleus\Health\HealthModelDefaults;
 use Coleus\Support\Concerns\AutoAssignUser;
 use Coleus\Users\Concerns\HasUser;
@@ -78,6 +79,7 @@ class Exercise extends HealthModelDefaults
 {
     use SoftDeletes;
     use HasUser;
+    use HasFactory;
 
     protected $casts = [
         'has_rep' => 'bool',
@@ -86,6 +88,11 @@ class Exercise extends HealthModelDefaults
         'has_calorie' => 'bool',
         'has_duration' => 'bool',
     ];
+
+    protected static function newFactory(): ExerciseFactory
+    {
+        return ExerciseFactory::new();
+    }
 
     public function muscleGroups(): BelongsToMany
     {
