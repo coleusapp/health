@@ -3,6 +3,7 @@
 namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Coleus\Health\Charts\WeightChart;
 use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Resources\CategoryResource;
 use Coleus\Health\Http\Resources\ExerciseResource;
@@ -10,12 +11,6 @@ use Coleus\Health\Http\Resources\MuscleGroupResource;
 use Coleus\Health\Http\Resources\ToothpasteResource;
 use Coleus\Health\Http\Resources\WeightResource;
 use Coleus\Health\Http\Resources\WorkoutResource;
-use Coleus\Health\Services\CategoryService;
-use Coleus\Health\Services\ExerciseService;
-use Coleus\Health\Services\MuscleGroupService;
-use Coleus\Health\Services\ToothpasteService;
-use Coleus\Health\Services\WeightChart;
-use Coleus\Health\Services\WorkoutService;
 use Inertia\Inertia;
 use Inertia\Response;
 

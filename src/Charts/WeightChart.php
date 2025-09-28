@@ -1,6 +1,6 @@
 <?php
 
-namespace Coleus\Health\Services;
+namespace Coleus\Health\Charts;
 
 use Carbon\CarbonPeriod;
 use Coleus\Health\Models\Weight;

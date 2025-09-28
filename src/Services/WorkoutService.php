@@ -16,25 +16,29 @@ class WorkoutService
             ->paginate();
     }
 
+    /**
+     * @throws \Throwable
+     */
     public static function store(array $data): Workout
     {
-        return static::save($data);
+        $data = collect($data);
+        $workout = Workout::create($data->only('date')->toArray());
+        return static::save($data->except('date')->toArray(), $workout);
     }
 
     public static function update(Workout $workout, array $data): Workout
     {
-        return static::save($data, $workout);
+        $data = collect($data);
+        $workout->update($data->only('date')->toArray());
+        return static::save($data->except('date')->toArray(), $workout);
     }
 
+    /**
+     * @throws \Throwable
+     */
     protected static function save(array $data, ?Workout $workout = null): Workout
     {
         $data = collect($data);
-
-        if ($workout) {
-            $workout->update($data->only('date')->toArray());
-        } else {
-            $workout = Workout::create($data->only('date')->toArray());
-        }
 
         DB::transaction(function () use ($workout, $data) {
             $workout->exercises()->detach();
