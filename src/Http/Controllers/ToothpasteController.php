@@ -2,8 +2,7 @@
 
 namespace Coleus\Health\Http\Controllers;
 
-use Coleus\Health\Http\Requests\Toothpaste\StoreRequest;
-use Coleus\Health\Http\Requests\Toothpaste\UpdateRequest;
+use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\ToothpasteRequest;
 use Coleus\Health\Http\Resources\ToothpasteResource;
 use Coleus\Health\Models\Toothpaste;
@@ -15,12 +14,8 @@ class ToothpasteController extends Controller
 {
     public function index()
     {
-        $collection = ToothpasteService::indexQuery()
-            ->paginate();
-
-
         return Inertia::render('toothpastes/Index', [
-            'collection' => ToothpasteResource::collection($collection),
+            'collection' => ToothpasteResource::collection(Health::toothpaste()->index()),
         ]);
     }
 
@@ -31,9 +26,9 @@ class ToothpasteController extends Controller
 
     public function store(ToothpasteRequest $request)
     {
-        $toothpaste = Toothpaste::create($request->validated());
-
-        return to_route('health.toothpastes.edit', ['toothpaste' => $toothpaste]);
+        return to_route('health.toothpastes.edit', [
+            'toothpaste' => Health::toothpaste()->store($request->validated()),
+        ]);
     }
 
     public function edit(Toothpaste $Toothpaste)
@@ -45,14 +40,14 @@ class ToothpasteController extends Controller
 
     public function update(ToothpasteRequest $request, Toothpaste $toothpaste)
     {
-        $toothpaste->update($request->validated());
+        Health::toothpaste()->update($toothpaste, $request->validated());
 
         return back();
     }
 
     public function destroy(Toothpaste $toothpaste)
     {
-        $toothpaste->delete();
+        Health::toothpaste()->destroy($toothpaste);
 
         return to_route('health.toothpastes.index');
     }

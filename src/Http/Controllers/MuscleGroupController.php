@@ -3,11 +3,11 @@
 namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\MuscleGroup\SaveRequest;
 use Coleus\Health\Http\Resources\MuscleGroupAsOptionResource;
 use Coleus\Health\Http\Resources\MuscleGroupResource;
 use Coleus\Health\Models\MuscleGroup;
-use Coleus\Health\Services\MuscleGroupService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,11 +16,8 @@ class MuscleGroupController extends Controller
 {
     public function index(): Response
     {
-        $collection = MuscleGroupService::indexQuery()
-            ->paginate();
-
         return Inertia::render('muscleGroups/Index', [
-            'collection' => MuscleGroupResource::collection($collection),
+            'collection' => MuscleGroupResource::collection(Health::muscleGroup()->index()),
         ]);
     }
 
@@ -33,7 +30,7 @@ class MuscleGroupController extends Controller
 
     public function store(SaveRequest $request): RedirectResponse
     {
-        $muscleGroup = MuscleGroup::create($request->validated());
+        $muscleGroup = Health::muscleGroup()->store($request->validated());
 
         return to_route('health.muscle-groups.edit', ['muscle_group' => $muscleGroup]);
     }
@@ -48,14 +45,14 @@ class MuscleGroupController extends Controller
 
     public function update(SaveRequest $request, MuscleGroup $muscleGroup): RedirectResponse
     {
-        $muscleGroup->update($request->validated());
+        Health::muscleGroup()->update($muscleGroup, $request->validated());
 
         return back();
     }
 
     public function destroy(MuscleGroup $muscleGroup): RedirectResponse
     {
-        $muscleGroup->delete();
+        Health::muscleGroup()->destroy($muscleGroup);
 
         return back();
     }

@@ -6,13 +6,13 @@ use Coleus\Health\Enums\CalorieEnum;
 use Coleus\Health\Enums\DistanceEnum;
 use Coleus\Health\Enums\DurationEnum;
 use Coleus\Health\Enums\WeightEnum;
+use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\WorkoutRequest;
 use Coleus\Health\Http\Resources\ExerciseAsOptionResource;
 use Coleus\Health\Http\Resources\WorkoutResource;
 use Coleus\Health\Models\Exercise;
 use Coleus\Health\Models\Workout;
 use Coleus\Health\Services\WorkoutService;
-use Coleus\Health\Services\WorkoutTable;
 use App\Http\Controllers\Controller;
 use Coleus\Support\Resources\EnumResource;
 use Inertia\Inertia;
@@ -22,9 +22,7 @@ class WorkoutController extends Controller
     public function index()
     {
         return Inertia::render('workouts/Index', [
-            'collection' => WorkoutResource::collection(
-                WorkoutTable::query()->withCount('exercises')->paginate()
-            ),
+            'collection' => WorkoutResource::collection(Health::workout()->index()),
         ]);
     }
 
@@ -44,9 +42,9 @@ class WorkoutController extends Controller
 
     public function store(WorkoutRequest $request)
     {
-        $workout = WorkoutService::save($request);
-
-        return to_route('health.workouts.edit', ['workout' => new WorkoutResource($workout)]);
+        return to_route('health.workouts.edit', [
+            'workout' => new WorkoutResource(Health::workout()->store($request->validated())),
+        ]);
     }
 
     public function edit(Workout $workout)
@@ -66,9 +64,9 @@ class WorkoutController extends Controller
      */
     public function update(WorkoutRequest $request, Workout $workout)
     {
-        WorkoutService::save($request, $workout);
-
-        return to_route('health.workouts.edit', ['workout' => new WorkoutResource($workout)]);
+        return to_route('health.workouts.edit', [
+            'workout' => WorkoutResource::make(Health::workout()->update($workout, $request->validated())),
+        ]);
     }
 
     public function destroy(Workout $workout)

@@ -32,7 +32,10 @@
         "laravel": {
             "providers": [
                 "Coleus\\Health\\HealthServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Calculator": "Coleus\\Health\\Facades\\Health"
+            }
         }
     },
     "config": {

@@ -4,10 +4,10 @@ namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Coleus\Health\Enums\WeightEnum;
+use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\WeightRequest;
 use Coleus\Health\Http\Resources\WeightResource;
 use Coleus\Health\Models\Weight;
-use Coleus\Health\Services\WeightService;
 use Coleus\Support\Resources\EnumResource;
 use Inertia\Inertia;
 
@@ -16,7 +16,7 @@ class WeightController extends Controller
     public function index()
     {
         return Inertia::render('weights/Index', [
-            'collection' => WeightResource::collection(WeightService::query()->paginate()),
+            'collection' => WeightResource::collection(Health::weight()->index()),
         ]);
     }
 
@@ -33,9 +33,9 @@ class WeightController extends Controller
 
     public function store(WeightRequest $request)
     {
-        $weight = Weight::create($request->all());
-
-        return to_route('health.weights.edit', ['weight' => new WeightResource($weight)]);
+        return to_route('health.weights.edit', [
+            'weight' => new WeightResource(Health::weight()->store($request->validated())),]
+        );
     }
 
     public function edit(Weight $weight)
@@ -48,14 +48,17 @@ class WeightController extends Controller
 
     public function update(WeightRequest $request, Weight $weight)
     {
-        $weight->update($request->all());
+        Health::weight()->update($weight, $request->validated());
+        $weight->refresh();
 
-        return to_route('health.weights.edit', ['weight' => new WeightResource($weight)]);
+        return to_route('health.weights.edit', [
+            'weight' => WeightResource::make($weight),
+        ]);
     }
 
     public function destroy(Weight $weight)
     {
-        $weight->delete();
+        Health::weight()->destroy($weight);
 
         return to_route('health.weights.index');
     }

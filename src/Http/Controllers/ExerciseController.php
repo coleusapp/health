@@ -7,6 +7,7 @@ use Coleus\Health\Enums\CalorieEnum;
 use Coleus\Health\Enums\DistanceEnum;
 use Coleus\Health\Enums\DurationEnum;
 use Coleus\Health\Enums\WeightEnum;
+use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\ExerciseRequest;
 use Coleus\Health\Http\Resources\CategoryAsOptionResource;
 use Coleus\Health\Http\Resources\ExerciseResource;
@@ -14,7 +15,7 @@ use Coleus\Health\Http\Resources\MuscleGroupAsOptionResource;
 use Coleus\Health\Models\Category;
 use Coleus\Health\Models\Exercise;
 use Coleus\Health\Models\MuscleGroup;
-use Coleus\Health\Services\ExerciseTable;
+use Coleus\Health\Services\ExerciseService;
 use Coleus\Support\Resources\EnumResource;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -25,7 +26,7 @@ class ExerciseController extends Controller
     public function index(): Response
     {
         return Inertia::render('exercises/Index', [
-            'collection' => ExerciseResource::collection(ExerciseTable::query()->paginate()),
+            'collection' => ExerciseResource::collection(Health::exercise()->index()),
         ]);
     }
 
@@ -43,12 +44,13 @@ class ExerciseController extends Controller
 
     public function store(ExerciseRequest $request): RedirectResponse
     {
-        $exercise = Exercise::create($request->validated());
-
-        $exercise->categories()->attach($request->flatten('categories'));
-        $exercise->muscleGroups()->attach($request->flatten('muscle_groups'));
-
-        return to_route('health.exercises.edit', ['exercise' => $exercise]);
+        return to_route('health.exercises.edit', [
+            'exercise' => Health::exercise()->store(
+                $request->validated(),
+                $request->flatten('categories'),
+                $request->flatten('muscle_groups')
+            ),
+        ]);
     }
 
     public function edit(Exercise $exercise): Response
@@ -66,17 +68,19 @@ class ExerciseController extends Controller
 
     public function update(ExerciseRequest $request, Exercise $exercise): RedirectResponse
     {
-        $exercise->update($request->validated());
-
-        $exercise->categories()->sync($request->flatten('categories'));
-        $exercise->muscleGroups()->sync($request->flatten('muscle_groups'));
+        Health::exercise()->update(
+            $exercise,
+            $request->validated(),
+            $request->flatten('categories'),
+            $request->flatten('muscle_groups')
+        );
 
         return back();
     }
 
     public function destroy(Exercise $exercise): RedirectResponse
     {
-        $exercise->delete();
+        Health::exercise()->destroy($exercise);
 
         return back();
     }

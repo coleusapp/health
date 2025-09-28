@@ -2,44 +2,29 @@
 
 namespace Coleus\Health\Services;
 
-use Coleus\Health\Models\HealthUser;
-use Coleus\Table\Searchable;
-use Coleus\Table\Table;
-use Illuminate\Database\Eloquent\Builder;
+use Coleus\Health\Models\Weight;
+use Illuminate\Pagination\LengthAwarePaginator;
 
-class WeightService extends Table
+class WeightService
 {
-    use Searchable;
-
-    public static function query(): Builder
+    public static function index(): LengthAwarePaginator
     {
-        return HealthUser::user()->weights()
-            ->when(static::hasSearchQuery(), fn ($query) => static::searchQuery($query))
-            ->when(static::hasSortQuery(), fn ($query) => static::sortQuery($query))
-            ->orderBy('created_at', 'desc')
-            ->getQuery();
+        return Weight::orderBy('created_at', 'desc')
+            ->paginate();
     }
 
-    protected static function searchQuery(Builder $query): Builder
+    public static function store(array $data): Weight
     {
-        return $query->where(function (Builder $builder) {
-            $builder->orWhere('weight', request(static::$searchQuery))
-                ->orWhereDate('date', request(static::$searchQuery))
-                ->orWhereDay('date', request(static::$searchQuery))
-                ->orWhereMonth('date', request(static::$searchQuery))
-                ->orWhereYear('date', request(static::$searchQuery))
-                ->orWhereTime('date', request(static::$searchQuery));
-        });
+        return Weight::create($data);
     }
 
-    protected static function sortQuery(Builder $query): Builder
+    public static function update(Weight $weight, array $data): bool
     {
-        return match (request(static::$sortQuery)) {
-            'date' => $query->orderBy('date', 'desc'),
-            '-date' => $query->orderBy('date'),
-            'weight' => $query->orderBy('weight', 'desc'),
-            '-weight' => $query->orderBy('weight'),
-            default => $query->orderBy('created_at', 'desc'),
-        };
+        return $weight->update($data);
+    }
+
+    public static function destroy(Weight $weight): bool
+    {
+        return $weight->delete();
     }
 }

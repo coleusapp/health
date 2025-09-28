@@ -2,10 +2,10 @@
 
 namespace Coleus\Health\Http\Controllers;
 
+use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\CategoryRequest;
 use Coleus\Health\Http\Resources\CategoryResource;
 use Coleus\Health\Models\Category;
-use Coleus\Health\Services\CategoryTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index(): Response
     {
         return Inertia::render('categories/Index', [
-            'collection' => CategoryResource::collection(CategoryTable::query()->paginate()),
+            'collection' => CategoryResource::collection(Health::category()->index()),
         ]);
     }
 
@@ -27,10 +27,8 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request): RedirectResponse
     {
-        $category = Category::create($request->validated());
-
         return to_route('health.categories.edit', [
-            'category' => $category
+            'category' => Health::category()->store($request->validated()),
         ]);
     }
 
@@ -43,14 +41,14 @@ class CategoryController extends Controller
 
     public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
-        $category->update($request->validated());
+        Health::category()->update($category, $request->validated());
 
         return back();
     }
 
     public function destroy(Category $category)
     {
-        $category->delete();
+        Health::category()->destroy($category);
 
         return back();
     }

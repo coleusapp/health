@@ -39,4 +39,11 @@ class HealthServiceProvider extends PackageServiceProvider
                 ->pushMiddlewareToGroup('web', HandleInertiaRequests::class);
         }
     }
+
+    public function packageRegistered(): void
+    {
+        $this->app->bind('health', function($app) {
+            return new Health();
+        });
+    }
 }

@@ -3,19 +3,19 @@
 namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Resources\CategoryResource;
 use Coleus\Health\Http\Resources\ExerciseResource;
 use Coleus\Health\Http\Resources\MuscleGroupResource;
 use Coleus\Health\Http\Resources\ToothpasteResource;
 use Coleus\Health\Http\Resources\WeightResource;
 use Coleus\Health\Http\Resources\WorkoutResource;
-use Coleus\Health\Services\CategoryTable;
-use Coleus\Health\Services\ExerciseTable;
+use Coleus\Health\Services\CategoryService;
+use Coleus\Health\Services\ExerciseService;
 use Coleus\Health\Services\MuscleGroupService;
 use Coleus\Health\Services\ToothpasteService;
 use Coleus\Health\Services\WeightChart;
-use Coleus\Health\Services\WeightService;
-use Coleus\Health\Services\WorkoutTable;
+use Coleus\Health\Services\WorkoutService;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -24,12 +24,12 @@ class DashboardController extends Controller
     public function __invoke(): Response
     {
         return Inertia::render('Dashboard', [
-            'weights' => WeightResource::collection(WeightService::query()->paginate()),
-            'categories' => CategoryResource::collection(CategoryTable::query()->paginate()),
-            'muscle_groups' => MuscleGroupResource::collection(MuscleGroupService::indexQuery()->paginate()),
-            'toothpastes' => ToothpasteResource::collection(ToothpasteService::indexQuery()->paginate()),
-            'exercises' => ExerciseResource::collection(ExerciseTable::query()->paginate()),
-            'workouts' => WorkoutResource::collection(WorkoutTable::query()->paginate()),
+            'weights' => WeightResource::collection(Health::weight()->index()),
+            'categories' => CategoryResource::collection(Health::category()->index()),
+            'muscle_groups' => MuscleGroupResource::collection(Health::muscleGroup()->index()),
+            'toothpastes' => ToothpasteResource::collection(Health::toothpaste()->index()),
+            'exercises' => ExerciseResource::collection(Health::exercise()->index()),
+            'workouts' => WorkoutResource::collection(Health::workout()->index()),
             'weights_chart' => WeightChart::getData(),
         ]);
     }

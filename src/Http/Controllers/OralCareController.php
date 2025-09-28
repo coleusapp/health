@@ -3,12 +3,12 @@
 namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\OralCareRequest;
 use Coleus\Health\Http\Resources\ToothpasteAsOptionResource;
 use Coleus\Health\Http\Resources\OralCareResource;
 use Coleus\Health\Models\OralCare;
 use Coleus\Health\Models\Toothpaste;
-use Coleus\Health\Services\OralCareService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,11 +17,8 @@ class OralCareController extends Controller
 {
     public function index(): Response
     {
-        $collection = OralCareService::indexQuery()
-            ->paginate();
-
         return Inertia::render('oralCares/Index', [
-            'collection' => OralCareResource::collection($collection),
+            'collection' => OralCareResource::collection(Health::oralCare()->index()),
         ]);
     }
 
@@ -38,9 +35,9 @@ class OralCareController extends Controller
 
     public function store(OralCareRequest $request): RedirectResponse
     {
-        $oralCare = OralCareService::save($request);
-
-        return to_route('health.oral-cares.edit', ['oral_care' => $oralCare]);
+        return to_route('health.oral-cares.edit', [
+            'oral_care' => Health::oralCare()->store($request->validated()),
+        ]);
     }
 
     public function edit(OralCare $oralCare): Response
@@ -53,14 +50,14 @@ class OralCareController extends Controller
 
     public function update(OralCareRequest $request, OralCare $oralCare): RedirectResponse
     {
-        OralCareService::save($request, $oralCare);
+        Health::oralCare()->update($oralCare, $request->validated());
 
         return back();
     }
 
     public function destroy(OralCare $oralCare): RedirectResponse
     {
-        $oralCare->delete();
+        Health::oralCare()->destroy($oralCare);
 
         return back();
     }
