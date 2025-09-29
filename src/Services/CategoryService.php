@@ -2,29 +2,13 @@
 
 namespace Coleus\Health\Services;
 
+use Coleus\Health\Data\CategoryData;
 use Coleus\Health\Models\Category;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Coleus\Support\Services\Service;
 
-class CategoryService
+class CategoryService extends Service
 {
-    public static function index(): LengthAwarePaginator
-    {
-        return Category::orderBy('created_at', 'desc')
-            ->paginate();
-    }
+    protected $model = Category::class;
 
-    public static function store(array $data): Category
-    {
-        return Category::create($data);
-    }
-
-    public static function update(Category $category, array $data): bool
-    {
-        return $category->update($data);
-    }
-
-    public static function destroy(Category $category): bool
-    {
-        return $category->delete();
-    }
+    protected $data = CategoryData::class;
 }

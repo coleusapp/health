@@ -3,6 +3,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "coleus/support": "^1.0",
+        "coleus/table": "^1.0",
+        "coleus/users": "^1.0",
         "illuminate/console": "^10.45|^11.0|^12.0",
         "illuminate/contracts": "^10.45|^11.0|^12.0",
         "illuminate/database": "^10.45|^11.0|^12.0",
@@ -10,11 +13,9 @@
         "illuminate/support": "^10.45|^11.0|^12.0",
         "illuminate/validation": "^10.45|^11.0|^12.0",
         "illuminate/view": "^10.45|^11.0|^12.0",
-        "spatie/laravel-package-tools": "^1.9",
-        "coleus/support": "^1.0",
-        "coleus/table": "^1.0",
-        "coleus/users": "^1.0",
         "inertiajs/inertia-laravel": "^2.0",
+        "spatie/laravel-data": "^4.17",
+        "spatie/laravel-package-tools": "^1.9",
         "tightenco/ziggy": "^v2.5"
     },
     "autoload": {

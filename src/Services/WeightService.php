@@ -2,29 +2,13 @@
 
 namespace Coleus\Health\Services;
 
+use Coleus\Health\Data\WeightData;
 use Coleus\Health\Models\Weight;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Coleus\Support\Services\Service;
 
-class WeightService
+class WeightService extends Service
 {
-    public static function index(): LengthAwarePaginator
-    {
-        return Weight::orderBy('created_at', 'desc')
-            ->paginate();
-    }
+    protected $model = Weight::class;
 
-    public static function store(array $data): Weight
-    {
-        return Weight::create($data);
-    }
-
-    public static function update(Weight $weight, array $data): bool
-    {
-        return $weight->update($data);
-    }
-
-    public static function destroy(Weight $weight): bool
-    {
-        return $weight->delete();
-    }
+    protected $data = WeightData::class;
 }
