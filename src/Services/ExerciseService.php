@@ -2,37 +2,50 @@
 
 namespace Coleus\Health\Services;
 
+use Coleus\Health\Data\ExerciseData;
 use Coleus\Health\Models\Exercise;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Coleus\Support\Services\Service;
+use Illuminate\Support\Facades\DB;
 
-class ExerciseService
+class ExerciseService extends Service
 {
-    public static function index(): LengthAwarePaginator
+    protected $model = Exercise::class;
+
+    protected $data = ExerciseData::class;
+
+    /**
+     * @throws \Throwable
+     */
+    public function store(mixed $payload): bool
     {
-        return Exercise::orderBy('created_at', 'desc')
-            ->paginate();
+        DB::beginTransaction();
+        try {
+            $model = Exercise::create($payload);
+            $model->categories()->sync(collect($payload['categories'] ?? [])->pluck('id'));
+            $model->muscleGroups()->sync(collect($payload['muscle_groups'] ?? [])->pluck('id'));
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+        }
+
+        return $result ?? false;
     }
 
-    public static function store(array $data, array $categories = [], array $muscleGroups = []): Exercise
+    /**
+     * @throws \Throwable
+     */
+    public function update(mixed $model, mixed $payload): bool
     {
-        $exercise = Exercise::create($data);
-        $exercise->categories()->attach($categories);
-        $exercise->muscleGroups()->attach($muscleGroups);
+        DB::beginTransaction();
+        try {
+            $result = $model->update($payload);
+            $model->categories()->sync(collect($payload['categories'] ?? [])->pluck('id'));
+            $model->muscleGroups()->sync(collect($payload['muscle_groups'] ?? [])->pluck('id'));
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+        }
 
-        return $exercise;
-    }
-
-    public static function update(Exercise $exercise, array $data, array $categories = [], array $muscleGroups = []): bool
-    {
-        $result = $exercise->update($data);
-        $exercise->categories()->sync($categories);
-        $exercise->muscleGroups()->sync($muscleGroups);
-
-        return $result;
-    }
-
-    public static function destroy(Exercise $exercise): bool
-    {
-        return $exercise->delete();
+        return $result ?? false;
     }
 }

@@ -12,7 +12,6 @@ use Coleus\Health\Http\Resources\ExerciseAsOptionResource;
 use Coleus\Health\Http\Resources\WorkoutResource;
 use Coleus\Health\Models\Exercise;
 use Coleus\Health\Models\Workout;
-use Coleus\Health\Services\WorkoutService;
 use App\Http\Controllers\Controller;
 use Coleus\Support\Resources\EnumResource;
 use Inertia\Inertia;

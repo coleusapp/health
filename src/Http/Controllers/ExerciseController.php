@@ -47,8 +47,6 @@ class ExerciseController extends Controller
         return to_route('health.exercises.edit', [
             'exercise' => Health::exercise()->store(
                 $request->validated(),
-                $request->flatten('categories'),
-                $request->flatten('muscle_groups')
             ),
         ]);
     }
@@ -71,8 +69,6 @@ class ExerciseController extends Controller
         Health::exercise()->update(
             $exercise,
             $request->validated(),
-            $request->flatten('categories'),
-            $request->flatten('muscle_groups')
         );
 
         return back();

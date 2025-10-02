@@ -2,29 +2,13 @@
 
 namespace Coleus\Health\Services;
 
+use Coleus\Health\Data\MuscleGroupData;
 use Coleus\Health\Models\MuscleGroup;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Coleus\Support\Services\Service;
 
-class MuscleGroupService
+class MuscleGroupService extends Service
 {
-    public static function index(): LengthAwarePaginator
-    {
-        return MuscleGroup::orderBy('created_at', 'desc')
-            ->paginate();
-    }
+    protected $model = MuscleGroup::class;
 
-    public static function store(array $data): MuscleGroup
-    {
-        return MuscleGroup::create($data);
-    }
-
-    public static function update(MuscleGroup $muscleGroup, array $data): bool
-    {
-        return $muscleGroup->update($data);
-    }
-
-    public static function destroy(MuscleGroup $muscleGroup): bool
-    {
-        return $muscleGroup->delete();
-    }
+    protected $data = MuscleGroupData::class;
 }
