@@ -5,8 +5,8 @@ namespace Coleus\Health\Services;
 use Coleus\Health\Data\WorkoutData;
 use Coleus\Health\Models\Workout;
 use Coleus\Support\Services\Service;
-use DB;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class WorkoutService extends Service
@@ -31,14 +31,16 @@ class WorkoutService extends Service
         try {
             $workout = $workout ?? Workout::create($payload);
 
-            $workout->exercises()->sync(
-                collect($payload['exercises'] ?? [])
-                    ->mapWithKeys(fn ($item) => [
-                        $item['id'] => collect($item)->except('id')
-                    ])
-                    ->toArray());
+            $workout->exercises()->detach();
+            collect($payload['exercises'] ?? [])
+                ->each(fn($item) => $workout->exercises()->attach(
+                    $item['id'],
+                    collect($item)->except('id')->toArray()
+                ));
             DB::commit();
         } catch (Throwable $e) {
+            logger()->error($e->getMessage());
+            logger()->error($e->getTraceAsString());
             DB::rollBack();
         }
 
