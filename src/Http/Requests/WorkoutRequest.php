@@ -7,13 +7,11 @@ use Coleus\Health\Enums\DistanceEnum;
 use Coleus\Health\Enums\DurationEnum;
 use Coleus\Health\Enums\WeightEnum;
 use Coleus\Health\Models\Exercise;
-use Coleus\Support\Concerns\FlattenArray;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class WorkoutRequest extends FormRequest
 {
-    use FlattenArray;
 
     public function authorize(): bool
     {

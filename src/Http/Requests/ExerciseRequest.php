@@ -8,14 +8,11 @@ use Coleus\Health\Enums\DurationEnum;
 use Coleus\Health\Enums\WeightEnum;
 use Coleus\Health\Models\Category;
 use Coleus\Health\Models\MuscleGroup;
-use Coleus\Support\Concerns\FlattenArray;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class ExerciseRequest extends FormRequest
 {
-    use FlattenArray;
-
     public function authorize(): bool
     {
         return true;

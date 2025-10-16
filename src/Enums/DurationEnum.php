@@ -3,7 +3,6 @@
 namespace Coleus\Health\Enums;
 
 use Coleus\Support\Contracts\HasLabel;
-use Illuminate\Contracts\Support\Htmlable;
 
 enum DurationEnum: string implements HasLabel
 {
@@ -11,7 +10,7 @@ enum DurationEnum: string implements HasLabel
     case Minute = 'minute';
     case Hour = 'hour';
 
-    public function getLabel(): string|Htmlable|null
+    public function getLabel(): string
     {
         return match ($this) {
             self::Second => 'Second',

@@ -2,6 +2,7 @@
 
 namespace Coleus\Health\Http\Resources;
 
+use Coleus\Support\Concerns\NullableResourceCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 

@@ -27,7 +27,7 @@ class WorkoutController extends Controller
 
     public function create()
     {
-        $default = new Workout(['date' => now('America/Denver')]);
+        $default = new Workout(['date' => now(config('app.timezone'))]);
 
         return Inertia::render('workouts/Create', [
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),

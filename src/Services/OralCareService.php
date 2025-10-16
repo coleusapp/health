@@ -2,33 +2,16 @@
 
 namespace Coleus\Health\Services;
 
-use Coleus\Health\Http\Requests\OralCareRequest;
+use Coleus\Health\Data\OralCareData;
 use Coleus\Health\Models\OralCare;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Coleus\Support\Services\Service;
 use Illuminate\Support\Facades\DB;
 
-class OralCareService
+class OralCareService extends Service
 {
-    public static function index(): LengthAwarePaginator
-    {
-        return OralCare::orderBy('created_at', 'desc')
-            ->paginate();
-    }
+    protected $data = OralCareData::class;
 
-    public static function store(array $data): OralCare
-    {
-        return static::save($data);
-    }
-
-    public static function update(OralCare $oralCare, array $data): OralCare
-    {
-        return static::save($data, $oralCare);
-    }
-
-    public static function destroy(OralCare $oralCare): bool
-    {
-        return $oralCare->delete();
-    }
+    protected $model = OralCare::class;
 
     protected static function save(array $data, ?OralCare $oralCare = null): OralCare
     {
@@ -47,5 +30,13 @@ class OralCareService
         });
 
         return $oralCare;
+    }
+
+    public function default(): OralCare
+    {
+        $default = OralCare::latest('date')->first() ?? new OralCare();
+        $default->date = now(config('app.timezone'));
+
+        return $default;
     }
 }

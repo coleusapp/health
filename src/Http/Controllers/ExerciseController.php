@@ -9,13 +9,8 @@ use Coleus\Health\Enums\DurationEnum;
 use Coleus\Health\Enums\WeightEnum;
 use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\ExerciseRequest;
-use Coleus\Health\Http\Resources\CategoryAsOptionResource;
 use Coleus\Health\Http\Resources\ExerciseResource;
-use Coleus\Health\Http\Resources\MuscleGroupAsOptionResource;
-use Coleus\Health\Models\Category;
 use Coleus\Health\Models\Exercise;
-use Coleus\Health\Models\MuscleGroup;
-use Coleus\Health\Services\ExerciseService;
 use Coleus\Support\Resources\EnumResource;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -37,17 +32,18 @@ class ExerciseController extends Controller
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),
             'duration_units' => EnumResource::collectionWithNull(DurationEnum::cases()),
             'calorie_units' => EnumResource::collectionWithNull(CalorieEnum::cases()),
-            'muscle_groups' => MuscleGroupAsOptionResource::collection(MuscleGroup::get()),
-            'categories' => CategoryAsOptionResource::collection(Category::get()),
+            'muscle_groups' => Health::muscleGroup()->options(),
+            'categories' => Health::category()->options(),
         ]);
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function store(ExerciseRequest $request): RedirectResponse
     {
         return to_route('health.exercises.edit', [
-            'exercise' => Health::exercise()->store(
-                $request->validated(),
-            ),
+            'exercise' => Health::exercise()->store($request->validated()),
         ]);
     }
 
@@ -59,17 +55,17 @@ class ExerciseController extends Controller
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),
             'duration_units' => EnumResource::collectionWithNull(DurationEnum::cases()),
             'calorie_units' => EnumResource::collectionWithNull(CalorieEnum::cases()),
-            'muscle_groups' => MuscleGroupAsOptionResource::collection(MuscleGroup::get()),
-            'categories' => CategoryAsOptionResource::collection(Category::get()),
+            'muscle_groups' => Health::muscleGroup()->options(),
+            'categories' => Health::category()->options(),
         ]);
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function update(ExerciseRequest $request, Exercise $exercise): RedirectResponse
     {
-        Health::exercise()->update(
-            $exercise,
-            $request->validated(),
-        );
+        Health::exercise()->update($exercise, $request->validated());
 
         return back();
     }

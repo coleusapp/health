@@ -22,12 +22,9 @@ class WeightController extends Controller
 
     public function create()
     {
-        $default = Weight::latest('created_at')->first() ?? new Weight(['weight' => 1]);
-        $default->date = now('America/Denver');
-
         return Inertia::render('weights/Create', [
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
-            'resource' => new WeightResource($default),
+            'resource' => new WeightResource(Health::weight()->default()),
         ]);
     }
 

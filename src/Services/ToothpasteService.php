@@ -2,29 +2,19 @@
 
 namespace Coleus\Health\Services;
 
+use Coleus\Health\Data\ToothpasteData;
+use Coleus\Health\Http\Resources\ToothpasteAsOptionResource;
 use Coleus\Health\Models\Toothpaste;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Coleus\Support\Services\Concerns\CanBeOption;
+use Coleus\Support\Services\Service;
 
-class ToothpasteService
+class ToothpasteService extends Service
 {
-    public static function index(): LengthAwarePaginator
-    {
-        return Toothpaste::orderBy('created_at', 'desc')
-            ->paginate();
-    }
+    use CanBeOption;
 
-    public static function store(array $data): Toothpaste
-    {
-        return Toothpaste::create($data);
-    }
+    protected $model = Toothpaste::class;
 
-    public static function update(Toothpaste $toothpaste, array $data): bool
-    {
-        return $toothpaste->update($data);
-    }
+    protected $data = ToothpasteData::class;
 
-    public static function destroy(Toothpaste $toothpaste): bool
-    {
-        return $toothpaste->delete();
-    }
+    protected string $optionResource = ToothpasteAsOptionResource::class;
 }

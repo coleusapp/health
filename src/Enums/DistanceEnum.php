@@ -3,7 +3,6 @@
 namespace Coleus\Health\Enums;
 
 use Coleus\Support\Contracts\HasLabel;
-use Illuminate\Contracts\Support\Htmlable;
 
 enum DistanceEnum: string implements HasLabel
 {
@@ -11,7 +10,7 @@ enum DistanceEnum: string implements HasLabel
     case Meter = 'meter';
     case Mile = 'mile';
 
-    public function getLabel(): string|Htmlable|null
+    public function getLabel(): string
     {
         return match ($this) {
             self::Kilometer => 'Kilometer',

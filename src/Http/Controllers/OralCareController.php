@@ -24,12 +24,9 @@ class OralCareController extends Controller
 
     public function create(): Response
     {
-        $default = OralCare::latest('date')->first() ?? new OralCare();
-        $default->date = now('America/Denver');
-
         return Inertia::render('oralCares/Create', [
-            'resource' => OralCareResource::make($default->load('toothpastes')),
-            'toothpastes' => ToothpasteAsOptionResource::collectionWithNull(Toothpaste::get()),
+            'resource' => OralCareResource::make(Health::oralCare()->default()->load('toothpastes')),
+            'toothpastes' => Health::toothpaste()->options(),
         ]);
     }
 
@@ -44,7 +41,7 @@ class OralCareController extends Controller
     {
         return Inertia::render('oralCares/Edit', [
             'resource' => OralCareResource::make($oralCare->load('toothpastes')),
-            'toothpastes' => ToothpasteAsOptionResource::collectionWithNull(Toothpaste::get()),
+            'toothpastes' => Health::toothpaste()->options(),
         ]);
     }
 

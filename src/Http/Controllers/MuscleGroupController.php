@@ -24,22 +24,22 @@ class MuscleGroupController extends Controller
     public function create(): Response
     {
         return Inertia::render('muscleGroups/Create', [
-            'muscle_groups' => MuscleGroupAsOptionResource::collectionWithNull(MuscleGroup::get()),
+            'muscle_groups' => Health::muscleGroup()->options(),
         ]);
     }
 
     public function store(SaveRequest $request): RedirectResponse
     {
-        $muscleGroup = Health::muscleGroup()->store($request->validated());
-
-        return to_route('health.muscle-groups.edit', ['muscle_group' => $muscleGroup]);
+        return to_route('health.muscle-groups.edit', [
+            'muscle_group' => Health::muscleGroup()->store($request->validated()),
+        ]);
     }
 
     public function edit(MuscleGroup $muscleGroup): Response
     {
         return Inertia::render('muscleGroups/Edit', [
             'resource' => MuscleGroupResource::make($muscleGroup),
-            'muscle_groups' => MuscleGroupAsOptionResource::collectionWithNull(MuscleGroup::get()),
+            'muscle_groups' => Health::muscleGroup()->options(),
         ]);
     }
 

@@ -6,7 +6,6 @@ use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\ToothpasteRequest;
 use Coleus\Health\Http\Resources\ToothpasteResource;
 use Coleus\Health\Models\Toothpaste;
-use Coleus\Health\Services\ToothpasteService;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 
@@ -31,10 +30,10 @@ class ToothpasteController extends Controller
         ]);
     }
 
-    public function edit(Toothpaste $Toothpaste)
+    public function edit(Toothpaste $toothpaste)
     {
         return Inertia::render('toothpastes/Edit', [
-            'resource' => ToothpasteResource::make($Toothpaste),
+            'resource' => ToothpasteResource::make($toothpaste),
         ]);
     }
 
