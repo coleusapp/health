@@ -29,4 +29,26 @@ class ExerciseFactory extends Factory
             'duration_unit' => $this->faker->randomElement(DurationEnum::cases())->value,
         ];
     }
+
+    public function allTrue(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'has_rep' => true,
+            'has_weight' => true,
+            'has_distance' => true,
+            'has_calorie' => true,
+            'has_duration' => true,
+        ]);
+    }
+
+    public function allFalse(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'has_rep' => false,
+            'has_weight' => false,
+            'has_distance' => false,
+            'has_calorie' => false,
+            'has_duration' => false,
+        ]);
+    }
 }

@@ -32,9 +32,15 @@ test('category edit works', function () {
 test('category update works', function () {
     $this->actingAs(User::factory()->create());
     $category = Category::factory()->create();
-    $response = $this->put(route('health.categories.update', ['category' => $category]), Category::factory()->make()->toArray());
+    $data = Category::factory()->make()->toArray();
+
+    $response = $this->put(
+        route('health.categories.update', ['category' => $category]),
+        $data
+    );
     $response->assertStatus(302);
-    $this->assertDatabaseCount(app(Category::class)->getTable(), 1);
+    $this->assertModelExists($category);
+    $this->assertEquals($data['name'], Category::first()->name);
 });
 
 test('category delete works', function () {
