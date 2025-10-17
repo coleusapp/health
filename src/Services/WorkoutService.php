@@ -5,10 +5,14 @@ namespace Coleus\Health\Services;
 use Coleus\Health\Data\WorkoutData;
 use Coleus\Health\Models\Workout;
 use Coleus\Support\Services\Service;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
+/**
+ * @extends Service<Workout, WorkoutData>
+ */
 class WorkoutService extends Service
 {
     protected $model = Workout::class;
@@ -23,17 +27,19 @@ class WorkoutService extends Service
     }
 
     /**
+     * @param  array<string, mixed>  $payload
+     * @param  Workout|null  $model
      * @throws \Throwable
      */
-    protected function save(array $payload, ?Workout $workout = null): Workout
+    protected function save(array $payload, ?Model $model = null): Workout
     {
         DB::beginTransaction();
         try {
-            $workout = $workout ?? Workout::create($payload);
+            $model = $model ?? Workout::create($payload);
 
-            $workout->exercises()->detach();
+            $model->exercises()->detach();
             collect($payload['exercises'] ?? [])
-                ->each(fn($item) => $workout->exercises()->attach(
+                ->each(fn($item) => $model->exercises()->attach(
                     $item['id'],
                     collect($item)->except('id')->toArray()
                 ));
@@ -44,6 +50,6 @@ class WorkoutService extends Service
             DB::rollBack();
         }
 
-        return $workout;
+        return $model;
     }
 }

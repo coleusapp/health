@@ -5,6 +5,7 @@ namespace Coleus\Health\Services;
 use Coleus\Health\Data\OralCareData;
 use Coleus\Health\Models\OralCare;
 use Coleus\Support\Services\Service;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class OralCareService extends Service
@@ -13,23 +14,23 @@ class OralCareService extends Service
 
     protected $model = OralCare::class;
 
-    protected static function save(array $data, ?OralCare $oralCare = null): OralCare
+    protected static function save(array $payload, ?Model $model = null): OralCare
     {
-        if ($oralCare) {
-            $oralCare->update($data);
+        if ($model) {
+            $model->update($payload);
         } else {
-            $oralCare = OralCare::create($data);
+            $model = OralCare::create($payload);
         }
 
-        DB::transaction(function () use ($oralCare, $data) {
-            $oralCare->toothpastes()->detach();
-            collect($data['toothpastes'] ?? [])
-                ->each(function ($toothpaste) use ($oralCare) {
-                    $oralCare->toothpastes()->attach($toothpaste['toothpaste_id']);
+        DB::transaction(function () use ($model, $payload) {
+            $model->toothpastes()->detach();
+            collect($payload['toothpastes'] ?? [])
+                ->each(function ($toothpaste) use ($model) {
+                    $model->toothpastes()->attach($toothpaste['toothpaste_id']);
                 });
         });
 
-        return $oralCare;
+        return $model;
     }
 
     public function default(): OralCare
