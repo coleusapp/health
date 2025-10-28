@@ -15,7 +15,8 @@ beforeEach(function () {
 });
 
 test('exercises index works', function () {
-    assertSuccessfulGet(route('health.exercises.index'));
+    return test()->get(route('health.exercises.index'))
+        ->assertStatus(Response::HTTP_OK);
 });
 
 test('exercises create works', function () {
@@ -23,21 +24,23 @@ test('exercises create works', function () {
         ->assertStatus(Response::HTTP_OK);
 });
 
-test('exercises store works', function ($data) {
+test('exercise store works', function ($data) {
     $this->post(route('health.exercises.store'), $data)
-        ->assertStatus(302);
+        ->assertRedirect()
+        ->assertSessionHasNoErrors();
     $this->assertDatabaseCount(app(Exercise::class)->getTable(), 1);
     $this->assertEmpty(array_diff($data, Exercise::orderByDesc('id')->first()->toArray()));
 })->with('primary');
 
 test('exercise edit works', function () {
     $this->get(route('health.exercises.edit', ['exercise' => Exercise::factory()->create()]))
-        ->assertStatus(200);
+        ->assertOk();
 });
 
 test('exercise update works', function ($data) {
     $this->put(route('health.exercises.update', ['exercise' => Exercise::factory()->create()]), $data)
-        ->assertStatus(302);
+        ->assertRedirect()
+        ->assertSessionHasNoErrors();
     $this->assertDatabaseCount(app(Exercise::class)->getTable(), 1);
     $latest = Exercise::orderByDesc('id')->first();
     $this->assertEmpty(array_diff($data, $latest->toArray()));
@@ -45,7 +48,7 @@ test('exercise update works', function ($data) {
 
 test('exercise delete works', function () {
     $exercise = Exercise::factory()->create();
-    $response = $this->delete(route('health.exercises.destroy', ['exercise' => $exercise]));
-    $response->assertStatus(302);
+    $this->delete(route('health.exercises.destroy', ['exercise' => $exercise]))
+        ->assertRedirect();
     $this->assertSoftDeleted($exercise);
 });

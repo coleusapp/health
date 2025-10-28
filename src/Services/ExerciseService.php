@@ -5,6 +5,7 @@ namespace Coleus\Health\Services;
 use Coleus\Health\Data\ExerciseData;
 use Coleus\Health\Models\Exercise;
 use Coleus\Support\Services\Service;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class ExerciseService extends Service
@@ -16,8 +17,9 @@ class ExerciseService extends Service
     /**
      * @throws \Throwable
      */
-    public function store(mixed $payload): bool
+    public function store(mixed $payload): ?Model
     {
+        $model = null;
         DB::beginTransaction();
         try {
             $model = Exercise::create($payload);
@@ -28,7 +30,7 @@ class ExerciseService extends Service
             DB::rollBack();
         }
 
-        return $result ?? false;
+        return $model;
     }
 
     /**
