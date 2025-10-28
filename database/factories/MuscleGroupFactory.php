@@ -21,10 +21,17 @@ class MuscleGroupFactory extends Factory
         ];
     }
 
-    public function withParent()
+    public function withParent(): static
     {
         return $this->state(fn() => [
             'muscle_group_id' => MuscleGroup::factory(),
+        ]);
+    }
+
+    public function withoutParent(): static
+    {
+        return $this->state(fn() => [
+            'muscle_group_id' => null,
         ]);
     }
 }

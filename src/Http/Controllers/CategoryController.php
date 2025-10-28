@@ -44,7 +44,7 @@ class CategoryController extends Controller
     {
         Health::category()->update($category, $request->validated());
 
-        return back();
+        return to_route('health.categories.edit', ['category' => $category]);
     }
 
     public function destroy(Category $category)

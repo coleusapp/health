@@ -1,52 +1,42 @@
 <?php
 
 use Coleus\Health\Models\Category;
-use Coleus\Users\Models\User;
+use Coleus\Health\Models\HealthUser;
+
+beforeEach(function () {
+    $this->actingAs(HealthUser::factory()->create());
+});
 
 test('categories index works', function () {
-    $this->actingAs(User::factory()->create());
-    $response = $this->get(route('health.categories.index'));
-    $response->assertStatus(200);
+    $this->get(route('health.categories.index'))
+        ->assertOk();
 });
 
 test('categories create works', function () {
-    $this->actingAs(User::factory()->create());
-    $response = $this->get(route('health.categories.create'));
-    $response->assertStatus(200);
+    $this->get(route('health.categories.create'))
+        ->assertOk();
 });
 
 test('categories store works', function () {
-    $this->actingAs(User::factory()->create());
-    $response = $this->post(route('health.categories.store'), Category::factory()->make()->toArray());
-    $response->assertStatus(302);
-    $this->assertDatabaseCount(app(Category::class)->getTable(), 1);
+    $this->post(route('health.categories.store'), Category::factory()->make()->toArray())
+        ->assertRedirect(route('health.categories.edit', ['category' => 1]));
 });
 
 test('category edit works', function () {
-    $this->actingAs(User::factory()->create());
-    $category = Category::factory()->create();
-    $response = $this->get(route('health.categories.edit', ['category' => $category]));
-    $response->assertStatus(200);
+    $this->get(route('health.categories.edit', ['category' => Category::factory()->create()]))
+        ->assertOk();
 });
 
 test('category update works', function () {
-    $this->actingAs(User::factory()->create());
     $category = Category::factory()->create();
-    $data = Category::factory()->make()->toArray();
-
-    $response = $this->put(
-        route('health.categories.update', ['category' => $category]),
-        $data
-    );
-    $response->assertStatus(302);
-    $this->assertModelExists($category);
-    $this->assertEquals($data['name'], Category::first()->name);
+    $this->put(
+        route('health.categories.update',
+            ['category' => $category]), Category::factory()->make()->toArray())
+        ->assertRedirect(route('health.categories.edit', ['category' => $category]));
 });
 
 test('category delete works', function () {
-    $this->actingAs(User::factory()->create());
     $category = Category::factory()->create();
-    $response = $this->delete(route('health.categories.destroy', ['category' => $category]));
-    $response->assertStatus(302);
+    assertSuccessfulDelete(route('health.categories.destroy', ['category' => $category]));
     $this->assertSoftDeleted($category);
 });

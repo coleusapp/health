@@ -1,11 +1,11 @@
 <?php
 
-use Coleus\Users\Models\User;
+use Coleus\Health\Models\HealthUser;
+
+beforeEach(function () {
+    $this->actingAs(HealthUser::factory()->create());
+});
 
 test('the dashboard works', function () {
-    $this->actingAs(User::factory()->create());
-
-    $response = $this->get(route('health.dashboard'));
-
-    $response->assertStatus(200);
+    assertSuccessfulGet(route('health.dashboard'));
 });
