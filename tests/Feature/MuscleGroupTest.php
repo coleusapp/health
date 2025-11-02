@@ -15,16 +15,15 @@ beforeEach(function () {
 
 test('muscle-groups index works', function () {
     $this->get(route('health.muscle-groups.index'))
-        ->assertStatus(200);
+        ->assertStatus(Response::HTTP_OK);
 });
 
 test('muscle-groups create works', function () {
     $this->get(route('health.muscle-groups.create'))
-        ->assertStatus(200);
+        ->assertStatus(Response::HTTP_OK);
 });
 
 test('muscle-groups store works', function ($data) {
-
     $this->post(route('health.muscle-groups.store'), $data)
         ->assertStatus(Response::HTTP_FOUND);
     $this->assertDatabaseHas(app(MuscleGroup::class)->getTable(), $data);
@@ -45,6 +44,6 @@ test('muscleGroup update works', function ($data) {
 test('muscleGroup delete works', function () {
     $muscleGroup = MuscleGroup::factory()->create();
     $response = $this->delete(route('health.muscle-groups.destroy', ['muscle_group' => $muscleGroup]));
-    $response->assertStatus(302);
+    $response->assertStatus(Response::HTTP_FOUND);
     $this->assertSoftDeleted($muscleGroup);
 });
