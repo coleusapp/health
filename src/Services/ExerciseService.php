@@ -50,4 +50,12 @@ class ExerciseService extends Service
 
         return $result ?? false;
     }
+
+    public function options(): array
+    {
+        return [
+            ExerciseData::from(['name' => '-- select one --']),
+            ...Exercise::all(),
+        ];
+    }
 }

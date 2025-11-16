@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { OptionCollection } from '@/types';
-import { ExerciseCollection, exerciseCollectionKey } from '@/components/exercises/exercise';
+import { ExerciseCollection, exerciseCollectionKey, ExerciseResource } from '@/components/exercises/exercise';
 import { calorieUnitsKey, distanceUnitsKey, durationUnitsKey, weightUnitsKey, WorkoutData } from '@/components/workouts/workout';
+import { OptionCollection } from '@/types';
 import { FormKit } from '@formkit/vue';
-import { cloneDeep, find, memoize } from 'lodash';
-import { inject } from 'vue';
+import { cloneDeep, find, findLast, memoize } from 'lodash';
+import { computed, inject } from 'vue';
 
 const exercises = inject(exerciseCollectionKey) as ExerciseCollection;
 const weightUnits = inject(weightUnitsKey) as OptionCollection;
@@ -12,11 +12,11 @@ const distanceUnits = inject(distanceUnitsKey) as OptionCollection;
 const durationUnits = inject(durationUnitsKey) as OptionCollection;
 const calorieUnits = inject(calorieUnitsKey) as OptionCollection;
 
-defineProps<{
+const props = defineProps<{
     value: Omit<WorkoutData, 'id'>;
 }>();
-
-const getExercise = memoize((exerciseId: number) => {
+const lastExercise: ExerciseResource | null = computed(() => findLast(props.value?.exercises || [], (item) => item?.id));
+const getExercise: ExerciseResource | null = memoize((exerciseId: number) => {
     return find(exercises.data, (item) => [item?.value].includes(exerciseId));
 });
 </script>
@@ -24,12 +24,20 @@ const getExercise = memoize((exerciseId: number) => {
     <FormKit type="datetime-local" name="date" label="Date" validation="required" />
     <FormKit type="repeater" name="exercises" label="Exercises" validation="required" :min="0">
         <template #default="{ value }">
-            <div class="flex flex-col md:flex-row items-end justify-between gap-3">
-                <FormKit type="select" label="Exercise" name="id" :options="cloneDeep(exercises.data)" outer-class="!mb-0 w-full md:flex-1" wrapper-class="!mb-0" />
+            <div class="flex flex-col items-end justify-between gap-3 md:flex-row">
+                <FormKit
+                    type="select"
+                    label="Exercise"
+                    name="id"
+                    :options="cloneDeep(exercises.data)"
+                    outer-class="!mb-0 w-full md:flex-1"
+                    wrapper-class="!mb-0"
+                    :value="value.id || lastExercise?.id"
+                />
                 <template v-if="getExercise(value.id)?.has_rep">
                     <FormKit type="number" min="0" label="Reps" name="reps" outer-class="!mb-0 w-full md:flex-1" wrapper-class="!mb-0" />
                 </template>
-                <div v-if="getExercise(value.id)?.has_weight" class="w-full md:w-auto md:flex-2 flex items-end gap-3">
+                <div v-if="getExercise(value.id)?.has_weight" class="flex w-full items-end gap-3 md:w-auto md:flex-2">
                     <FormKit type="number" min="0" label="Weight" name="weight" outer-class="!mb-0 w-2/3 md:w-full md:flex-1" wrapper-class="!mb-0" />
                     <FormKit
                         type="select"
@@ -43,8 +51,16 @@ const getExercise = memoize((exerciseId: number) => {
                         wrapper-class="!mb-0"
                     />
                 </div>
-                <div v-if="getExercise(value.id)?.has_distance" class="w-full md:w-auto md:flex-2 flex items-end gap-3">
-                    <FormKit type="number" min="0" label="Distance" name="distance" step="0.01" outer-class="!mb-0 w-2/3 md:flex-1" wrapper-class="!mb-0" />
+                <div v-if="getExercise(value.id)?.has_distance" class="flex w-full items-end gap-3 md:w-auto md:flex-2">
+                    <FormKit
+                        type="number"
+                        min="0"
+                        label="Distance"
+                        name="distance"
+                        step="0.01"
+                        outer-class="!mb-0 w-2/3 md:flex-1"
+                        wrapper-class="!mb-0"
+                    />
                     <FormKit
                         type="select"
                         name="distance_unit"
@@ -57,7 +73,7 @@ const getExercise = memoize((exerciseId: number) => {
                         wrapper-class="!mb-0"
                     />
                 </div>
-                <div v-if="getExercise(value.id)?.has_duration" class="w-full md:w-auto md:flex-2 flex items-end gap-3">
+                <div v-if="getExercise(value.id)?.has_duration" class="flex w-full items-end gap-3 md:w-auto md:flex-2">
                     <FormKit type="number" min="0" label="Duration" name="duration" outer-class="!mb-0 w-2/3 md:flex-1" wrapper-class="!mb-0" />
                     <FormKit
                         type="select"
@@ -71,7 +87,7 @@ const getExercise = memoize((exerciseId: number) => {
                         wrapper-class="!mb-0"
                     />
                 </div>
-                <div v-if="getExercise(value.id)?.has_calorie" class="w-full md:w-auto md:flex-2 flex items-end gap-3">
+                <div v-if="getExercise(value.id)?.has_calorie" class="flex w-full items-end gap-3 md:w-auto md:flex-2">
                     <FormKit type="number" min="0" label="Calorie" name="calorie" outer-class="!mb-0 w-2/3 md:flex-1" wrapper-class="!mb-0" />
                     <FormKit
                         type="select"

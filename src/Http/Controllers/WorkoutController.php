@@ -2,6 +2,8 @@
 
 namespace Coleus\Health\Http\Controllers;
 
+use Coleus\Health\Data\ExerciseData;
+use Coleus\Health\Data\WorkoutData;
 use Coleus\Health\Enums\CalorieEnum;
 use Coleus\Health\Enums\DistanceEnum;
 use Coleus\Health\Enums\DurationEnum;
@@ -27,15 +29,15 @@ class WorkoutController extends Controller
 
     public function create()
     {
-        $default = new Workout(['date' => now(config('app.timezone'))]);
+        $default = new Workout(WorkoutData::from([])->toArray());
 
         return Inertia::render('workouts/Create', [
+            'resource' => new WorkoutResource($default),
+            'exercises' => ExerciseAsOptionResource::collection(Health::exercise()->options()),
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),
             'duration_units' => EnumResource::collectionWithNull(DurationEnum::cases()),
             'calorie_units' => EnumResource::collectionWithNull(CalorieEnum::cases()),
-            'resource' => new WorkoutResource($default),
-            'exercises' => ExerciseAsOptionResource::collection(Exercise::all()),
         ]);
     }
 
@@ -49,12 +51,12 @@ class WorkoutController extends Controller
     public function edit(Workout $workout)
     {
         return Inertia::render('workouts/Edit', [
+            'resource' => WorkoutResource::make($workout->load('exercises')),
+            'exercises' => ExerciseAsOptionResource::collection(Health::exercise()->options()),
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),
             'duration_units' => EnumResource::collectionWithNull(DurationEnum::cases()),
             'calorie_units' => EnumResource::collectionWithNull(CalorieEnum::cases()),
-            'resource' => WorkoutResource::make($workout->load('exercises')),
-            'exercises' => ExerciseAsOptionResource::collection(Exercise::all()),
         ]);
     }
 

@@ -6,10 +6,12 @@ use Spatie\LaravelData\Data;
 
 class WorkoutData extends Data
 {
+    public string $date;
+
     public function __construct(
-        public string $date,
+        //
     )
     {
-        //
+        $this->date = now(config('app.timezone'));
     }
 }
