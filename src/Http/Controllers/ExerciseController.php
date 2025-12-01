@@ -28,6 +28,7 @@ class ExerciseController extends Controller
     public function create(): Response
     {
         return Inertia::render('exercises/Create', [
+            'resource' => ExerciseResource::make(Health::exercise()->default()),
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),
             'duration_units' => EnumResource::collectionWithNull(DurationEnum::cases()),

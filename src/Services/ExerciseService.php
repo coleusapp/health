@@ -4,6 +4,7 @@ namespace Coleus\Health\Services;
 
 use Coleus\Health\Data\ExerciseData;
 use Coleus\Health\Models\Exercise;
+use Coleus\Health\Settings\GeneralSettings;
 use Coleus\Support\Services\Service;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -57,5 +58,17 @@ class ExerciseService extends Service
             ExerciseData::from(['name' => '-- select one --']),
             ...Exercise::all(),
         ];
+    }
+
+    public function default(): Exercise
+    {
+        $settings = app(GeneralSettings::class);
+
+        return new Exercise([
+            'calorie_unit' => $settings->calorie_unit,
+            'duration_unit' => $settings->duration_unit,
+            'distance_unit' => $settings->distance_unit,
+            'weight_unit' => $settings->weight_unit,
+        ]);
     }
 }

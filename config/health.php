@@ -15,4 +15,11 @@ return [
      * Default: health
      */
     'route_prefix' => 'health',
+
+    /*
+     * Settings group prefix.
+     *
+     * Default: health
+     */
+    'settings_prefix' => 'health',
 ];

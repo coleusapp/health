@@ -4,6 +4,7 @@ use Coleus\Health\Http\Controllers\DashboardController;
 use Coleus\Health\Http\Controllers\ExerciseController;
 use Coleus\Health\Http\Controllers\MuscleGroupController;
 use Coleus\Health\Http\Controllers\OralCareController;
+use Coleus\Health\Http\Controllers\SettingsController;
 use Coleus\Health\Http\Controllers\ToothpasteController;
 use Coleus\Health\Http\Controllers\WeightController;
 use Coleus\Health\Http\Controllers\CategoryController;
@@ -22,4 +23,6 @@ Route::middleware(['web', 'auth'])
         Route::resource('exercises', ExerciseController::class)->except('show');
         Route::resource('oral-cares', OralCareController::class)->except('show');
         Route::resource('toothpastes', ToothpasteController::class)->except('show');
+        Route::get('settings', [SettingsController::class, 'general'])->name('settings.general');
+        Route::post('settings', [SettingsController::class, 'save'])->name('settings.save');
     });

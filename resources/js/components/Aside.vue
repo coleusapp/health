@@ -76,11 +76,7 @@ const links = [
 </script>
 
 <template>
-    <UiDashboardSidebar id="health-sidebar" v-model:open="open" collapsible class="bg-elevated/10">
-        <template #header="{ collapsed }">
-            <UiDashboardSidebarCollapse variant="ghost" side="right" />
-            <span v-if="!collapsed">Health</span>
-        </template>
+    <UiDashboardSidebar id="health-sidebar" v-model:open="open" class="bg-elevated/10">
         <template #default="{ collapsed }">
             <UiNavigationMenu :collapsed="collapsed" :items="links[0]" orientation="vertical" tooltip popover />
 

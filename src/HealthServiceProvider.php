@@ -14,17 +14,18 @@ class HealthServiceProvider extends PackageServiceProvider
         $package->name('health')
             ->hasConfigFile()
             ->hasMigrations([
-                'create_muscle_groups_table',
-                'create_exercises_table',
-                'create_workouts_table',
-                'create_weights_table',
-                'create_oral_cares_table',
-                'create_toothpastes_table',
-                'create_oral_care_toothpaste_table',
-                'create_exercise_muscle_groups_table',
-                'create_exercise_workout_table',
-                'create_categories_table',
-                'create_category_exercises_table',
+                'health/create_muscle_groups_table',
+                'health/create_exercises_table',
+                'health/create_workouts_table',
+                'health/create_weights_table',
+                'health/create_oral_cares_table',
+                'health/create_toothpastes_table',
+                'health/create_oral_care_toothpaste_table',
+                'health/create_exercise_muscle_groups_table',
+                'health/create_exercise_workout_table',
+                'health/create_categories_table',
+                'health/create_category_exercises_table',
+                'health/create_settings_table',
             ])
             ->runsMigrations()
             ->hasRoute('web')

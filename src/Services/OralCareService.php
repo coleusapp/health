@@ -4,6 +4,7 @@ namespace Coleus\Health\Services;
 
 use Coleus\Health\Data\OralCareData;
 use Coleus\Health\Models\OralCare;
+use Coleus\Health\Settings\GeneralSettings;
 use Coleus\Support\Services\Service;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +37,7 @@ class OralCareService extends Service
     public function default(): OralCare
     {
         $default = OralCare::latest('date')->first() ?? new OralCare();
-        $default->date = now(config('app.timezone'));
+        $default->date = now(app(GeneralSettings::class)->timezone);
 
         return $default;
     }

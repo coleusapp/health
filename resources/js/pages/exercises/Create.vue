@@ -6,6 +6,8 @@ import {
     categoriesKey,
     distanceUnitsKey,
     durationUnitsKey,
+    ExerciseResource,
+    exerciseResourceKey,
     muscleGroupsKey,
     weightUnitsKey,
 } from '@/components/exercises/exercise';
@@ -13,6 +15,7 @@ import HealthLayout from '@/layouts/HealthLayout.vue';
 import { provide } from 'vue';
 
 const props = defineProps<{
+    resource: ExerciseResource;
     weight_units: OptionCollection;
     distance_units: OptionCollection;
     duration_units: OptionCollection;
@@ -20,6 +23,7 @@ const props = defineProps<{
     muscle_groups: OptionCollection;
     categories: OptionCollection;
 }>();
+provide(exerciseResourceKey, props.resource);
 provide(weightUnitsKey, props.weight_units);
 provide(distanceUnitsKey, props.distance_units);
 provide(durationUnitsKey, props.duration_units);
