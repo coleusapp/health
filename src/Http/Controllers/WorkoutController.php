@@ -15,6 +15,7 @@ use Coleus\Health\Http\Resources\WorkoutResource;
 use Coleus\Health\Models\Exercise;
 use Coleus\Health\Models\Workout;
 use App\Http\Controllers\Controller;
+use Coleus\Health\Settings\GeneralSettings;
 use Coleus\Support\Resources\EnumResource;
 use Inertia\Inertia;
 
@@ -29,10 +30,8 @@ class WorkoutController extends Controller
 
     public function create()
     {
-        $default = new Workout(WorkoutData::from([])->toArray());
-
         return Inertia::render('workouts/Create', [
-            'resource' => new WorkoutResource($default),
+            'resource' => new WorkoutResource(Health::workout()->default()),
             'exercises' => ExerciseAsOptionResource::collection(Health::exercise()->options()),
             'weight_units' => EnumResource::collectionWithNull(WeightEnum::cases()),
             'distance_units' => EnumResource::collectionWithNull(DistanceEnum::cases()),

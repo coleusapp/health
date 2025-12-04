@@ -4,6 +4,7 @@ namespace Coleus\Health\Services;
 
 use Coleus\Health\Data\WorkoutData;
 use Coleus\Health\Models\Workout;
+use Coleus\Health\Settings\GeneralSettings;
 use Coleus\Support\Services\Service;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -51,5 +52,14 @@ class WorkoutService extends Service
         }
 
         return $model;
+    }
+
+    public static function default(): Workout
+    {
+        $data = WorkoutData::from([
+            'date' => now(app(GeneralSettings::class)->timezone),
+        ])->toArray();
+
+        return new Workout($data);
     }
 }

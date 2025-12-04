@@ -15,9 +15,9 @@ return new class extends Migration
             $table->foreignIdFor(Workout::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(Exercise::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedSmallInteger('reps')->nullable();
-            $table->unsignedInteger('weight')->nullable();
+            $table->double('weight')->nullable();
             $table->string('weight_unit')->nullable();
-            $table->unsignedInteger('distance')->nullable();
+            $table->double('distance')->nullable();
             $table->string('distance_unit')->nullable();
             $table->unsignedSmallInteger('duration')->nullable();
             $table->string('duration_unit')->nullable();
