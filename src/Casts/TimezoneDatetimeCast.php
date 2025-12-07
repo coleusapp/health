@@ -2,7 +2,6 @@
 
 namespace Coleus\Health\Casts;
 
-// use App\Settings\GeneralSettings;
 use Carbon\Carbon;
 use Coleus\Health\Settings\GeneralSettings;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;

@@ -4,8 +4,7 @@ namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Coleus\Health\Facades\Health;
-use Coleus\Health\Http\Requests\MuscleGroup\SaveRequest;
-use Coleus\Health\Http\Resources\MuscleGroupAsOptionResource;
+use Coleus\Health\Http\Requests\MuscleGroup\MuscleRequest;
 use Coleus\Health\Http\Resources\MuscleGroupResource;
 use Coleus\Health\Models\MuscleGroup;
 use Illuminate\Http\RedirectResponse;
@@ -28,7 +27,7 @@ class MuscleGroupController extends Controller
         ]);
     }
 
-    public function store(SaveRequest $request): RedirectResponse
+    public function store(MuscleRequest $request): RedirectResponse
     {
         return to_route('health.muscle-groups.edit', [
             'muscle_group' => Health::muscleGroup()->store($request->validated()),
@@ -43,7 +42,7 @@ class MuscleGroupController extends Controller
         ]);
     }
 
-    public function update(SaveRequest $request, MuscleGroup $muscleGroup): RedirectResponse
+    public function update(MuscleRequest $request, MuscleGroup $muscleGroup): RedirectResponse
     {
         Health::muscleGroup()->update($muscleGroup, $request->validated());
 

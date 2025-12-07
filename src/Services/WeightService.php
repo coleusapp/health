@@ -3,11 +3,9 @@
 namespace Coleus\Health\Services;
 
 use Coleus\Health\Data\WeightData;
-use Coleus\Health\Enums\WeightEnum;
 use Coleus\Health\Models\Weight;
 use Coleus\Health\Settings\GeneralSettings;
 use Coleus\Support\Services\Service;
-use Inertia\Inertia;
 
 class WeightService extends Service
 {

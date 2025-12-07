@@ -2,8 +2,6 @@
 
 namespace Coleus\Health\Http\Controllers;
 
-use Coleus\Health\Data\ExerciseData;
-use Coleus\Health\Data\WorkoutData;
 use Coleus\Health\Enums\CalorieEnum;
 use Coleus\Health\Enums\DistanceEnum;
 use Coleus\Health\Enums\DurationEnum;
@@ -12,10 +10,8 @@ use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\WorkoutRequest;
 use Coleus\Health\Http\Resources\ExerciseAsOptionResource;
 use Coleus\Health\Http\Resources\WorkoutResource;
-use Coleus\Health\Models\Exercise;
 use Coleus\Health\Models\Workout;
 use App\Http\Controllers\Controller;
-use Coleus\Health\Settings\GeneralSettings;
 use Coleus\Support\Resources\EnumResource;
 use Inertia\Inertia;
 

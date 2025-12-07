@@ -3,7 +3,6 @@
 namespace Coleus\Health\Casts;
 
 use Coleus\Health\Concerns\DistanceConcern;
-// use App\Settings\GeneralSettings;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,7 +20,6 @@ class DistanceCast implements CastsAttributes
 
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        // app(GeneralSettings::class)->distance_unit
         return $value ? match ($model->exercise?->distance_unit) {
             'mile' => app(DistanceConcern::class)->MiToM($value),
             'meter' => $value,

@@ -4,12 +4,10 @@ namespace Coleus\Health\Models;
 
 use Coleus\Health\Database\Factories\ExerciseFactory;
 use Coleus\Health\HealthModelDefaults;
-use Coleus\Support\Concerns\AutoAssignUser;
 use Coleus\Users\Concerns\HasUser;
 use Coleus\Users\Models\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

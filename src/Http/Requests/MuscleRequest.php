@@ -1,11 +1,11 @@
 <?php
 
-namespace Coleus\Health\Http\Requests\WorkoutCategory;
+namespace Coleus\Health\Http\Requests\MuscleGroup;
 
+use Coleus\Health\Models\MuscleGroup;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateRequest extends FormRequest
+class MuscleRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -18,10 +18,9 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                Rule::unique('categories', 'name')->ignore($this->route('category')->id),
-            ],
+            'name' => 'required',
+            'description' => 'nullable',
+            'muscle_group_id' => 'nullable|exists:'.app(MuscleGroup::class)->getTable().',id',
         ];
     }
 }

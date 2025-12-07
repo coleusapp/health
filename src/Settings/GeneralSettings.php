@@ -6,6 +6,7 @@ use Coleus\Health\Enums\CalorieEnum;
 use Coleus\Health\Enums\DistanceEnum;
 use Coleus\Health\Enums\DurationEnum;
 use Coleus\Health\Enums\WeightEnum;
+use Coleus\Users\Concerns\HasUser;
 use Spatie\LaravelSettings\Settings;
 
 class GeneralSettings extends Settings

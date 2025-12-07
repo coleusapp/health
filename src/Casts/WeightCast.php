@@ -3,7 +3,6 @@
 namespace Coleus\Health\Casts;
 
 use Coleus\Health\Concerns\WeightConcern;
-// use App\Settings\GeneralSettings;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,7 +19,6 @@ class WeightCast implements CastsAttributes
 
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        // app(GeneralSettings::class)->weight_unit
         return $value ? match ($model->exercise?->weight_unit) {
             'kg' => app(WeightConcern::class)->kgToG($value),
             'lbs' => app(WeightConcern::class)->lbsToG($value),

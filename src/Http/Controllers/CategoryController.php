@@ -3,7 +3,6 @@
 namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Coleus\Health\Data\CategoryData;
 use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\CategoryRequest;
 use Coleus\Health\Http\Resources\CategoryResource;
