@@ -11,6 +11,8 @@ use Coleus\Health\Http\Controllers\CategoryController;
 use Coleus\Health\Http\Controllers\WorkoutController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', DashboardController::class)
+    ->middleware(['web', 'auth']);
 Route::middleware(['web', 'auth'])
     ->name('health.')
     ->prefix('health')
