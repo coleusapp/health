@@ -12,7 +12,11 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word(),
+            'name' => $this->faker->randomElement([
+                'Strength Training', 'Cardio', 'Flexibility', 'HIIT',
+                'Yoga', 'Pilates', 'Swimming', 'Cycling', 'Core & Abs',
+                'Martial Arts', 'Running', 'Balance & Mobility',
+            ]),
         ];
     }
 }

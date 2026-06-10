@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Extensions\Health\Models\CategoryExercise> $categoryExercises
  * @property-read int|null $category_exercises_count
  * @property-read \Coleus\Users\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category onlyTrashed()
@@ -33,19 +34,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category withoutTrashed()
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Health\Models\Exercise> $exercises
  * @property-read int|null $exercises_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Users\Models\User> $users
  * @property-read int|null $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category user($users)
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy([UserScope::class])]
 class Category extends HealthModelDefaults
 {
-    use SoftDeletes;
-    use HasUser;
     use HasFactory;
+    use HasUser;
+    use SoftDeletes;
 
     protected static function newFactory(): CategoryFactory
     {
@@ -54,6 +58,6 @@ class Category extends HealthModelDefaults
 
     public function exercises(): BelongsToMany
     {
-        return $this->belongsToMany(Exercise::class);
+        return $this->belongsToMany(Exercise::class, config('health.table_prefix').'category_exercise');
     }
 }

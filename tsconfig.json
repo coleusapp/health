@@ -1,3 +1,16 @@
 {
-  "extends": "../support/tsconfig.json",
+    "extends": "../support/tsconfig.json",
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./resources/js/*"],
+            "@coleus/support/*": ["../support/resources/js/*"],
+            "#build/ui": ["./node_modules/@nuxt/ui/.nuxt/ui"]
+        }
+    },
+    "include": [
+        "resources/js/**/*.ts",
+        "resources/js/**/*.d.ts",
+        "resources/js/**/*.tsx",
+        "resources/js/**/*.vue"
+    ]
 }

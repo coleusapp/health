@@ -12,7 +12,7 @@ class WorkoutFactory extends Factory
     public function definition(): array
     {
         return [
-            'date' => $this->faker->date(),
+            'date' => $this->faker->dateTimeBetween('-2 years', 'now'),
         ];
     }
 }

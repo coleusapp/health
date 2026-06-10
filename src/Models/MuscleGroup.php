@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|MuscleGroup newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MuscleGroup newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MuscleGroup onlyTrashed()
@@ -34,27 +35,32 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|MuscleGroup whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MuscleGroup withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|MuscleGroup withoutTrashed()
+ *
  * @property int|null $muscle_group_id
  * @property-read \Illuminate\Database\Eloquent\Collection<int, MuscleGroup> $children
  * @property-read int|null $children_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, MuscleGroup> $muscleGroups
  * @property-read int|null $muscle_groups_count
  * @property-read MuscleGroup|null $parent
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|MuscleGroup whereMuscleGroupId($value)
+ *
  * @property-read \Coleus\Users\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Health\Models\Exercise> $exercises
  * @property-read int|null $exercises_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Users\Models\User> $users
  * @property-read int|null $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MuscleGroup user($users)
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy([UserScope::class])]
 class MuscleGroup extends HealthModelDefaults
 {
-    use SoftDeletes;
-    use HasUser;
     use HasFactory;
+    use HasUser;
+    use SoftDeletes;
 
     protected static function newFactory(): MuscleGroupFactory
     {
@@ -78,6 +84,6 @@ class MuscleGroup extends HealthModelDefaults
 
     public function exercises(): BelongsToMany
     {
-        return $this->belongsToMany(Exercise::class);
+        return $this->belongsToMany(Exercise::class, config('health.table_prefix').'exercise_muscle_group');
     }
 }
