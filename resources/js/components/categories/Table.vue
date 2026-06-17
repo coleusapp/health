@@ -14,8 +14,12 @@ const columns: TableColumn<CategoryData>[] = [
         header: 'Name',
     },
     {
+        accessorKey: 'exercises_count',
+        header: 'Exercises',
+    },
+    {
         id: 'actions',
-        cell: ({ row }) => h(TableActions, { categoryId: row?.original?.id }),
+        cell: ({ row }) => h(TableActions, { categoryId: row?.original?.id, exercisesCount: row?.original?.exercises_count }),
     },
 ];
 </script>

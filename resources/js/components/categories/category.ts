@@ -4,6 +4,7 @@ import type { InjectionKey } from 'vue';
 export type CategoryData = {
     id: string;
     name: string;
+    exercises_count: number | null;
 };
 
 export type CategoryResource = Resource<CategoryData>;
