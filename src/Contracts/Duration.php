@@ -1,8 +1,8 @@
 <?php
 
-namespace Coleus\Health\Concerns;
+namespace Coleus\Health\Contracts;
 
-interface DurationConcern
+interface Duration
 {
     public function secondToMinute($duration): float;
     public function secondToHour($duration): float;

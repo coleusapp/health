@@ -3,7 +3,6 @@
 namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Coleus\Health\Charts\WeightChart;
 use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Resources\CategoryResource;
 use Coleus\Health\Http\Resources\ExerciseResource;
@@ -25,7 +24,6 @@ class DashboardController extends Controller
             'toothpastes' => ToothpasteResource::collection(Health::toothpaste()->index()),
             'exercises' => ExerciseResource::collection(Health::exercise()->index()),
             'workouts' => WorkoutResource::collection(Health::workout()->index()),
-            'weights_chart' => WeightChart::getData(),
         ]);
     }
 }

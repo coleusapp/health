@@ -15,10 +15,10 @@ class WeightFactory extends Factory
         $unit = $this->faker->randomElement(WeightEnum::cases());
 
         return [
+            'unit' => $unit->value,
             'weight' => $unit === WeightEnum::KG
                 ? $this->faker->randomFloat(1, 50, 120)
                 : $this->faker->randomFloat(1, 110, 265),
-            'unit' => $unit->value,
             'date' => $this->faker->dateTimeBetween('-3 months', 'now'),
         ];
     }

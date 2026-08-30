@@ -1,8 +1,8 @@
 <?php
 
-namespace Coleus\Health\Concerns;
+namespace Coleus\Health\Contracts;
 
-interface WeightConcern
+interface Weight
 {
     public function lbsToKg($weight): float;
     public function lbsToG($weight): float;

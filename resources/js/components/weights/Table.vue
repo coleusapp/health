@@ -22,6 +22,20 @@ const columns: TableColumn<WeightData>[] = [
         header: ({ column }) => h(Header, { column: column, label: 'Weight' }),
     },
     {
+        id: 'diff',
+        header: 'Diff',
+        cell: ({ row, table }) => {
+            const previous = table.getRowModel().rows[row.index + 1]?.original;
+            if (!previous || previous.unit !== row.original.unit) {
+                return '-';
+            }
+            const diff = Number((row.original.weight - previous.weight).toFixed(1));
+            const color = diff > 0 ? 'text-red-500' : diff < 0 ? 'text-green-500' : '';
+
+            return h('span', { class: color }, `${diff > 0 ? '+' : ''}${diff}${row.original.unit}`);
+        },
+    },
+    {
         id: 'actions',
         cell: ({ row }) => h(TableActions, { weightId: row?.original?.id }),
     },

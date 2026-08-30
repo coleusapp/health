@@ -6,7 +6,6 @@ import type { CategoryCollection } from '@/components/categories/category';
 import type { MuscleGroupCollection } from '@/components/muscleGroups/muscleGroup';
 import type { ExerciseCollection } from '@/components/exercises/exercise';
 import type { WorkoutCollection } from '@/components/workouts/workout';
-import TrendMetric from '../components/weights/TrendMetric.vue';
 
 defineProps<{
     weights: WeightCollection;
@@ -15,14 +14,11 @@ defineProps<{
     // toothpastes: ToothpasteCollection;
     exercises: ExerciseCollection;
     workouts: WorkoutCollection;
-    weights_chart: any,
 }>();
 </script>
 
 <template>
     <Head title="Dashboard" />
 
-    <HealthLayout>
-        <TrendMetric class="w-full md:max-w-1/2" :data="weights_chart" />
-    </HealthLayout>
+    <HealthLayout></HealthLayout>
 </template>

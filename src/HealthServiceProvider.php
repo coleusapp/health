@@ -3,7 +3,13 @@
 namespace Coleus\Health;
 
 use Coleus\Health\Commands\HealthFreshCommand;
+use Coleus\Health\Contracts\Distance;
+use Coleus\Health\Contracts\Duration;
+use Coleus\Health\Contracts\Weight;
 use Coleus\Health\Http\Middleware\HandleInertiaRequests;
+use Coleus\Health\Services\Conversions\DistanceConversion;
+use Coleus\Health\Services\Conversions\DurationConversion;
+use Coleus\Health\Services\Conversions\WeightConversion;
 use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -49,8 +55,9 @@ class HealthServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->app->bind('health', function ($app) {
-            return new Health;
-        });
+        $this->app->bind('health', fn ($app) => new Health);
+        $this->app->singletonIf(Distance::class, fn ($app) => new DistanceConversion);
+        $this->app->singletonIf(Duration::class, fn ($app) => new DurationConversion);
+        $this->app->singletonIf(Weight::class, fn ($app) => new WeightConversion);
     }
 }

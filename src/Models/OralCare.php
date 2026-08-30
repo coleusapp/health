@@ -2,7 +2,6 @@
 
 namespace Coleus\Health\Models;
 
-use Coleus\Health\Casts\TimezoneDatetimeCast;
 use Coleus\Health\Database\Factories\OralCareFactory;
 use Coleus\Health\HealthModelDefaults;
 use Coleus\Users\Concerns\HasUser;
@@ -26,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Health\Models\OralCareToothpaste> $oralCareToothpaste
  * @property-read int|null $oral_care_toothpastes_count
  * @property-read \Coleus\Users\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare onlyTrashed()
@@ -42,22 +42,25 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare withoutTrashed()
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Users\Models\User> $users
  * @property-read int|null $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare user($users)
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy([UserScope::class])]
 class OralCare extends HealthModelDefaults
 {
-    use SoftDeletes;
-    use HasUser;
     use HasFactory;
+    use HasUser;
+    use SoftDeletes;
 
     public function casts(): array
     {
         return [
-            'date' => TimezoneDatetimeCast::class,
+            'date' => 'datetime',
             'brushed' => 'boolean',
             'flossed' => 'boolean',
             'fluoride_taken' => 'boolean',
@@ -71,7 +74,7 @@ class OralCare extends HealthModelDefaults
 
     public function toothpastes(): BelongsToMany
     {
-        return $this->belongsToMany(Toothpaste::class, config(static::$tablePrefix) . 'oral_care_toothpaste')
+        return $this->belongsToMany(Toothpaste::class, config(static::$tablePrefix).'oral_care_toothpaste')
             ->withTimestamps();
     }
 }

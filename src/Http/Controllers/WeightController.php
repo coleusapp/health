@@ -3,6 +3,7 @@
 namespace Coleus\Health\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Coleus\Health\Charts\WeightChart;
 use Coleus\Health\Enums\WeightEnum;
 use Coleus\Health\Facades\Health;
 use Coleus\Health\Http\Requests\WeightRequest;
@@ -17,6 +18,7 @@ class WeightController extends Controller
     {
         return Inertia::render('weights/Index', [
             'collection' => WeightResource::collection(Health::weight()->index()),
+            'weights_chart' => WeightChart::getData(),
         ]);
     }
 
@@ -31,7 +33,7 @@ class WeightController extends Controller
     public function store(WeightRequest $request)
     {
         return to_route('health.weights.edit', [
-            'weight' => new WeightResource(Health::weight()->store($request->validated())),]
+            'weight' => new WeightResource(Health::weight()->store($request->validated())), ]
         );
     }
 
