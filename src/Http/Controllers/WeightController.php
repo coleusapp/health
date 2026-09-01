@@ -10,15 +10,16 @@ use Coleus\Health\Http\Requests\WeightRequest;
 use Coleus\Health\Http\Resources\WeightResource;
 use Coleus\Health\Models\Weight;
 use Coleus\Support\Resources\EnumResource;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class WeightController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('weights/Index', [
             'collection' => WeightResource::collection(Health::weight()->index()),
-            'weights_chart' => WeightChart::getData(),
+            'weights_chart' => WeightChart::getData($request->input('period', 'monthly')),
         ]);
     }
 
