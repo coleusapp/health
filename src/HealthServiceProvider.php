@@ -34,7 +34,6 @@ class HealthServiceProvider extends PackageServiceProvider
                     'health/create_exercise_workout_table',
                     'health/create_categories_table',
                     'health/create_category_exercises_table',
-                    // 'health/create_settings_table',
                 ]))
             ->runsMigrations()
             ->hasCommands([
@@ -59,5 +58,9 @@ class HealthServiceProvider extends PackageServiceProvider
         $this->app->singletonIf(Distance::class, fn ($app) => new DistanceConversion);
         $this->app->singletonIf(Duration::class, fn ($app) => new DurationConversion);
         $this->app->singletonIf(Weight::class, fn ($app) => new WeightConversion);
+        $this->app->singleton(
+            'health.settings',
+            fn ($app) => $app->make('settings')->group(config('health.settings_prefix').'_general'),
+        );
     }
 }

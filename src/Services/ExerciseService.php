@@ -3,8 +3,12 @@
 namespace Coleus\Health\Services;
 
 use Coleus\Health\Data\ExerciseData;
+use Coleus\Health\Enums\CalorieEnum;
+use Coleus\Health\Enums\DistanceEnum;
+use Coleus\Health\Enums\DurationEnum;
+use Coleus\Health\Enums\WeightEnum;
+use Coleus\Health\Facades\Settings;
 use Coleus\Health\Models\Exercise;
-use Coleus\Health\Settings\GeneralSettings;
 use Coleus\Support\Services\Service;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -62,13 +66,11 @@ class ExerciseService extends Service
 
     public function default(): Exercise
     {
-        $settings = app(GeneralSettings::class);
-
         return new Exercise([
-            'calorie_unit' => $settings->calorie_unit,
-            'duration_unit' => $settings->duration_unit,
-            'distance_unit' => $settings->distance_unit,
-            'weight_unit' => $settings->weight_unit,
+            'calorie_unit' => Settings::get('calorie_unit', CalorieEnum::KCAL->value),
+            'duration_unit' => Settings::get('duration_unit', DurationEnum::Minute->value),
+            'distance_unit' => Settings::get('distance_unit', DistanceEnum::Mile->value),
+            'weight_unit' => Settings::get('weight_unit', WeightEnum::LBS->value),
         ]);
     }
 }

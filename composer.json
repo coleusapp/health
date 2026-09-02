@@ -3,6 +3,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "coleus/settings": "^1.0",
         "coleus/support": "^1.0",
         "coleus/table": "^1.0",
         "coleus/users": "^1.0",
@@ -16,7 +17,6 @@
         "inertiajs/inertia-laravel": "^2.0",
         "spatie/laravel-data": "^4.17",
         "spatie/laravel-package-tools": "^1.9",
-        "spatie/laravel-settings": "^3.5",
         "tightenco/ziggy": "^v2.5"
     },
     "autoload": {

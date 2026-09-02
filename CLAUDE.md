@@ -27,7 +27,6 @@ Stubs live in `database/migrations/health/` and are registered in `HealthService
 | `create_category_exercises_table` | `health_category_exercise` | none (pure pivot) | — |
 | `create_exercise_workout_table` | `health_exercise_workout` | none (withPivot) | — |
 | `create_oral_care_toothpaste_table` | `health_oral_care_toothpaste` | none (pure pivot) | — |
-| `create_settings_table` | Spatie Settings | n/a | — |
 
 ## Models
 
@@ -70,7 +69,7 @@ All factories use realistic data — no `faker->word()` or lorem ipsum for names
 - **ExerciseMuscleGroup** — creates Exercise + MuscleGroup via sub-factories
 
 ## Settings
-`GeneralSettings` (Spatie Laravel Settings) stores: `timezone`, `weight_unit`, `distance_unit`, `duration_unit`, `calorie_unit`. Group key resolves from `config('health.settings_prefix').'_general'`.
+Backed by `coleus/settings` (shared `settings` table, no per-package migration). `HealthServiceProvider` binds `'health.settings'` to `app('settings')->group(config('health.settings_prefix').'_general')`, exposed via the `Coleus\Health\Facades\Settings` facade: `Settings::get('timezone', 'UTC')` / `Settings::set('timezone', $value)`. Keys used: `timezone`, `weight_unit`, `distance_unit`, `duration_unit`, `calorie_unit` — each call site passes its own default (see `WeightEnum`, `DistanceEnum`, `DurationEnum`, `CalorieEnum`).
 
 ## Inertia / Frontend
 - Pages live in `resources/js/pages/`

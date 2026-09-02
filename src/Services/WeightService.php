@@ -3,8 +3,9 @@
 namespace Coleus\Health\Services;
 
 use Coleus\Health\Data\WeightData;
+use Coleus\Health\Enums\WeightEnum;
+use Coleus\Health\Facades\Settings;
 use Coleus\Health\Models\Weight;
-use Coleus\Health\Settings\GeneralSettings;
 use Coleus\Support\Services\Service;
 
 class WeightService extends Service
@@ -15,8 +16,8 @@ class WeightService extends Service
 
     public function default(): Weight
     {
-        $default = Weight::latest('created_at')->first() ?? new Weight(['unit' => app(GeneralSettings::class)->weight_unit, 'weight' => 1]);
-        $default->date = now(app(GeneralSettings::class)->timezone);
+        $default = Weight::latest('created_at')->first() ?? new Weight(['unit' => Settings::get('weight_unit', WeightEnum::LBS->value), 'weight' => 1]);
+        $default->date = now(Settings::get('timezone', 'UTC'));
 
         return $default;
     }

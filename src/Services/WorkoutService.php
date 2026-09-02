@@ -3,8 +3,8 @@
 namespace Coleus\Health\Services;
 
 use Coleus\Health\Data\WorkoutData;
+use Coleus\Health\Facades\Settings;
 use Coleus\Health\Models\Workout;
-use Coleus\Health\Settings\GeneralSettings;
 use Coleus\Support\Services\Service;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -30,7 +30,8 @@ class WorkoutService extends Service
     /**
      * @param  array<string, mixed>  $payload
      * @param  Workout|null  $model
-     * @throws \Throwable
+     *
+     * @throws Throwable
      */
     protected function save(array $payload, ?Model $model = null): Workout
     {
@@ -40,7 +41,7 @@ class WorkoutService extends Service
 
             $model->exercises()->detach();
             collect($payload['exercises'] ?? [])
-                ->each(fn($item) => $model->exercises()->attach(
+                ->each(fn ($item) => $model->exercises()->attach(
                     $item['id'],
                     collect($item)->except('id')->toArray()
                 ));
@@ -57,7 +58,7 @@ class WorkoutService extends Service
     public static function default(): Workout
     {
         $data = WorkoutData::from([
-            'date' => now(app(GeneralSettings::class)->timezone),
+            'date' => now(Settings::get('timezone', 'UTC')),
         ])->toArray();
 
         return new Workout($data);

@@ -4,7 +4,6 @@ namespace Coleus\Health\Charts;
 
 use Carbon\CarbonPeriod;
 use Coleus\Health\Models\Weight;
-use Coleus\Health\Settings\GeneralSettings;
 use Coleus\Widgets\ChartWidget;
 use Illuminate\Support\Collection;
 

@@ -10,7 +10,7 @@ class DistanceCast implements CastsAttributes
 {
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $value ? match ($model->exercise?->distance_unit) { //  ?? app(GeneralSettings::class)->distance_unit
+        return $value ? match ($model->exercise?->distance_unit) {
             'mile' => round(Distance::class->mToMi($value), 2),
             'meter' => round($value, 2),
             'kilometer' => round(Distance::class->mToKm($value), 2),
