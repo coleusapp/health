@@ -58,7 +58,7 @@ class WorkoutService extends Service
     public static function default(): Workout
     {
         $data = WorkoutData::from([
-            'date' => now(Settings::get('timezone', 'UTC')),
+            'date' => now(Settings::get('general.timezone', 'UTC')),
         ])->toArray();
 
         return new Workout($data);

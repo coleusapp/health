@@ -2,9 +2,9 @@
 
 namespace Coleus\Health\Models;
 
-use Coleus\Support\Models\App as BaseApp;
+use Coleus\Apps\Models\App as BaseApp;
 
 class App extends BaseApp
 {
-    protected string $name = "health";
+    protected ?string $name = 'coleus.health';
 }

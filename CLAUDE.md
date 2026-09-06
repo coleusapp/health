@@ -69,7 +69,13 @@ All factories use realistic data — no `faker->word()` or lorem ipsum for names
 - **ExerciseMuscleGroup** — creates Exercise + MuscleGroup via sub-factories
 
 ## Settings
-Backed by `coleus/settings` (shared `settings` table, no per-package migration). `HealthServiceProvider` binds `'health.settings'` to `app('settings')->group(config('health.settings_prefix').'_general')`, exposed via the `Coleus\Health\Facades\Settings` facade: `Settings::get('timezone', 'UTC')` / `Settings::set('timezone', $value)`. Keys used: `timezone`, `weight_unit`, `distance_unit`, `duration_unit`, `calorie_unit` — each call site passes its own default (see `WeightEnum`, `DistanceEnum`, `DurationEnum`, `CalorieEnum`).
+Backed by `coleus/settings` (shared `settings` table, no `group` column — `name` is the only key, grouped by dot-prefix convention e.g. `general.timezone`). `HealthServiceProvider` binds `'health.settings'` to `app('settings')->forApp(new HealthApp()->get())` (`Coleus\Health\Models\App`, name `health`), exposed via the `Coleus\Health\Facades\Settings` facade. Requires an `apps` row named `health` to exist (via `coleus/apps`'s `create_apps_table`/`create_model_has_apps_table` migrations). Keys used: `general.timezone`, `general.weight_unit`, `general.distance_unit`, `general.duration_unit`, `general.calorie_unit` — each call site passes its own default (see `WeightEnum`, `DistanceEnum`, `DurationEnum`, `CalorieEnum`).
+
+Two tiers: an app-wide default and a per-user override (via the `apps()`/`users()` pivots on `Coleus\Settings\Models\Settings`, no attached user = default).
+- `Settings::get('general.timezone', 'UTC')` — auto-fallback: current auth user's override, then the app default, then the passed default.
+- `Settings::set('general.timezone', $value)` — writes the app-wide default tier.
+- `Settings::forUser()->set('general.timezone', $value)` — writes the current auth user's override.
+- `Settings::forUser($user)->get(...)` / `->set(...)` — targets a specific user (e.g. an admin editing another user's settings).
 
 ## Inertia / Frontend
 - Pages live in `resources/js/pages/`

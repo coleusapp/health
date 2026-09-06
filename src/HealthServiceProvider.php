@@ -7,6 +7,7 @@ use Coleus\Health\Contracts\Distance;
 use Coleus\Health\Contracts\Duration;
 use Coleus\Health\Contracts\Weight;
 use Coleus\Health\Http\Middleware\HandleInertiaRequests;
+use Coleus\Health\Models\App as HealthApp;
 use Coleus\Health\Services\Conversions\DistanceConversion;
 use Coleus\Health\Services\Conversions\DurationConversion;
 use Coleus\Health\Services\Conversions\WeightConversion;
@@ -58,9 +59,10 @@ class HealthServiceProvider extends PackageServiceProvider
         $this->app->singletonIf(Distance::class, fn ($app) => new DistanceConversion);
         $this->app->singletonIf(Duration::class, fn ($app) => new DurationConversion);
         $this->app->singletonIf(Weight::class, fn ($app) => new WeightConversion);
+        $this->app->singleton('app.health', fn () => new HealthApp()->get());
         $this->app->singleton(
             'health.settings',
-            fn ($app) => $app->make('settings')->group(config('health.settings_prefix').'_general'),
+            fn ($app) => $app->make('settings')->forApp($app->make('app.health')),
         );
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Coleus\Health\Facades;
 
-use Coleus\Settings\SettingsGroup;
+use Coleus\Settings\SettingsScope;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool has(string $name)
  * @method static void forget(string $name)
  * @method static array all()
+ * @method static SettingsScope forUser(\Illuminate\Database\Eloquent\Model|int|string|null $user = null)
  *
- * @see SettingsGroup
+ * @see SettingsScope
  */
 class Settings extends Facade
 {

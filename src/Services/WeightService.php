@@ -16,8 +16,8 @@ class WeightService extends Service
 
     public function default(): Weight
     {
-        $default = Weight::latest('created_at')->first() ?? new Weight(['unit' => Settings::get('weight_unit', WeightEnum::LBS->value), 'weight' => 1]);
-        $default->date = now(Settings::get('timezone', 'UTC'));
+        $default = Weight::latest('created_at')->first() ?? new Weight(['unit' => Settings::get('general.weight_unit', WeightEnum::LBS->value), 'weight' => 1]);
+        $default->date = now(Settings::get('general.timezone', 'UTC'));
 
         return $default;
     }

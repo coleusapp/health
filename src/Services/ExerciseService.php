@@ -67,10 +67,10 @@ class ExerciseService extends Service
     public function default(): Exercise
     {
         return new Exercise([
-            'calorie_unit' => Settings::get('calorie_unit', CalorieEnum::KCAL->value),
-            'duration_unit' => Settings::get('duration_unit', DurationEnum::Minute->value),
-            'distance_unit' => Settings::get('distance_unit', DistanceEnum::Mile->value),
-            'weight_unit' => Settings::get('weight_unit', WeightEnum::LBS->value),
+            'calorie_unit' => Settings::get('general.calorie_unit', CalorieEnum::KCAL->value),
+            'duration_unit' => Settings::get('general.duration_unit', DurationEnum::Minute->value),
+            'distance_unit' => Settings::get('general.distance_unit', DistanceEnum::Mile->value),
+            'weight_unit' => Settings::get('general.weight_unit', WeightEnum::LBS->value),
         ]);
     }
 }

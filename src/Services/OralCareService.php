@@ -37,7 +37,7 @@ class OralCareService extends Service
     public function default(): OralCare
     {
         $default = OralCare::latest('date')->first() ?? new OralCare;
-        $default->date = now(Settings::get('timezone', 'UTC'));
+        $default->date = now(Settings::get('general.timezone', 'UTC'));
 
         return $default;
     }

@@ -19,11 +19,11 @@ class SettingsController extends Controller
         return Inertia::render('settings/General', [
             'resource' => [
                 'data' => [
-                    'timezone' => Settings::get('timezone', 'UTC'),
-                    'weight_unit' => Settings::get('weight_unit', WeightEnum::LBS->value),
-                    'distance_unit' => Settings::get('distance_unit', DistanceEnum::Mile->value),
-                    'duration_unit' => Settings::get('duration_unit', DurationEnum::Minute->value),
-                    'calorie_unit' => Settings::get('calorie_unit', CalorieEnum::KCAL->value),
+                    'timezone' => Settings::get('general.timezone', 'UTC'),
+                    'weight_unit' => Settings::get('general.weight_unit', WeightEnum::LBS->value),
+                    'distance_unit' => Settings::get('general.distance_unit', DistanceEnum::Mile->value),
+                    'duration_unit' => Settings::get('general.duration_unit', DurationEnum::Minute->value),
+                    'calorie_unit' => Settings::get('general.calorie_unit', CalorieEnum::KCAL->value),
                 ],
             ],
         ]);
@@ -31,11 +31,11 @@ class SettingsController extends Controller
 
     public function save(Request $request)
     {
-        Settings::set('timezone', $request->input('timezone'));
-        Settings::set('weight_unit', $request->input('weight_unit'));
-        Settings::set('distance_unit', $request->input('distance_unit'));
-        Settings::set('duration_unit', $request->input('duration_unit'));
-        Settings::set('calorie_unit', $request->input('calorie_unit'));
+        Settings::set('general.timezone', $request->input('timezone'));
+        Settings::set('general.weight_unit', $request->input('weight_unit'));
+        Settings::set('general.distance_unit', $request->input('distance_unit'));
+        Settings::set('general.duration_unit', $request->input('duration_unit'));
+        Settings::set('general.calorie_unit', $request->input('calorie_unit'));
 
         return back();
     }

@@ -3,6 +3,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "coleus/apps": "^1.0",
         "coleus/settings": "^1.0",
         "coleus/support": "^1.0",
         "coleus/table": "^1.0",
