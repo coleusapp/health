@@ -15,7 +15,7 @@
         "illuminate/support": "^10.45|^11.0|^12.0",
         "illuminate/validation": "^10.45|^11.0|^12.0",
         "illuminate/view": "^10.45|^11.0|^12.0",
-        "inertiajs/inertia-laravel": "^2.0",
+        "inertiajs/inertia-laravel": "^3.0",
         "spatie/laravel-data": "^4.17",
         "spatie/laravel-package-tools": "^1.9",
         "tightenco/ziggy": "^v2.5"

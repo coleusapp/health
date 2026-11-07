@@ -36,7 +36,6 @@ class HealthServiceProvider extends PackageServiceProvider
                     'health/create_categories_table',
                     'health/create_category_exercises_table',
                 ]))
-            ->runsMigrations()
             ->hasCommands([
                 HealthFreshCommand::class,
             ])
@@ -47,6 +46,8 @@ class HealthServiceProvider extends PackageServiceProvider
 
     public function bootingPackage(): void
     {
+        $this->loadMigrationsFrom(database_path('migrations/health'));
+
         if (Str::of(request()?->path())->startsWith(config('health.route_prefix'))) {
             app('router')
                 ->pushMiddlewareToGroup('web', HandleInertiaRequests::class);
