@@ -1,0 +1,1 @@
+import{_ as o}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{r,o as t,b as n}from"./app-CSEiRsmL.js";const a={};function c(m,s){const e=r("FormKit");return t(),n(e,{type:"text",name:"name",label:"Name",validation:"required"})}const p=o(a,[["render",c]]);export{p as W};

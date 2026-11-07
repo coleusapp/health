@@ -1,0 +1,1 @@
+import{_ as a}from"./HealthLayout.vue_vue_type_script_setup_true_lang-DvDqoL8_.js";import{d as s,o,c as r,a as e,u as t,h as c,F as n}from"./app-CSEiRsmL.js";const l=s({__name:"Dashboard",props:{weights:{},categories:{},muscle_groups:{},exercises:{},workouts:{}},setup(_){return(m,p)=>(o(),r(n,null,[e(t(c),{title:"Dashboard"}),e(a)],64))}});export{l as default};
