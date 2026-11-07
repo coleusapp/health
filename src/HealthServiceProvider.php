@@ -21,21 +21,6 @@ class HealthServiceProvider extends PackageServiceProvider
     {
         $package->name('health')
             ->hasConfigFile()
-            ->hasMigrations(array_map(
-                fn ($migration) => config('health.name')."/$migration",
-                [
-                    'health/create_muscle_groups_table',
-                    'health/create_exercises_table',
-                    'health/create_workouts_table',
-                    'health/create_weights_table',
-                    'health/create_oral_cares_table',
-                    'health/create_toothpastes_table',
-                    'health/create_oral_care_toothpaste_table',
-                    'health/create_exercise_muscle_groups_table',
-                    'health/create_exercise_workout_table',
-                    'health/create_categories_table',
-                    'health/create_category_exercises_table',
-                ]))
             ->hasCommands([
                 HealthFreshCommand::class,
             ])
@@ -46,7 +31,7 @@ class HealthServiceProvider extends PackageServiceProvider
 
     public function bootingPackage(): void
     {
-        $this->loadMigrationsFrom(database_path('migrations/health'));
+        $this->loadMigrationsFrom($this->package->basePath('/../database/migrations'));
 
         if (Str::of(request()?->path())->startsWith(config('health.route_prefix'))) {
             app('router')
