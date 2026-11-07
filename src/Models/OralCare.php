@@ -2,14 +2,18 @@
 
 namespace Coleus\Health\Models;
 
+use Coleus\Health\Casts\TimezoneCast;
 use Coleus\Health\Database\Factories\OralCareFactory;
 use Coleus\Health\HealthModelDefaults;
 use Coleus\Users\Concerns\HasUser;
 use Coleus\Users\Models\Scopes\UserScope;
+use Coleus\Users\Models\User;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -19,12 +23,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $flossed
  * @property int $fluoride_taken
  * @property int $user_id
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Health\Models\OralCareToothpaste> $oralCareToothpaste
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, OralCareToothpaste> $oralCareToothpaste
  * @property-read int|null $oral_care_toothpastes_count
- * @property-read \Coleus\Users\Models\User $user
+ * @property-read User $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare newQuery()
@@ -43,7 +47,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare withoutTrashed()
  *
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Coleus\Users\Models\User> $users
+ * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OralCare user($users)
@@ -60,7 +64,7 @@ class OralCare extends HealthModelDefaults
     public function casts(): array
     {
         return [
-            'date' => 'datetime',
+            'date' => TimezoneCast::class,
             'brushed' => 'boolean',
             'flossed' => 'boolean',
             'fluoride_taken' => 'boolean',

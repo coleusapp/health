@@ -2,25 +2,28 @@
 
 namespace Coleus\Health\Models;
 
+use Coleus\Health\Casts\TimezoneCast;
 use Coleus\Health\Database\Factories\WeightFactory;
 use Coleus\Health\HealthModelDefaults;
 use Coleus\Users\Concerns\HasUser;
 use Coleus\Users\Models\Scopes\UserScope;
+use Coleus\Users\Models\User;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int $weight
  * @property string|null $unit
- * @property \Illuminate\Support\Carbon $date
+ * @property Carbon $date
  * @property int $user_id
- * @property-read \Coleus\Users\Models\User $user
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read User $user
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Weight newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Weight newQuery()
@@ -52,7 +55,7 @@ class Weight extends HealthModelDefaults
     public function casts(): array
     {
         return [
-            'date' => 'datetime',
+            'date' => TimezoneCast::class,
         ];
     }
 
